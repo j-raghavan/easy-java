@@ -414,6 +414,10 @@ class Component extends DCLogic {
   // ---- narration ----
   wireAudio(){
     this.synth=window.speechSynthesis;
+    // Voices load asynchronously (empty on first getVoices() in Chrome) — refresh the
+    // cached pick once 'voiceschanged' fires so we don't fall back to the robotic default.
+    if(this.synth&&'onvoiceschanged' in this.synth){this.synth.onvoiceschanged=()=>{this._voice=null;this._pickVoice();};}
+    this._pickVoice();
     document.getElementById('muteBtn').onclick=(e)=>{
       this.muted=!this.muted; e.currentTarget.textContent=this.muted?'🔇':'🔊';
       if(this.muted&&this.synth)this.synth.cancel();
@@ -421,14 +425,35 @@ class Component extends DCLogic {
     };
     document.getElementById('replayBtn').onclick=()=>this.speakCurrent(true);
   }
+  _pickVoice(){
+    if(this._voice)return this._voice;
+    const vs=(this.synth&&this.synth.getVoices())||[]; if(!vs.length)return null;
+    const en=vs.filter(v=>/^en(-|_|$)/i.test(v.lang)); const pool=en.length?en:vs;
+    // Best-sounding first: neural/natural, then premium named voices, then any en-US.
+    const tiers=[/Natural/i,/Siri|Premium|Enhanced/i,/Samantha|Ava|Allison|Serena|Evan|Zoe/i,/Google (US|UK) English/i,/Jenny|Aria|Guy|Michelle|Sonia/i,/en-US/i];
+    for(const re of tiers){const m=pool.find(v=>re.test(v.name)||re.test(v.lang)); if(m)return this._voice=m;}
+    return this._voice=pool[0]||null;
+  }
   speakCurrent(force){
-    if(!this.synth||this.muted&&!force)return; if(this.muted&&!force)return;
+    if(!this.synth||(this.muted&&!force))return;
     const txt=this.scenes[this.i].getAttribute('data-narr'); if(!txt)return;
-    try{this.synth.cancel();
-      const u=new SpeechSynthesisUtterance(txt); u.rate=1.02; u.pitch=1.05;
-      const vs=this.synth.getVoices(); const pref=vs.find(v=>/Google US English|Samantha|Jenny|Aria/i.test(v.name))||vs.find(v=>/en-US/i.test(v.lang));
-      if(pref)u.voice=pref;
-      this.synth.speak(u);
+    try{
+      const token=(this._sTok=(this._sTok||0)+1);
+      this.synth.cancel();
+      const voice=this._pickVoice();
+      // Speak sentence by sentence for natural intonation and a short breath between lines.
+      const parts=String(txt).replace(/\s+/g,' ').trim().match(/[^.!?]+[.!?]+|\S[^.!?]*$/g)||[txt];
+      let idx=0;
+      const next=()=>{
+        if(token!==this._sTok||(this.muted&&!force))return;
+        if(idx>=parts.length)return;
+        const u=new SpeechSynthesisUtterance(parts[idx++]);
+        if(voice){u.voice=voice;u.lang=voice.lang;}else{u.lang='en-US';}
+        u.rate=0.95; u.pitch=1.0; u.volume=1.0;
+        u.onend=()=>{ if(token===this._sTok)setTimeout(next, idx<parts.length?180:0); };
+        this.synth.speak(u);
+      };
+      next();
     }catch(e){}
   }
   // ---- stepper ----

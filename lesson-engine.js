@@ -261,12 +261,60 @@
 
     // narration
     var synth = window.speechSynthesis;
+    var voiceCache = null;
+    // Voices load asynchronously: getVoices() is empty on the first call in Chrome
+    // and only fills in after 'voiceschanged'. Not waiting for that is what made the
+    // narration fall back to the robotic default voice. Cache once, refresh on change.
+    function pickVoice() {
+      if (voiceCache) return voiceCache;
+      var vs = (synth && synth.getVoices()) || [];
+      if (!vs.length) return null;
+      var en = vs.filter(function (v) { return /^en(-|_|$)/i.test(v.lang); });
+      var pool = en.length ? en : vs;
+      // Best-sounding first: neural/natural voices, then premium named voices, then any en-US.
+      var tiers = [
+        /Natural/i,                              // Edge/Windows neural, e.g. "Microsoft Aria Online (Natural)"
+        /Siri|Premium|Enhanced/i,                // macOS/iOS premium & Siri voices
+        /Samantha|Ava|Allison|Serena|Evan|Zoe/i, // high-quality Apple voices
+        /Google (US|UK) English/i,               // Chrome's best
+        /Jenny|Aria|Guy|Michelle|Sonia/i,        // other Microsoft voices
+        /en-US/i                                 // any US English
+      ];
+      for (var t = 0; t < tiers.length; t++) {
+        var m = pool.find(function (v) { return tiers[t].test(v.name) || tiers[t].test(v.lang); });
+        if (m) { voiceCache = m; return m; }
+      }
+      voiceCache = pool[0] || null;
+      return voiceCache;
+    }
+    if (synth && 'onvoiceschanged' in synth) {
+      synth.onvoiceschanged = function () { voiceCache = null; pickVoice(); };
+    }
+    pickVoice();
+    var speakToken = 0;
     function speak(force) {
       if (!synth) return; if (state.muted && !force) return;
       var txt = scenes[state.i].getAttribute('data-narr'); if (!txt) return;
-      try { synth.cancel(); var u = new SpeechSynthesisUtterance(txt); u.rate = 1.02; u.pitch = 1.04;
-        var vs = synth.getVoices(); var pref = vs.find(function (v) { return /Google US English|Samantha|Jenny|Aria/i.test(v.name); }) || vs.find(function (v) { return /en-US/i.test(v.lang); });
-        if (pref) u.voice = pref; synth.speak(u); } catch (e) {}
+      try {
+        var myToken = ++speakToken;
+        synth.cancel();
+        var voice = pickVoice();
+        // Speak sentence by sentence so each gets a natural falling intonation and a
+        // short breath follows — far closer to human cadence than one long monotone run.
+        var parts = String(txt).replace(/\s+/g, ' ').trim().match(/[^.!?]+[.!?]+|\S[^.!?]*$/g) || [txt];
+        var idx = 0;
+        (function next() {
+          if (myToken !== speakToken || (state.muted && !force)) return;
+          if (idx >= parts.length) return;
+          var u = new SpeechSynthesisUtterance(parts[idx++]);
+          if (voice) { u.voice = voice; u.lang = voice.lang; } else { u.lang = 'en-US'; }
+          u.rate = 0.95;   // a touch slower reads as calmer and clearer
+          u.pitch = 1.0;   // natural pitch, not chipmunky
+          u.volume = 1.0;
+          u.onend = function () { if (myToken === speakToken) setTimeout(next, idx < parts.length ? 180 : 0); };
+          synth.speak(u);
+        })();
+      } catch (e) {}
     }
     var muteBtn = $('[data-mute]', root), replayBtn = $('[data-replay]', root);
     if (muteBtn) muteBtn.onclick = function () { state.muted = !state.muted; muteBtn.textContent = state.muted ? '🔇' : '🔊'; if (state.muted && synth) synth.cancel(); else speak(); };
