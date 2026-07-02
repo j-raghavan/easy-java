@@ -1,0 +1,184 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<script src="./support.js"></script>
+</head>
+<body>
+<x-dc>
+<helmet>
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@400;500;600;700&family=Nunito:wght@400;600;700;800&family=JetBrains+Mono:wght@400;500;700&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="lesson.css">
+<script src="lesson-engine.js"></script>
+</helmet>
+<div class="app" id="l6">
+<div class="topbar">
+<div class="brandrow">
+<div class="brand"><a href="Course Hub.dc.html"><span class="dot">J</span></a> Java, Clearly · Lesson 6</div>
+<div class="badges"><span class="pill">AP CS A Prep</span><span class="pill score" data-score>0 pts</span><button class="iconbtn" data-mute title="Toggle narration">🔊</button><button class="iconbtn" data-replay title="Replay narration">↺</button></div>
+</div>
+<div class="progwrap"><div class="progbar" data-prog></div></div>
+</div>
+<div class="stage" data-stage>
+
+<section class="scene active" data-narr="You made it to the final lesson. Everything you've learned — variables, loops, arrays, methods, objects — is the same toolkit that real engineers use to explore other planets. Today we'll see how Java actually flies in space, and then you'll build a capstone project: your own Mars rover mission simulation. Let's finish strong.">
+<span class="kicker">Lesson 6 of 6 · The Payoff 🚀</span>
+<h1 class="title-xl">Java in Space</h1>
+<p class="lead">The concepts you just learned aren't just for exams — they run tools that explore Mars. In this final lesson you'll see Java's real missions, then build your own <b>rover mission simulation</b> as a capstone.</p>
+<div class="btnrow"><span class="tag">⏱ ~14 min</span><span class="tag p">✎ 2 quizzes</span><span class="tag a">🚀 capstone project</span><span class="tag" style="background:var(--coralSoft);color:#c23">💻 live sim</span></div>
+</section>
+
+<section class="scene" data-narr="Java really does help run space missions. At NASA's Jet Propulsion Laboratory, scientists used a Java program called Maestro to help plan and command the Spirit Mars rover. NASA also built WorldWind, an open-source Java engine for viewing the whole Earth in 3D. And JMARS, a Java mission-planning tool, has been used by NASA scientists since 2003. Java's creator even served on an advisory board at JPL.">
+<span class="kicker">Concept 01</span>
+<h2 class="sh">Where Java actually flies 🛰️</h2>
+<p class="lead">These are real, documented Java programs used in space exploration:</p>
+<div class="twocol">
+<div class="infobox"><h3>🔴 Maestro — Mars rover planning</h3><p style="margin:0;font-size:14.5px;line-height:1.5">JPL scientists used the Java-based <b>Maestro Science Activity Planner</b> to help plan activities for the <b>Spirit</b> Mars Exploration Rover — choosing targets and building command sequences.</p></div>
+<div class="infobox"><h3>🌍 NASA WorldWind</h3><p style="margin:0;font-size:14.5px;line-height:1.5">An open-source <b>Java</b> engine (SDK) for a 3D virtual globe. Organizations use it to visualize terrain, track vehicles, and study weather — powered by NASA's geographic data.</p></div>
+<div class="infobox"><h3>🗺️ JMARS</h3><p style="margin:0;font-size:14.5px;line-height:1.5"><b>Java Mission-planning and Analysis for Remote Sensing</b> — public since 2003 and still used by NASA scientists to work with data from Mars and other missions.</p></div>
+<div class="infobox"><h3>☕ A JPL connection</h3><p style="margin:0;font-size:14.5px;line-height:1.5">Java's founder, James Gosling, spent so much time at JPL that he became an <b>advisory board member</b> — Java and space go way back.</p></div>
+</div>
+</section>
+
+<section class="scene" data-narr="Why choose Java for something as serious as a space mission? Three reasons you already understand. Write once, run anywhere means the same code works on many machines. Automatic memory management means fewer crashing bugs. And strong typing catches mistakes before the program ever runs — which matters a lot when your computer is millions of miles away.">
+<span class="kicker">Concept 02</span>
+<h2 class="sh">Why Java for high-stakes work? 🎯</h2>
+<p class="lead">The very features you learned this course are exactly why engineers trust Java for ground tools:</p>
+<div class="softgrid">
+<div class="stepcard c-purple"><span class="stepnum">🌍</span><div><b>Write once, run anywhere</b> — one program runs on the many different computers a mission team uses worldwide (Lesson 2's JVM!).</div></div>
+<div class="stepcard c-teal"><span class="stepnum">🧹</span><div><b>Automatic memory management</b> — Java cleans up unused memory for you, avoiding a whole category of crashing bugs.</div></div>
+<div class="stepcard c-amber"><span class="stepnum">🛡️</span><div><b>Strong typing</b> — the compiler catches type mistakes <i>before</i> running (Lesson 2's compile-time errors), so bugs are found on Earth, not in space.</div></div>
+</div>
+<div class="why"><b>The big idea →</b> "Boring" language features like types and the JVM become superpowers when a mistake could cost a billion-dollar mission. Reliability beats cleverness.</div>
+</section>
+
+<section class="scene" data-narr="Checkpoint one, on Java in the real world.">
+<span class="kicker">Checkpoint · Quiz 1</span>
+<h2 class="sh">Real-world Java ✏️</h2>
+<div class="quiz" data-quiz="1">
+<div class="q" data-answer="1" data-fb-ok="Correct! JPL used the Java-based Maestro planner to help operate the Spirit Mars rover." data-fb-no="One of these is the Java tool JPL used to help plan the Spirit rover's activities.">
+<div class="qtext">Which Java program helped NASA scientists plan a Mars rover's activities?</div>
+<div class="opts"><button class="opt" data-i="0"><span class="mk">A</span>Microsoft Word</button><button class="opt" data-i="1"><span class="mk">B</span>Maestro Science Activity Planner</button><button class="opt" data-i="2"><span class="mk">C</span>The Java compiler</button></div>
+</div>
+<div class="q" data-answer="0" data-fb-ok="Right — 'write once, run anywhere' (the JVM) lets one program run on the mission team's many different computers." data-fb-no="Think about the JVM from Lesson 2. What does it let the same program do?">
+<div class="qtext">Which Java feature helps the same tool run on a mission team's many different computers?</div>
+<div class="opts"><button class="opt" data-i="0"><span class="mk">A</span>Write once, run anywhere (the JVM)</button><button class="opt" data-i="1"><span class="mk">B</span>Bright colors</button><button class="opt" data-i="2"><span class="mk">C</span>It uses less electricity</button></div>
+</div>
+</div>
+</section>
+
+<section class="scene" data-narr="Here is your capstone project: a Mars rover mission simulation. Your rover starts with full battery at position zero. It reads a list of commands and reacts to each one — moving forward, scanning, or charging — while tracking its battery. This one program uses everything: variables, arrays, loops, conditionals, and string methods. Read the brief, then build it in the next screen.">
+<span class="kicker">Capstone · The brief 🚀</span>
+<h2 class="sh">Project: Mars Rover Mission</h2>
+<p class="lead">Your capstone combines <b>every</b> concept from all six lessons into one program. Here's the mission spec:</p>
+<div class="assign">
+<div class="taskitem"><span class="tasknum">🔋</span><div><b>State.</b> The rover tracks <span class="mono">battery</span> (starts 100) and <span class="mono">position</span> (starts 0), using variables.</div></div>
+<div class="taskitem"><span class="tasknum">📋</span><div><b>Commands.</b> A <span class="mono">String[]</span> array holds the mission commands: <span class="mono">"FORWARD"</span>, <span class="mono">"SCAN"</span>, <span class="mono">"CHARGE"</span>.</div></div>
+<div class="taskitem"><span class="tasknum">🔁</span><div><b>Loop + decisions.</b> Loop over the commands; use <span class="mono">if / else if</span> and <span class="mono">.equals()</span> to react to each one and update battery &amp; position.</div></div>
+<div class="taskitem"><span class="tasknum">📊</span><div><b>Report.</b> Print what happens at each step, then a final mission summary.</div></div>
+</div>
+<div class="why"><b>This is the whole course →</b> variables (L1), the machine (L2), types &amp; decisions (L3), loops &amp; arrays &amp; methods (L4), and clean structure (L5) — all in one real program.</div>
+</section>
+
+<section class="scene" data-narr="Here's a working starter for your rover. Run it and watch the mission unfold. Then make it your own: add a CHARGE command that refills battery, add a check that stops the rover if the battery gets too low, or add new commands. This is real programming — experiment!">
+<span class="kicker">Capstone · Live build 💻</span>
+<h2 class="sh">Build &amp; run your rover</h2>
+<p class="lead">This <b>runs</b>. Press Run to fly the mission, then extend it (ideas in the hint):</p>
+<div class="codepanel">
+<div class="codehead"><span class="tl r"></span><span class="tl y"></span><span class="tl g"></span><span class="codefile mono">RoverMission.java</span></div>
+<textarea class="editor" spellcheck="false">int battery = 100;
+int position = 0;
+String[] commands = {"FORWARD", "SCAN", "FORWARD", "CHARGE", "FORWARD"};
+
+for (int i = 0; i < commands.length; i++) {
+  String cmd = commands[i];
+  if (cmd.equals("FORWARD")) {
+    position = position + 10;
+    battery = battery - 5;
+    System.out.println("Move -> " + position + "m  (battery " + battery + "%)");
+  } else if (cmd.equals("SCAN")) {
+    battery = battery - 10;
+    System.out.println("Scanning rocks... (battery " + battery + "%)");
+  } else if (cmd.equals("CHARGE")) {
+    battery = battery + 20;
+    System.out.println("Solar charging... (battery " + battery + "%)");
+  }
+}
+System.out.println("=== Mission complete. Distance: " + position + "m, battery: " + battery + "% ===");</textarea>
+</div>
+<div class="btnrow"><button class="btn run" data-run>▶ Run mission</button><span class="hint">Extend it: add a <span class="mono">"TURN"</span> command, or an <span class="mono">if</span> that warns when <span class="mono">battery &lt; 30</span>.</span></div>
+<div class="console mono" data-console><span class="muted">// press Run to launch</span></div>
+</section>
+
+<section class="scene" data-narr="Final checkpoint — the big synthesis. This pulls together ideas from the entire course. You've earned this.">
+<span class="kicker">Checkpoint · Quiz 2 · Synthesis</span>
+<h2 class="sh">The whole course 🎓</h2>
+<div class="quiz" data-quiz="2">
+<div class="q" data-answer="2" data-pts="15" data-fb-ok="Correct! .equals() is the right way to compare String commands — == can fail." data-fb-no="Recall Lesson 4's big rule for comparing Strings.">
+<div class="qtext">In the rover, how do you correctly check <span class="mono">cmd</span> against <span class="mono">"SCAN"</span>?</div>
+<div class="opts"><button class="opt" data-i="0"><span class="mk">A</span><span class="mono">cmd = "SCAN"</span></button><button class="opt" data-i="1"><span class="mk">B</span><span class="mono">cmd == "SCAN"</span></button><button class="opt" data-i="2"><span class="mk">C</span><span class="mono">cmd.equals("SCAN")</span></button></div>
+</div>
+<div class="q" data-answer="0" data-pts="15" data-fb-ok="Yes — the loop repeats the body once per command in the array, reacting to each." data-fb-no="What structure lets the rover process every command in the array, one by one?">
+<div class="qtext">What lets the rover process <b>every</b> command in the array?</div>
+<div class="opts"><button class="opt" data-i="0"><span class="mk">A</span>A for loop over the array</button><button class="opt" data-i="1"><span class="mk">B</span>A single println</button><button class="opt" data-i="2"><span class="mk">C</span>The constructor</button></div>
+</div>
+<div class="q" data-answer="1" data-pts="15" data-fb-ok="Right — starting battery 100, then −5, −10, −5, +20, −5 = 95. Trace it like the exam!" data-fb-no="Trace the 5 commands: FORWARD(−5), SCAN(−10), FORWARD(−5), CHARGE(+20), FORWARD(−5), starting from 100.">
+<div class="qtext">After the starter mission runs, what is the final <span class="mono">battery</span>?</div>
+<div class="opts"><button class="opt" data-i="0"><span class="mk">A</span>100</button><button class="opt" data-i="1"><span class="mk">B</span>95</button><button class="opt" data-i="2"><span class="mk">C</span>80</button></div>
+</div>
+</div>
+</section>
+
+<section class="scene" data-narr="Your capstone assignment: extend the rover into a complete mission of your own. Add new commands, a low-battery safeguard, and a summary. Try it all before opening the answer sheet, which shows one complete solution.">
+<span class="kicker">Practice · Capstone Assignment</span>
+<h2 class="sh">Your capstone 📝</h2>
+<p class="lead">Start from the rover above and make it yours. Try each part before checking the answer sheet.</p>
+<div class="assign">
+<div class="taskitem"><span class="tasknum">1</span><div><b>Add a command.</b> Add a <span class="mono">"TURN"</span> command that uses 2% battery and prints <span class="mono">"Rotating..."</span>.</div></div>
+<div class="taskitem"><span class="tasknum">2</span><div><b>Safety check.</b> Inside the loop, if <span class="mono">battery &lt; 30</span>, print a <span class="mono">"⚠ LOW BATTERY"</span> warning.</div></div>
+<div class="taskitem"><span class="tasknum">3</span><div><b>Count the scans.</b> Use a counter variable to total how many <span class="mono">"SCAN"</span> commands ran, and print it in the final summary.</div></div>
+</div>
+<div class="why"><b>You're exam-ready →</b> A program that loops over an array, branches with conditionals, and tracks state <i>is</i> an AP CS A free-response problem. You can now build one from scratch.</div>
+<div class="btnrow"><a class="btn primary" href="Lesson 6 - Answer Sheet.dc.html" target="_blank">📄 Open Answer Sheet</a></div>
+</section>
+
+<section class="scene" data-narr="You did it. You completed all six lessons — from what a program is, all the way to code that helps explore Mars. You now understand the core of AP Computer Science A: variables, the machine, types, decisions, loops, arrays, methods, objects, and recursion. Keep practicing in IntelliJ, keep building, and go ace that exam. Congratulations, and welcome to computer science!">
+<span class="kicker">🎉 Course complete! 🎉</span>
+<h2 class="sh">You finished all 6 lessons!</h2>
+<div class="card" style="display:flex;align-items:center;gap:24px;flex-wrap:wrap">
+<div><div class="scorebig" data-final-score>0</div><div class="hint" style="margin-top:4px">points this lesson</div></div>
+<div style="flex:1;min-width:200px"><p class="lead" style="font-size:16px;margin:0">From "what is a program?" to code that explores Mars. You've built the full foundation for AP Computer Science A. 🚀</p></div>
+</div>
+<h3 style="font-family:'Space Grotesk';margin-top:8px">Where to go next</h3>
+<div class="finalgrid">
+<div class="rc"><div class="rt">💻 Practice in IntelliJ</div><div class="rd">Rebuild each assignment in the real IDE.</div></div>
+<div class="rc"><div class="rt">🔁 Replay any lesson</div><div class="rd">Revisit steppers &amp; quizzes to lock it in.</div></div>
+<div class="rc"><div class="rt">📚 AP CS A topics</div><div class="rd">You've covered the core units — keep drilling FRQs.</div></div>
+</div>
+<div class="callout" style="margin-top:6px"><span class="n">★</span><span>Keep the momentum: pick a small project — a quiz game, a calculator, a bigger rover — and build it in IntelliJ. Real programs teach more than any exam.</span></div>
+<div class="btnrow"><a class="btn primary" href="Course Hub.dc.html">← Back to Course Hub</a><a class="btn ghost" href="https://apstudents.collegeboard.org/courses/ap-computer-science-a" target="_blank">AP CS A syllabus ↗</a></div>
+</section>
+
+</div>
+<div class="navbar"><button class="btn ghost" data-prev>← Back</button><div class="dots" data-dots></div><button class="btn primary" data-next>Start →</button></div>
+</div>
+</x-dc>
+<script type="text/x-dc" data-dc-script>
+class Component extends DCLogic {
+  componentDidMount(){
+    var tries=0;
+    var boot=()=>{
+      var root=document.getElementById('l6');
+      if(window.LessonEngine && root){ this.api=window.LessonEngine.mount(root,{key:'l6'}); }
+      else if(tries++<80){ setTimeout(boot,50); }
+    };
+    boot();
+  }
+}
+</script>
+</body>
+</html>

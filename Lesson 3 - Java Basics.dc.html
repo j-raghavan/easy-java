@@ -1,0 +1,246 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<script src="./support.js"></script>
+</head>
+<body>
+<x-dc>
+<helmet>
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@400;500;600;700&family=Nunito:wght@400;600;700;800&family=JetBrains+Mono:wght@400;500;700&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="lesson.css">
+<script src="lesson-engine.js"></script>
+</helmet>
+<div class="app" id="l3">
+<div class="topbar">
+<div class="brandrow">
+<div class="brand"><a href="Course Hub.dc.html"><span class="dot">J</span></a> Java, Clearly · Lesson 3</div>
+<div class="badges"><span class="pill">AP CS A Prep</span><span class="pill score" data-score>0 pts</span><button class="iconbtn" data-mute title="Toggle narration">🔊</button><button class="iconbtn" data-replay title="Replay narration">↺</button></div>
+</div>
+<div class="progwrap"><div class="progbar" data-prog></div></div>
+</div>
+<div class="stage" data-stage>
+
+<section class="scene active" data-narr="You know what programs are and how they run. Now let's get fluent in the language itself. This lesson is Java Basics: the exact shape of a Java program, the operators you compute with, and how to make your code decide things with if and else. This is the heart of AP Computer Science A.">
+<span class="kicker">Lesson 3 of 6 · The Language</span>
+<h1 class="title-xl">Speaking<br>Fluent Java</h1>
+<p class="lead">Every Java program has the same skeleton, a toolbox of operators, and a way to make decisions. Learn these three things well and you can read almost any AP CS A problem.</p>
+<div class="btnrow"><span class="tag">⏱ ~13 min</span><span class="tag p">✎ 2 quizzes</span><span class="tag a">🧩 matching</span><span class="tag" style="background:var(--coralSoft);color:#c23">💻 2 code labs</span></div>
+</section>
+
+<section class="scene" data-narr="Every Java program lives inside a class, and starts running inside a special method called main. Let's dissect it. The green run button in your IDE looks for main and begins there. Everything you write goes between its curly braces, and every statement ends with a semicolon.">
+<span class="kicker">Concept 01</span>
+<h2 class="sh">The anatomy of a Java program 🦴</h2>
+<p class="lead">This skeleton never changes. Memorize its shape — you'll type it hundreds of times.</p>
+<div class="codepanel">
+<div class="codehead"><span class="tl r"></span><span class="tl y"></span><span class="tl g"></span><span class="codefile mono">Greeter.java</span></div>
+<div class="codebody"><span class="k">public class</span> <span class="t">Greeter</span> {          <span class="cm">// the class — the container</span>
+  <span class="k">public static void</span> <span class="fn">main</span>(<span class="t">String</span>[] args) {   <span class="cm">// where the program starts</span>
+    <span class="t">String</span> name = <span class="s">"Ada"</span>;      <span class="cm">// a statement — ends with ;</span>
+    <span class="t">System</span>.<span class="fn">out</span>.<span class="fn">println</span>(<span class="s">"Hello, "</span> + name);
+  }
+}</div>
+</div>
+<div class="deflist">
+<div><span class="dt">class Greeter</span> — the container; its name must match the file <span class="mono">Greeter.java</span>.</div>
+<div><span class="dt">main</span> — the starting line. The JVM always runs <span class="mono">main</span> first.</div>
+<div><span class="dt">{ }</span> — curly braces group code into blocks. Every <span class="mono">{</span> needs a matching <span class="mono">}</span>.</div>
+<div><span class="dt">;</span> — a semicolon ends every statement, like a period ends a sentence.</div>
+</div>
+</section>
+
+<section class="scene" data-narr="Operators are how you compute. There are arithmetic operators like plus and modulo, comparison operators that ask true-or-false questions, and logical operators that combine those questions. Try the editor: change the numbers and watch the answers.">
+<span class="kicker">Concept 02 · Code lab</span>
+<h2 class="sh">Operators: your calculator 🧮</h2>
+<p class="lead">Three families of operators do all the computing. Run this and experiment:</p>
+<div class="twocol" style="margin-bottom:4px">
+<div class="infobox"><h3>➕ Arithmetic</h3><ul><li><span class="mono">+ - * /</span> — add, subtract, multiply, divide</li><li><span class="mono">%</span> — modulo (remainder)</li></ul></div>
+<div class="infobox"><h3>❓ Comparison &amp; logic</h3><ul><li><span class="mono">== != &lt; &gt; &lt;= &gt;=</span> — ask true/false</li><li><span class="mono">&amp;&amp;</span> and, <span class="mono">||</span> or, <span class="mono">!</span> not</li></ul></div>
+</div>
+<div class="codepanel">
+<div class="codehead"><span class="tl r"></span><span class="tl y"></span><span class="tl g"></span><span class="codefile mono">Operators.java</span></div>
+<textarea class="editor" spellcheck="false">int a = 17;
+int b = 5;
+System.out.println("Sum: " + (a + b));
+System.out.println("Remainder: " + (a % b));
+boolean positive = (a > 0) && (b > 0);
+System.out.println("Both positive? " + positive);</textarea>
+</div>
+<div class="btnrow"><button class="btn run" data-run>▶ Run</button><button class="btn ghost" data-try="int age = 15;&#10;boolean teen = age >= 13 && age <= 19;&#10;System.out.println(&quot;Teenager? &quot; + teen);">Try boolean logic</button><span class="hint"><span class="mono">%</span> is huge on the AP exam — <span class="mono">17 % 5</span> = 2.</span></div>
+<div class="console mono" data-console><span class="muted">// press Run</span></div>
+</section>
+
+<section class="scene" data-narr="A classic trap: int versus double. When you divide two integers, Java throws away the decimal. To get a decimal answer you must use a double, or cast. Press Step to see the difference side by side — this exact idea is tested on nearly every exam.">
+<span class="kicker">Concept 03 · Interactive</span>
+<h2 class="sh">The int-vs-double trap ⚠️</h2>
+<p class="lead">Same numbers, different types, <b>different answers</b>. Press <b>Step</b> to watch:</p>
+<div class="split stepper" data-steps='[{"line":0,"set":{"intResult":"?"}},{"line":1,"set":{"intResult":"3"},"type":"7/2 drops decimal"},{"line":3,"set":{"dblResult":"?"}},{"line":4,"set":{"dblResult":"3.5"},"type":"7.0/2 keeps it"}]'>
+<div class="codepanel">
+<div class="codehead"><span class="tl r"></span><span class="tl y"></span><span class="tl g"></span><span class="codefile mono">Division.java</span></div>
+<div class="codebody"><span class="cline" data-line="0"><span class="k">int</span> intResult;</span><span class="cline" data-line="1">intResult = <span class="n">7</span> / <span class="n">2</span>;</span><span class="cline" data-line="2"></span><span class="cline" data-line="3"><span class="k">double</span> dblResult;</span><span class="cline" data-line="4">dblResult = <span class="n">7.0</span> / <span class="n">2</span>;</span></div>
+</div>
+<div>
+<div class="vars">
+<div class="varbox"><span class="varlabel">intResult</span><div class="varchip empty" data-v="intResult">—</div></div>
+<div class="varbox"><span class="varlabel">dblResult</span><div class="varchip empty" data-v="dblResult">—</div></div>
+</div>
+<div class="btnrow" style="margin-top:14px"><button class="btn primary" data-step>▶ Step</button><button class="btn ghost" data-step-reset>Reset</button></div>
+</div>
+</div>
+<div class="why"><b>The rule →</b> If <b>both</b> operands are <span class="mono">int</span>, you get <span class="mono">int</span> division (decimal dropped). Make at least one a <span class="mono">double</span> — e.g. <span class="mono">(double) a / b</span> — to keep the decimal.</div>
+</section>
+
+<section class="scene" data-narr="Checkpoint one. These test operators and the int-versus-double trap. Take your time and trace carefully.">
+<span class="kicker">Checkpoint · Quiz 1</span>
+<h2 class="sh">Operator check ✏️</h2>
+<div class="quiz" data-quiz="1">
+<div class="q" data-answer="2" data-fb-ok="Correct! 17 % 5 = 2, because 5 goes into 17 three times (15) with 2 left over." data-fb-no="Modulo is the remainder: how much is left after dividing evenly. 17 − 15 = ?">
+<div class="qtext">What is <span class="mono">17 % 5</span>?</div>
+<div class="opts"><button class="opt" data-i="0"><span class="mk">A</span>3</button><button class="opt" data-i="1"><span class="mk">B</span>3.4</button><button class="opt" data-i="2"><span class="mk">C</span>2</button></div>
+</div>
+<div class="q" data-answer="0" data-fb-ok="Yes — both are ints, so it's integer division: 9 / 4 = 2, decimal dropped." data-fb-no="Both operands are int, so Java does integer division and drops the decimal.">
+<div class="qtext">What does <span class="mono">System.out.println(9 / 4);</span> print?</div>
+<div class="opts"><button class="opt" data-i="0"><span class="mk">A</span>2</button><button class="opt" data-i="1"><span class="mk">B</span>2.25</button><button class="opt" data-i="2"><span class="mk">C</span>2.0</button></div>
+</div>
+<div class="q" data-answer="1" data-fb-ok="Right! true && false is false — AND needs BOTH sides true." data-fb-no="&& means AND: it's only true when both sides are true.">
+<div class="qtext">What is <span class="mono">(5 &gt; 3) &amp;&amp; (2 &gt; 8)</span>?</div>
+<div class="opts"><button class="opt" data-i="0"><span class="mk">A</span>true</button><button class="opt" data-i="1"><span class="mk">B</span>false</button><button class="opt" data-i="2"><span class="mk">C</span>error</button></div>
+</div>
+</div>
+</section>
+
+<section class="scene" data-narr="Now the superpower: making decisions. An if statement runs a block only when its condition is true. Add else if to test more cases, and else as a catch-all. Press Step to watch Java pick exactly one branch based on a test score.">
+<span class="kicker">Concept 04 · Interactive</span>
+<h2 class="sh">Making decisions: if / else if / else 🔀</h2>
+<p class="lead">Java checks each condition top to bottom and runs the <b>first</b> one that's true. Press <b>Step</b>:</p>
+<div class="split stepper" data-steps='[{"line":0,"set":{"score":"78"},"type":"int"},{"line":1},{"line":3},{"line":5},{"line":6,"set":{"grade":"C"},"type":"else branch"},{"line":8,"out":"Grade: C"}]'>
+<div class="codepanel">
+<div class="codehead"><span class="tl r"></span><span class="tl y"></span><span class="tl g"></span><span class="codefile mono">Grader.java</span></div>
+<div class="codebody"><span class="cline" data-line="0"><span class="k">int</span> score = <span class="n">78</span>;</span><span class="cline" data-line="1"><span class="k">if</span> (score >= <span class="n">90</span>) {</span><span class="cline" data-line="2">  grade = <span class="s">"A"</span>;</span><span class="cline" data-line="3">} <span class="k">else if</span> (score >= <span class="n">80</span>) {</span><span class="cline" data-line="4">  grade = <span class="s">"B"</span>;</span><span class="cline" data-line="5">} <span class="k">else</span> {</span><span class="cline" data-line="6">  grade = <span class="s">"C"</span>;</span><span class="cline" data-line="7">}</span><span class="cline" data-line="8"><span class="t">System</span>.<span class="fn">out</span>.<span class="fn">println</span>(<span class="s">"Grade: "</span> + grade);</span></div>
+</div>
+<div>
+<div class="vars">
+<div class="varbox"><span class="varlabel">score</span><div class="varchip empty" data-v="score">—</div></div>
+<div class="varbox"><span class="varlabel">grade</span><div class="varchip empty" data-v="grade">—</div></div>
+</div>
+<div class="console mono" data-step-out style="margin-top:14px"><span class="muted">// output</span></div>
+<div class="btnrow" style="margin-top:14px"><button class="btn primary" data-step>▶ Step</button><button class="btn ghost" data-step-reset>Reset</button></div>
+</div>
+</div>
+<div class="why"><b>Watch the order →</b> Java skips <span class="mono">A</span> (78 &lt; 90) and <span class="mono">B</span> (78 &lt; 80), then takes <span class="mono">else</span>. Only <b>one</b> branch ever runs.</div>
+</section>
+
+<section class="scene" data-narr="Let's lock in the logical operators. Match each one to what it means. These combine true-false questions and show up constantly inside if statements.">
+<span class="kicker">Concept 05 · Drag &amp; drop</span>
+<h2 class="sh">Logical operators 🧩</h2>
+<p class="lead">Match each operator to its meaning:</p>
+<div class="match" id="opmatch">
+<div class="mcol"><h3>Operator</h3>
+<div class="chip" draggable="true" data-type="and">&amp;&amp;</div>
+<div class="chip" draggable="true" data-type="or">||</div>
+<div class="chip" draggable="true" data-type="not">!</div>
+<div class="chip" draggable="true" data-type="eq">==</div>
+</div>
+<div class="mcol"><h3>Meaning</h3>
+<div class="drop" data-type="and"><span class="lbl">AND — true only if <b>both</b> sides are true</span><span class="slot"></span></div>
+<div class="drop" data-type="or"><span class="lbl">OR — true if <b>at least one</b> side is true</span><span class="slot"></span></div>
+<div class="drop" data-type="not"><span class="lbl">NOT — flips true to false and back</span><span class="slot"></span></div>
+<div class="drop" data-type="eq"><span class="lbl">Equal to — checks if two values match</span><span class="slot"></span></div>
+</div>
+</div>
+</section>
+
+<section class="scene" data-narr="Your turn to make decisions in code. Write a program that checks a number and prints whether it's positive, negative, or zero. The starter uses if and else if. Change the number and re-run to test every branch.">
+<span class="kicker">Concept 06 · Code lab 💻</span>
+<h2 class="sh">Write your own decision</h2>
+<p class="lead">This runs live. Change <span class="mono">n</span> to test each branch, then try the even/odd example.</p>
+<div class="codepanel">
+<div class="codehead"><span class="tl r"></span><span class="tl y"></span><span class="tl g"></span><span class="codefile mono">SignCheck.java</span></div>
+<textarea class="editor" spellcheck="false">int n = -4;
+if (n > 0) {
+  System.out.println(n + " is positive");
+} else if (n < 0) {
+  System.out.println(n + " is negative");
+} else {
+  System.out.println("It's zero");
+}</textarea>
+</div>
+<div class="btnrow"><button class="btn run" data-run>▶ Run</button><button class="btn ghost" data-try="int n = 7;&#10;if (n % 2 == 0) {&#10;  System.out.println(n + &quot; is even&quot;);&#10;} else {&#10;  System.out.println(n + &quot; is odd&quot;);&#10;}">Try even / odd</button><span class="hint">The even/odd trick uses <span class="mono">n % 2 == 0</span>.</span></div>
+<div class="console mono" data-console><span class="muted">// press Run</span></div>
+</section>
+
+<section class="scene" data-narr="Second checkpoint, and it's tougher. Trace each one carefully like the computer would.">
+<span class="kicker">Checkpoint · Quiz 2</span>
+<h2 class="sh">Decision master 🎯</h2>
+<div class="quiz" data-quiz="2">
+<div class="q" data-answer="1" data-pts="12" data-fb-ok="Correct! 20 > 20 is false (skip A), but 20 == 20 is true, so it prints 'exactly twenty'." data-fb-no="Check each condition in order. Is 20 > 20? No. Is 20 == 20? Yes.">
+<div class="qtext">If <span class="mono">x = 20</span>: <span class="mono">if (x &gt; 20) print("big"); else if (x == 20) print("exactly twenty"); else print("small")</span></div>
+<div class="opts"><button class="opt" data-i="0"><span class="mk">A</span>big</button><button class="opt" data-i="1"><span class="mk">B</span>exactly twenty</button><button class="opt" data-i="2"><span class="mk">C</span>small</button></div>
+</div>
+<div class="q" data-answer="2" data-pts="12" data-fb-ok="Yes! To get a decimal you must cast: (double) 7 / 2 = 3.5." data-fb-no="Casting one operand to double keeps the decimal. Which option does that?">
+<div class="qtext">Which prints <span class="mono">3.5</span>?</div>
+<div class="opts"><button class="opt" data-i="0"><span class="mk">A</span><span class="mono">7 / 2</span></button><button class="opt" data-i="1"><span class="mk">B</span><span class="mono">7 % 2</span></button><button class="opt" data-i="2"><span class="mk">C</span><span class="mono">(double) 7 / 2</span></button></div>
+</div>
+<div class="q" data-answer="0" data-pts="12" data-fb-ok="Right — || (OR) is true if either side is true, and 5 > 3 is true." data-fb-no="|| means OR: true if at least ONE side is true. Is 5 > 3 true?">
+<div class="qtext">What is <span class="mono">(5 &gt; 3) || (10 &lt; 2)</span>?</div>
+<div class="opts"><button class="opt" data-i="0"><span class="mk">A</span>true</button><button class="opt" data-i="1"><span class="mk">B</span>false</button><button class="opt" data-i="2"><span class="mk">C</span>3</button></div>
+</div>
+</div>
+</section>
+
+<section class="scene" data-narr="Practice time. Three tasks on operators and decisions. Try them in a code lab first, then check the answer sheet.">
+<span class="kicker">Practice · Assignment 3</span>
+<h2 class="sh">Your assignment 📝</h2>
+<p class="lead">Use a code lab above (or IntelliJ). Try each yourself, then compare with the answer sheet.</p>
+<div class="assign">
+<div class="taskitem"><span class="tasknum">1</span><div><b>Even or odd.</b> Create an <span class="mono">int</span> and print whether it's even or odd using <span class="mono">%</span> and an <span class="mono">if/else</span>.</div></div>
+<div class="taskitem"><span class="tasknum">2</span><div><b>Letter grade.</b> Given an <span class="mono">int score</span> (0–100), print the letter grade: A (≥90), B (≥80), C (≥70), else F. Use <span class="mono">if / else if / else</span>.</div></div>
+<div class="taskitem"><span class="tasknum">3</span><div><b>Average with a decimal.</b> Three test scores are 88, 92, 79. Print their average <b>as a decimal</b> (hint: watch out for integer division — you'll need a cast or a double).</div></div>
+</div>
+<div class="why"><b>Why it matters →</b> "if/else if" chains and the integer-division trap are among the most-tested ideas in AP CS A. Nail these and you're ahead of the class.</div>
+<div class="btnrow"><a class="btn primary" href="Lesson 3 - Answer Sheet.dc.html" target="_blank">📄 Open Answer Sheet</a></div>
+</section>
+
+<section class="scene" data-narr="Great work. You can now read the shape of any Java program, compute with operators, avoid the integer division trap, and make decisions with if and else. Next lesson we add repetition and collections: loops, arrays, and methods. Onward!">
+<span class="kicker">Lesson complete 🎉</span>
+<h2 class="sh">You're speaking Java!</h2>
+<div class="card" style="display:flex;align-items:center;gap:24px;flex-wrap:wrap">
+<div><div class="scorebig" data-final-score>0</div><div class="hint" style="margin-top:4px">points earned</div></div>
+<div style="flex:1;min-width:200px"><p class="lead" style="font-size:16px;margin:0">Operators and <span class="mono">if</span> statements are the vocabulary of every program you'll ever write.</p></div>
+</div>
+<h3 style="font-family:'Space Grotesk';margin-top:8px">You learned</h3>
+<div class="finalgrid">
+<div class="rc"><div class="rt">🦴 Program shape</div><div class="rd">class, main, braces, semicolons.</div></div>
+<div class="rc"><div class="rt">🧮 Operators</div><div class="rd">arithmetic, %, comparison, logic.</div></div>
+<div class="rc"><div class="rt">⚠️ int vs double</div><div class="rd">The integer-division trap + casting.</div></div>
+<div class="rc"><div class="rt">🔀 Decisions</div><div class="rd">if / else if / else.</div></div>
+<div class="rc"><div class="rt">🧩 Boolean logic</div><div class="rd">&amp;&amp;, ||, !, ==.</div></div>
+<div class="rc"><div class="rt">📝 Assignment</div><div class="rd">Grades, even/odd, averages.</div></div>
+</div>
+<div class="callout" style="margin-top:6px"><span class="n">→</span><span><b>Up next — Lesson 4:</b> Java Intermediate — loops, arrays, and writing your own methods.</span></div>
+<div class="btnrow"><a class="btn primary" href="Course Hub.dc.html">← Back to Course Hub</a></div>
+</section>
+
+</div>
+<div class="navbar"><button class="btn ghost" data-prev>← Back</button><div class="dots" data-dots></div><button class="btn primary" data-next>Start →</button></div>
+</div>
+</x-dc>
+<script type="text/x-dc" data-dc-script>
+class Component extends DCLogic {
+  componentDidMount(){
+    var tries=0;
+    var boot=()=>{
+      var root=document.getElementById('l3');
+      if(window.LessonEngine && root){ this.api=window.LessonEngine.mount(root,{key:'l3'}); }
+      else if(tries++<80){ setTimeout(boot,50); }
+    };
+    boot();
+  }
+}
+</script>
+</body>
+</html>

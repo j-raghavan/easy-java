@@ -1,0 +1,128 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<script src="./support.js"></script>
+</head>
+<body>
+<x-dc>
+<helmet>
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@500;600;700&family=Nunito:wght@400;600;700;800&family=JetBrains+Mono:wght@400;500;700&display=swap" rel="stylesheet">
+<style>
+doc-page:not(:defined){visibility:hidden}
+*{box-sizing:border-box}
+body{margin:0;background:#EDEAE3;font-family:'Nunito',system-ui,sans-serif;color:#20203A;line-height:1.55}
+h1,h2,h3{font-family:'Space Grotesk',sans-serif;letter-spacing:-.01em}
+h1{font-size:30px;margin:0 0 4px}
+h2{font-size:19px;margin:26px 0 10px;padding-bottom:7px;border-bottom:2px solid #ECE7DE;display:flex;align-items:center;gap:10px}
+h2 .num{background:#E0562A;color:#fff;width:26px;height:26px;border-radius:8px;display:inline-flex;align-items:center;justify-content:center;font-size:14px;font-family:'JetBrains Mono';flex:none}
+.mono{font-family:'JetBrains Mono',monospace}
+.hdr{display:flex;justify-content:space-between;align-items:flex-end;gap:16px;border-bottom:3px solid #20203A;padding-bottom:12px;margin-bottom:6px}
+.hdr .dot{width:30px;height:30px;border-radius:8px;background:#E0562A;color:#fff;font-family:'JetBrains Mono';font-weight:700;display:inline-flex;align-items:center;justify-content:center;font-size:16px}
+.brand{display:flex;align-items:center;gap:10px;font-family:'Space Grotesk';font-weight:700}
+.metabar{font-family:'JetBrains Mono';font-size:12px;color:#6B6B85;text-align:right}
+.subtitle{color:#6B6B85;font-size:14px;font-weight:600;margin:0 0 2px}
+.warn{background:#FFF4DE;border-left:4px solid #FFB020;border-radius:0 10px 10px 0;padding:12px 16px;font-size:14px;margin:14px 0 4px}
+.task{font-weight:700;font-size:15px;margin:2px 0 10px;color:#b0431c}
+.code{background:#1E1E2E;color:#E8E6F3;border-radius:11px;padding:14px 16px;font-family:'JetBrains Mono';font-size:13px;line-height:1.65;white-space:pre;overflow-x:auto;margin:8px 0}
+.code .k{color:#c58af9}.code .t{color:#66d9c7}.code .s{color:#ffcf7a}.code .n{color:#f78fb3}.code .cm{color:#8b89a8}.code .fn{color:#7ab6ff}
+.out{background:#E1F6F3;border:1px solid #bfe9e2;border-radius:11px;padding:11px 15px;font-family:'JetBrains Mono';font-size:13px;color:#0a7a6f;margin:8px 0;white-space:pre}
+.out .lbl{display:block;font-size:11px;font-weight:700;letter-spacing:.1em;text-transform:uppercase;color:#12756a;margin-bottom:5px}
+.explain{font-size:14px;color:#3a3a52;background:#F6F4EF;border-radius:10px;padding:12px 15px;margin:8px 0}
+.explain b{font-family:'Space Grotesk'}
+.pitfall{font-size:13.5px;color:#8a2f2f}
+.pitfall b{color:#c23}
+.qa{font-size:14px;margin:4px 0}
+.qa .qn{font-weight:700}
+.qa .ans{color:#0a7a6f;font-weight:700}
+.rubric{border-collapse:collapse;width:100%;margin-top:6px}
+.rubric td{padding:7px 10px;font-size:13px;border-bottom:1px solid #ECE7DE}
+.rubric th{text-align:left;font-size:11px;text-transform:uppercase;letter-spacing:.08em;color:#6B6B85;padding:6px 10px;font-family:'JetBrains Mono'}
+.foot{font-family:'JetBrains Mono';font-size:11px;color:#8b89a8;display:flex;justify-content:space-between;width:100%}
+</style>
+<x-import component-from-global-scope="doc-page" from="./doc-page.js" hint-size="100%,100%">
+<doc-page size="letter" margin="0.7in">
+<div slot="footer" class="foot"><span>Java, Clearly — Lesson 5</span><span>Answer Sheet · Instructor copy</span></div>
+<div class="hdr">
+<div class="brand"><span class="dot">J</span><span>Java, Clearly</span></div>
+<div class="metabar">LESSON 5 · JAVA ADVANCED<br>ANSWER SHEET — AP CS A PREP</div>
+</div>
+<p class="subtitle">Assignment 5 — Worked Solutions</p>
+<h1>Objects &amp; Recursion: Answer Key</h1>
+<div class="warn">📌 <b>For the student:</b> Task 1 is class design (structure matters more than output). Tasks 2 &amp; 3 are recursion — the key is spotting the <b>base case</b>. Attempt all before reading.</div>
+
+<h2><span class="num">1</span> Design a <span class="mono" style="font-size:.8em">Student</span> class</h2>
+<p class="task">Two fields (name, int grade), a constructor, and a <span class="mono">promote()</span> method.</p>
+<div class="code"><span class="k">public class</span> <span class="t">Student</span> {
+  <span class="k">String</span> name;      <span class="cm">// field</span>
+  <span class="k">int</span> grade;         <span class="cm">// field</span>
+
+  <span class="k">public</span> <span class="fn">Student</span>(<span class="k">String</span> n, <span class="k">int</span> g) {   <span class="cm">// constructor</span>
+    name = n;
+    grade = g;
+  }
+  <span class="k">public void</span> <span class="fn">promote</span>() {   <span class="cm">// behavior</span>
+    grade = grade + <span class="n">1</span>;
+  }
+}</div>
+<div class="explain"><b>What to check:</b> the two fields are declared at the top, the constructor's parameters are copied into the fields, and <span class="mono">promote()</span> changes the object's own <span class="mono">grade</span> field. Creating one: <span class="mono">Student s = new Student("Kai", 10); s.promote();</span> → Kai's grade becomes 11.</div>
+<p class="pitfall"><b>Common mistake:</b> naming the constructor something other than <span class="mono">Student</span>, or giving it a return type. A constructor has <b>no</b> return type and must match the class name exactly.</p>
+
+<h2><span class="num">2</span> Recursive countdown</h2>
+<p class="task"><span class="mono">countdown(int n)</span> prints n → 1 then "Blastoff!".</p>
+<div class="code"><span class="k">void</span> <span class="fn">countdown</span>(<span class="k">int</span> n) {
+  <span class="k">if</span> (n <= <span class="n">0</span>) {          <span class="cm">// base case: stop</span>
+    <span class="t">System</span>.<span class="fn">out</span>.<span class="fn">println</span>(<span class="s">"Blastoff!"</span>);
+    <span class="k">return</span>;
+  }
+  <span class="t">System</span>.<span class="fn">out</span>.<span class="fn">println</span>(n);      <span class="cm">// do this level's work</span>
+  <span class="fn">countdown</span>(n - <span class="n">1</span>);         <span class="cm">// recurse on a smaller n</span>
+}
+<span class="fn">countdown</span>(<span class="n">5</span>);</div>
+<div class="out"><span class="lbl">Expected output</span>5
+4
+3
+2
+1
+Blastoff!</div>
+<div class="explain"><b>Key idea:</b> the <b>base case</b> (<span class="mono">n &lt;= 0</span>) stops the recursion. Each call prints its own <span class="mono">n</span>, then calls itself with <span class="mono">n - 1</span> — a smaller problem that marches toward the base case.</div>
+
+<h2><span class="num">3</span> Recursive sum</h2>
+<p class="task"><span class="mono">int sumTo(int n)</span> returns 1 + 2 + … + n.</p>
+<div class="code"><span class="k">int</span> <span class="fn">sumTo</span>(<span class="k">int</span> n) {
+  <span class="k">if</span> (n <= <span class="n">1</span>) {          <span class="cm">// base case</span>
+    <span class="k">return</span> <span class="n">1</span>;
+  }
+  <span class="k">return</span> n + <span class="fn">sumTo</span>(n - <span class="n">1</span>);   <span class="cm">// this n, plus the sum of the rest</span>
+}
+<span class="t">System</span>.<span class="fn">out</span>.<span class="fn">println</span>(<span class="fn">sumTo</span>(<span class="n">10</span>));</div>
+<div class="out"><span class="lbl">Expected output</span>55</div>
+<div class="explain"><b>Key idea:</b> <span class="mono">sumTo(10)</span> = 10 + <span class="mono">sumTo(9)</span> = 10 + 9 + <span class="mono">sumTo(8)</span> … down to <span class="mono">sumTo(1)</span> = 1. Adding 1+2+…+10 gives 55. The recursive call must move toward the base case (<span class="mono">n - 1</span>), or it never stops.</div>
+<p class="pitfall"><b>Common mistake:</b> forgetting the base case, or recursing with the same <span class="mono">n</span>. Either way the method calls itself forever and throws <span class="mono">StackOverflowError</span>.</p>
+
+<h2><span class="num">✓</span> Quiz answer key</h2>
+<p class="qa"><span class="qn">Quiz 1, Q1:</span> class vs object → <span class="ans">B — class is blueprint, object is built from it.</span></p>
+<p class="qa"><span class="qn">Quiz 1, Q2:</span> What runs on <span class="mono">new</span> → <span class="ans">C — the constructor.</span></p>
+<p class="qa"><span class="qn">Quiz 1, Q3:</span> name &amp; age are → <span class="ans">A — fields.</span></p>
+<p class="qa"><span class="qn">Quiz 2, Q1:</span> Puppy's methods → <span class="ans">B — both bark() and play().</span></p>
+<p class="qa"><span class="qn">Quiz 2, Q2:</span> No base case → <span class="ans">A — recurses forever and crashes.</span></p>
+<p class="qa"><span class="qn">Quiz 2, Q3:</span> <span class="mono">factorial(3)</span> → <span class="ans">C — 6.</span></p>
+
+<h2><span class="num">★</span> Grading rubric (30 pts)</h2>
+<table class="rubric">
+<tr><th>Criterion</th><th>Points</th><th>What to look for</th></tr>
+<tr><td>Task 1 — fields + constructor</td><td>7</td><td>Two fields; constructor matches class name, sets fields.</td></tr>
+<tr><td>Task 1 — promote()</td><td>3</td><td>Adds 1 to the object's grade.</td></tr>
+<tr><td>Task 2 — countdown</td><td>9</td><td>Has base case; prints 5→1 then Blastoff!.</td></tr>
+<tr><td>Task 3 — sumTo</td><td>8</td><td>Base case + n + sumTo(n−1); returns 55.</td></tr>
+<tr><td>Recursion reasoning</td><td>3</td><td>Student can identify the base case in each.</td></tr>
+</table>
+</doc-page>
+</x-import></helmet>
+</x-dc>
+</body>
+</html>

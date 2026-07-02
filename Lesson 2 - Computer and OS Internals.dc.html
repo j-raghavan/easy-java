@@ -1,0 +1,234 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<script src="./support.js"></script>
+</head>
+<body>
+<x-dc>
+<helmet>
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@400;500;600;700&family=Nunito:wght@400;600;700;800&family=JetBrains+Mono:wght@400;500;700&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="lesson.css">
+<script src="lesson-engine.js"></script>
+</helmet>
+<div class="app" id="l2">
+<div class="topbar">
+<div class="brandrow">
+<div class="brand"><a href="Course Hub.dc.html"><span class="dot">J</span></a> Java, Clearly · Lesson 2</div>
+<div class="badges">
+<span class="pill">AP CS A Prep</span>
+<span class="pill score" data-score>0 pts</span>
+<button class="iconbtn" data-mute title="Toggle narration">🔊</button>
+<button class="iconbtn" data-replay title="Replay narration">↺</button>
+</div>
+</div>
+<div class="progwrap"><div class="progbar" data-prog></div></div>
+</div>
+<div class="stage" data-stage>
+
+<section class="scene active" data-narr="Welcome back. Last time you learned that a program is a list of instructions. But where do those instructions actually go, and what runs them? In this lesson we open up the computer — from the code you type, all the way down to the electricity in the chip.">
+<span class="kicker">Lesson 2 of 6 · Under the Hood</span>
+<h1 class="title-xl">What Happens<br>When You Press Run</h1>
+<p class="lead">Your Java code is just text. So how does a machine of silicon and electricity turn <span class="mono">"Hello"</span> into words on a screen? Let's trace the whole journey — and meet the operating system that makes it all possible.</p>
+<div class="btnrow"><span class="tag">⏱ ~12 min</span><span class="tag p">✎ 2 quizzes</span><span class="tag a">🧩 matching</span><span class="tag" style="background:var(--coralSoft);color:#c23">💻 live code</span></div>
+</section>
+
+<section class="scene" data-narr="A computer is built in layers. At the bottom is hardware — the physical chip and memory. On top of that sits the operating system, like Windows, macOS, or Linux. And on top of that run your programs. Each layer only talks to the one just below it. You write a program; it asks the OS for help; the OS controls the hardware.">
+<span class="kicker">Concept 01</span>
+<h2 class="sh">A computer is a stack of layers 🥞</h2>
+<p class="lead">Each layer trusts the one below it to do the hard work. You live at the top.</p>
+<div class="softgrid">
+<div class="stepcard c-purple"><span class="stepnum">3</span><div><b>Your Programs</b> — Java, games, browsers. <span class="hint" style="display:block;font-weight:600">"I need to save a file."</span></div></div>
+<div class="parrow" style="justify-content:flex-start;padding-left:14px">↕</div>
+<div class="stepcard c-teal"><span class="stepnum">2</span><div><b>Operating System</b> — Windows / macOS / Linux. <span class="hint" style="display:block;font-weight:600">"I'll manage the hardware for you."</span></div></div>
+<div class="parrow" style="justify-content:flex-start;padding-left:14px">↕</div>
+<div class="stepcard c-amber"><span class="stepnum">1</span><div><b>Hardware</b> — CPU, memory (RAM), disk. <span class="hint" style="display:block;font-weight:600">Electricity + silicon. Understands only 1s and 0s.</span></div></div>
+</div>
+<div class="why"><b>Why this matters →</b> When your Java program prints to the screen or reads a file, it never touches the hardware directly. It asks the OS. Understanding this "chain of command" explains a lot of what you'll see in AP CS.</div>
+</section>
+
+<section class="scene" data-narr="Here's the big secret. The computer can't read Java directly. When you press Run, a translator called the compiler — javac — turns your .java text into bytecode, stored in a .class file. Then the Java Virtual Machine, the JVM, reads that bytecode and runs it on any computer. This is why Java's slogan is: write once, run anywhere.">
+<span class="kicker">Concept 02 · The pipeline</span>
+<h2 class="sh">Java's journey: source → bytecode → running ⚙️</h2>
+<p class="lead">Java isn't read directly by the chip. It takes a clever two-step trip:</p>
+<div class="pipe">
+<div class="pnode"><div class="pi">📝</div><div class="pl mono">Hello.java</div><div class="ps">Your source code (plain text you wrote)</div></div>
+<div class="parrow">→</div>
+<div class="pnode"><div class="pi">🛠️</div><div class="pl mono">javac</div><div class="ps">The <b>compiler</b> translates &amp; checks it</div></div>
+<div class="parrow">→</div>
+<div class="pnode"><div class="pi">📦</div><div class="pl mono">Hello.class</div><div class="ps"><b>Bytecode</b> — half-way language</div></div>
+<div class="parrow">→</div>
+<div class="pnode"><div class="pi">☕</div><div class="pl mono">JVM</div><div class="ps">Runs bytecode on <b>any</b> device</div></div>
+</div>
+<div class="twocol">
+<div class="infobox"><h3>🌍 Write once, run anywhere</h3><p style="margin:0;font-size:14.5px;line-height:1.5">The same <span class="mono">.class</span> bytecode runs on Windows, Mac, a phone, or a spacecraft — as long as that device has a JVM. That portability is why Java is everywhere.</p></div>
+<div class="infobox"><h3>🐞 The compiler is your friend</h3><p style="margin:0;font-size:14.5px;line-height:1.5"><span class="mono">javac</span> checks your grammar first. If you forget a semicolon, it refuses to compile and tells you the line — <b>before</b> the program ever runs.</p></div>
+</div>
+</section>
+
+<section class="scene" data-narr="Once your code is running, the CPU executes it one instruction at a time using a simple loop: fetch the next instruction, decode what it means, execute it. Variables live in memory — RAM — as numbered boxes. Press Step to watch the CPU run a tiny program and fill those memory cells.">
+<span class="kicker">Concept 03 · Interactive</span>
+<h2 class="sh">Inside the CPU: fetch → decode → execute 🔁</h2>
+<p class="lead">The CPU repeats one loop billions of times a second. Press <b>Step</b> to watch it run this program and store values in memory.</p>
+<div class="split stepper" data-steps='[{"line":0,"set":{"a":"5"},"type":"RAM @1000"},{"line":1,"set":{"b":"3"},"type":"RAM @1004"},{"line":2,"set":{"sum":"8"},"type":"RAM @1008"},{"line":3,"out":"8"}]'>
+<div class="codepanel">
+<div class="codehead"><span class="tl r"></span><span class="tl y"></span><span class="tl g"></span><span class="codefile mono">Add.java</span></div>
+<div class="codebody"><span class="cline" data-line="0"><span class="k">int</span> a = <span class="n">5</span>;</span><span class="cline" data-line="1"><span class="k">int</span> b = <span class="n">3</span>;</span><span class="cline" data-line="2"><span class="k">int</span> sum = a + b;</span><span class="cline" data-line="3"><span class="t">System</span>.<span class="fn">out</span>.<span class="fn">println</span>(sum);</span></div>
+</div>
+<div>
+<div class="vars">
+<div class="varbox"><span class="varlabel">a</span><div class="varchip empty" data-v="a">—</div></div>
+<div class="varbox"><span class="varlabel">b</span><div class="varchip empty" data-v="b">—</div></div>
+<div class="varbox"><span class="varlabel">sum</span><div class="varchip empty" data-v="sum">—</div></div>
+</div>
+<div class="console mono" data-step-out style="margin-top:14px"><span class="muted">// output</span></div>
+<div class="btnrow" style="margin-top:14px"><button class="btn primary" data-step>▶ Step</button><button class="btn ghost" data-step-reset>Reset</button></div>
+</div>
+</div>
+<div class="why"><b>Key insight →</b> Every variable is really an address in RAM. When you write <span class="mono">int a = 5</span>, the computer reserves a box in memory and writes 5 into it. "Running out of memory" means you've used up all the boxes.</div>
+</section>
+
+<section class="scene" data-narr="Checkpoint one. Think about the layers and the pipeline you just saw.">
+<span class="kicker">Checkpoint · Quiz 1</span>
+<h2 class="sh">Trace the journey ✏️</h2>
+<div class="quiz" data-quiz="1">
+<div class="q" data-answer="1" data-fb-ok="Correct! javac compiles your source into bytecode; the JVM then runs that bytecode." data-fb-no="Remember the pipeline: .java → javac (compiler) → .class bytecode → JVM.">
+<div class="qtext">What turns your <span class="mono">.java</span> file into <span class="mono">.class</span> bytecode?</div>
+<div class="opts"><button class="opt" data-i="0"><span class="mk">A</span>The operating system</button><button class="opt" data-i="1"><span class="mk">B</span>The compiler (javac)</button><button class="opt" data-i="2"><span class="mk">C</span>The monitor</button></div>
+</div>
+<div class="q" data-answer="2" data-fb-ok="Exactly — the JVM lets the same bytecode run on any device, giving Java its 'write once, run anywhere' power." data-fb-no="Think about what makes the SAME bytecode work on a Mac, a PC, and a phone.">
+<div class="qtext">Why can the same Java program run on many different computers?</div>
+<div class="opts"><button class="opt" data-i="0"><span class="mk">A</span>Because Java is very small</button><button class="opt" data-i="1"><span class="mk">B</span>Because the CPU understands Java directly</button><button class="opt" data-i="2"><span class="mk">C</span>Because each device has a JVM to run the bytecode</button></div>
+</div>
+</div>
+</section>
+
+<section class="scene" data-narr="So what does the operating system actually do all day? It's the manager of the computer. It decides which program runs on the CPU next, hands out memory, organizes files on the disk, and talks to devices like the keyboard and screen. Match each part of the OS to its job.">
+<span class="kicker">Concept 04 · Drag &amp; drop</span>
+<h2 class="sh">The OS is the computer's manager 👔</h2>
+<p class="lead">Dozens of programs want the CPU at once. The OS keeps order. Match each OS job to what it does:</p>
+<div class="match" id="osmatch">
+<div class="mcol"><h3>OS component</h3>
+<div class="chip" draggable="true" data-type="sched">Scheduler</div>
+<div class="chip" draggable="true" data-type="mem">Memory manager</div>
+<div class="chip" draggable="true" data-type="fs">File system</div>
+<div class="chip" draggable="true" data-type="drv">Device drivers</div>
+</div>
+<div class="mcol"><h3>Its job</h3>
+<div class="drop" data-type="sched"><span class="lbl">Decides which program runs next on the CPU</span><span class="slot"></span></div>
+<div class="drop" data-type="mem"><span class="lbl">Hands out &amp; reclaims RAM boxes</span><span class="slot"></span></div>
+<div class="drop" data-type="fs"><span class="lbl">Organizes your files &amp; folders on disk</span><span class="slot"></span></div>
+<div class="drop" data-type="drv"><span class="lbl">Talks to keyboard, screen &amp; other hardware</span><span class="slot"></span></div>
+</div>
+</div>
+</section>
+
+<section class="scene" data-narr="Errors come in two flavors, and telling them apart is a huge AP skill. A compile-time error is a grammar mistake the compiler catches before running — like a missing semicolon. A runtime error happens while the program runs, like dividing by zero. Compile errors stop you early; runtime errors crash you mid-flight.">
+<span class="kicker">Concept 05</span>
+<h2 class="sh">Two kinds of errors 🚦</h2>
+<p class="lead">Knowing <b>when</b> an error strikes tells you where to look for the fix.</p>
+<div class="twocol">
+<div class="infobox" style="border-color:#f3c9c9"><h3>🛑 Compile-time error</h3><p style="margin:0 0 10px;font-size:14.5px;line-height:1.5">Caught by <span class="mono">javac</span> <b>before</b> the program runs. Usually a grammar/spelling mistake. The program never starts.</p><div class="codepanel"><div class="codebody" style="font-size:13px"><span class="t">System</span>.<span class="fn">out</span>.<span class="fn">println</span>(<span class="s">"hi"</span>)<span class="cm"> ← missing ;</span></div></div></div>
+<div class="infobox" style="border-color:#f3d9b0"><h3>💥 Runtime error</h3><p style="margin:0 0 10px;font-size:14.5px;line-height:1.5">Code is grammatically fine, so it compiles — but something goes wrong <b>while running</b>, and it crashes.</p><div class="codepanel"><div class="codebody" style="font-size:13px"><span class="k">int</span> x = <span class="n">5</span> / <span class="n">0</span>;<span class="cm"> ← divide by zero 💥</span></div></div></div>
+</div>
+<div class="why"><b>Rule of thumb →</b> Red squiggles in IntelliJ before you run = compile-time. Program starts then throws an <span class="mono">Exception</span> = runtime.</div>
+</section>
+
+<section class="scene" data-narr="Your turn. This editor is running on a simulated JVM, just like the real thing. Try the divide-by-zero example to see a runtime crash, then fix it. Experiment freely.">
+<span class="kicker">Concept 06 · Live editor 💻</span>
+<h2 class="sh">Run it on the (virtual) machine</h2>
+<p class="lead">This runs on a mini JVM right in your browser. Run it, then try the crash example and fix it yourself.</p>
+<div class="codepanel">
+<div class="codehead"><span class="tl r"></span><span class="tl y"></span><span class="tl g"></span><span class="codefile mono">Machine.java</span></div>
+<textarea class="editor" spellcheck="false">int cores = 8;
+int tasks = 40;
+int perCore = tasks / cores;
+System.out.println("Each core handles " + perCore + " tasks");</textarea>
+</div>
+<div class="btnrow">
+<button class="btn run" data-run>▶ Run</button>
+<button class="btn ghost" data-try="int x = 10;&#10;int y = 0;&#10;System.out.println(x / y);">Try a crash 💥</button>
+<span class="hint">Watch how <span class="mono">40 / 8</span> gives a whole number — that's <b>integer division</b>.</span>
+</div>
+<div class="console mono" data-console><span class="muted">// press Run to see output</span></div>
+</section>
+
+<section class="scene" data-narr="Second checkpoint — a little harder. These mix the CPU, memory, the OS, and error types.">
+<span class="kicker">Checkpoint · Quiz 2</span>
+<h2 class="sh">Level up 🎯</h2>
+<div class="quiz" data-quiz="2">
+<div class="q" data-answer="1" data-pts="12" data-fb-ok="Right — a missing semicolon is a grammar mistake javac catches before running: compile-time." data-fb-no="Would the program even start? The compiler rejects grammar mistakes first.">
+<div class="qtext">You forget a semicolon. When is this error caught?</div>
+<div class="opts"><button class="opt" data-i="0"><span class="mk">A</span>While the program runs (runtime)</button><button class="opt" data-i="1"><span class="mk">B</span>Before it runs, by the compiler (compile-time)</button><button class="opt" data-i="2"><span class="mk">C</span>It's never caught</button></div>
+</div>
+<div class="q" data-answer="0" data-pts="12" data-fb-ok="Correct — the scheduler decides which waiting program gets the CPU next." data-fb-no="Which OS component takes turns giving programs time on the CPU?">
+<div class="qtext">200 programs are open but the CPU runs one thing at a time. Who decides whose turn it is?</div>
+<div class="opts"><button class="opt" data-i="0"><span class="mk">A</span>The OS scheduler</button><button class="opt" data-i="1"><span class="mk">B</span>The compiler</button><button class="opt" data-i="2"><span class="mk">C</span>The file system</button></div>
+</div>
+<div class="q" data-answer="2" data-pts="12" data-fb-ok="Yes! 40 / 8 = 5 exactly. Integer division throws away any remainder." data-fb-no="Both are ints, so Java does integer division: 40 / 8.">
+<div class="qtext">In the editor, what did <span class="mono">tasks / cores</span> (40 / 8) print?</div>
+<div class="opts"><button class="opt" data-i="0"><span class="mk">A</span>4.5</button><button class="opt" data-i="1"><span class="mk">B</span>0.2</button><button class="opt" data-i="2"><span class="mk">C</span>5</button></div>
+</div>
+</div>
+</section>
+
+<section class="scene" data-narr="Time to practice. Three tasks that connect code to the machine underneath. Try them in the editor first, then compare with the answer sheet.">
+<span class="kicker">Practice · Assignment 2</span>
+<h2 class="sh">Your assignment 📝</h2>
+<p class="lead">Use the live editor above (or IntelliJ). Attempt each yourself, then open the answer sheet to compare.</p>
+<div class="assign">
+<div class="taskitem"><span class="tasknum">1</span><div><b>Memory math.</b> A program stores 3 <span class="mono">int</span> variables. Each <span class="mono">int</span> uses 4 bytes. Create the variables and print the <b>total bytes</b> used (should be 12).</div></div>
+<div class="taskitem"><span class="tasknum">2</span><div><b>Integer division &amp; remainder.</b> You have 30 students and want teams of 4. Use <span class="mono">/</span> to print how many full teams, and <span class="mono">%</span> (modulo) to print how many students are left over.</div></div>
+<div class="taskitem"><span class="tasknum">3</span><div><b>Cause a crash, then fix it.</b> Write code that triggers a runtime error (divide by zero). Then change one number so it runs correctly, and print the result. In your answer, label which error was compile-time vs runtime.</div></div>
+</div>
+<div class="why"><b>Why it matters →</b> AP CS A constantly asks you to predict output of integer division and modulo, and to identify error types. These three tasks drill exactly that.</div>
+<div class="btnrow"><a class="btn primary" href="Lesson 2 - Answer Sheet.dc.html" target="_blank">📄 Open Answer Sheet</a></div>
+</section>
+
+<section class="scene" data-narr="Excellent work. You now know how code travels from text to running program, how the CPU and memory work, what the operating system does, and the two kinds of errors. Next lesson, we go deep on Java basics: syntax, types, and making decisions. See you there!">
+<span class="kicker">Lesson complete 🎉</span>
+<h2 class="sh">You went under the hood!</h2>
+<div class="card" style="display:flex;align-items:center;gap:24px;flex-wrap:wrap">
+<div><div class="scorebig" data-final-score>0</div><div class="hint" style="margin-top:4px">points earned</div></div>
+<div style="flex:1;min-width:200px"><p class="lead" style="font-size:16px;margin:0">You can now explain what actually happens when you press Run — a real superpower for debugging.</p></div>
+</div>
+<h3 style="font-family:'Space Grotesk';margin-top:8px">You learned</h3>
+<div class="finalgrid">
+<div class="rc"><div class="rt">🥞 Layers</div><div class="rd">Hardware → OS → your programs.</div></div>
+<div class="rc"><div class="rt">⚙️ The pipeline</div><div class="rd">source → javac → bytecode → JVM.</div></div>
+<div class="rc"><div class="rt">🔁 CPU + RAM</div><div class="rd">Fetch-decode-execute; variables live in memory.</div></div>
+<div class="rc"><div class="rt">👔 The OS</div><div class="rd">Scheduler, memory, files, devices.</div></div>
+<div class="rc"><div class="rt">🚦 Two errors</div><div class="rd">Compile-time vs runtime.</div></div>
+<div class="rc"><div class="rt">📝 Assignment</div><div class="rd">Division, modulo & error types.</div></div>
+</div>
+<div class="callout" style="margin-top:6px"><span class="n">→</span><span><b>Up next — Lesson 3:</b> Java Basics — syntax, types, operators, and making decisions with <span class="mono">if</span>.</span></div>
+<div class="btnrow"><a class="btn primary" href="Course Hub.dc.html">← Back to Course Hub</a></div>
+</section>
+
+</div>
+<div class="navbar">
+<button class="btn ghost" data-prev>← Back</button>
+<div class="dots" data-dots></div>
+<button class="btn primary" data-next>Start →</button>
+</div>
+</div>
+</x-dc>
+<script type="text/x-dc" data-dc-script>
+class Component extends DCLogic {
+  componentDidMount(){
+    var tries=0;
+    var boot=()=>{
+      var root=document.getElementById('l2');
+      if(window.LessonEngine && root){ this.api=window.LessonEngine.mount(root,{key:'l2'}); }
+      else if(tries++<80){ setTimeout(boot,50); }
+    };
+    boot();
+  }
+}
+</script>
+</body>
+</html>

@@ -1,0 +1,110 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<script src="./support.js"></script>
+</head>
+<body>
+<x-dc>
+<helmet>
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@500;600;700&family=Nunito:wght@400;600;700;800&family=JetBrains+Mono:wght@400;500;700&display=swap" rel="stylesheet">
+<style>
+doc-page:not(:defined){visibility:hidden}
+*{box-sizing:border-box}
+body{margin:0;background:#EDEAE3;font-family:'Nunito',system-ui,sans-serif;color:#20203A;line-height:1.55}
+h1,h2,h3,.dh{font-family:'Space Grotesk',sans-serif;letter-spacing:-.01em}
+h1{font-size:30px;margin:0 0 4px}
+h2{font-size:19px;margin:26px 0 10px;padding-bottom:7px;border-bottom:2px solid #ECE7DE;display:flex;align-items:center;gap:10px}
+h2 .num{background:#6C4CE0;color:#fff;width:26px;height:26px;border-radius:8px;display:inline-flex;align-items:center;justify-content:center;font-size:14px;font-family:'JetBrains Mono';flex:none}
+.mono{font-family:'JetBrains Mono',monospace}
+.subtitle{color:#6B6B85;font-size:14px;font-weight:600;margin:0 0 2px}
+.hdr{display:flex;justify-content:space-between;align-items:flex-end;gap:16px;border-bottom:3px solid #20203A;padding-bottom:12px;margin-bottom:6px}
+.hdr .dot{width:30px;height:30px;border-radius:8px;background:#6C4CE0;color:#fff;font-family:'JetBrains Mono';font-weight:700;display:inline-flex;align-items:center;justify-content:center;font-size:16px}
+.brand{display:flex;align-items:center;gap:10px;font-family:'Space Grotesk';font-weight:700}
+.metabar{font-family:'JetBrains Mono';font-size:12px;color:#6B6B85;text-align:right}
+.warn{background:#FFF4DE;border-left:4px solid #FFB020;border-radius:0 10px 10px 0;padding:12px 16px;font-size:14px;margin:14px 0 4px}
+.task{font-weight:700;font-size:15px;margin:2px 0 10px;color:#40308a}
+.code{background:#1E1E2E;color:#E8E6F3;border-radius:11px;padding:14px 16px;font-family:'JetBrains Mono';font-size:13px;line-height:1.65;white-space:pre;overflow-x:auto;margin:8px 0}
+.code .k{color:#c58af9}.code .t{color:#66d9c7}.code .s{color:#ffcf7a}.code .n{color:#f78fb3}.code .cm{color:#8b89a8}.code .fn{color:#7ab6ff}
+.out{background:#E1F6F3;border:1px solid #bfe9e2;border-radius:11px;padding:11px 15px;font-family:'JetBrains Mono';font-size:13px;color:#0a7a6f;margin:8px 0;white-space:pre}
+.out .lbl{display:block;font-size:11px;font-weight:700;letter-spacing:.1em;text-transform:uppercase;color:#12756a;margin-bottom:5px}
+.explain{font-size:14px;color:#3a3a52;background:#F6F4EF;border-radius:10px;padding:12px 15px;margin:8px 0}
+.explain b{font-family:'Space Grotesk'}
+.pitfall{font-size:13.5px;color:#8a2f2f}
+.pitfall b{color:#c23}
+.qa{font-size:14px;margin:4px 0}
+.qa .qn{font-weight:700}
+.qa .ans{color:#0a7a6f;font-weight:700}
+.rubric td{padding:7px 10px;font-size:13px;border-bottom:1px solid #ECE7DE}
+.rubric{border-collapse:collapse;width:100%;margin-top:6px}
+.rubric th{text-align:left;font-size:11px;text-transform:uppercase;letter-spacing:.08em;color:#6B6B85;padding:6px 10px;font-family:'JetBrains Mono'}
+.foot{font-family:'JetBrains Mono';font-size:11px;color:#8b89a8;display:flex;justify-content:space-between;width:100%}
+</style>
+<x-import component-from-global-scope="doc-page" from="./doc-page.js" hint-size="100%,100%">
+<doc-page size="letter" margin="0.7in">
+<div slot="footer" class="foot"><span>Java, Clearly — Lesson 1</span><span>Answer Sheet · Instructor copy</span></div>
+
+<div class="hdr">
+<div class="brand"><span class="dot">J</span><span>Java, Clearly</span></div>
+<div class="metabar">LESSON 1 · PROGRAMMING BASICS<br>ANSWER SHEET — AP CS A PREP</div>
+</div>
+<p class="subtitle">Assignment 1 — Worked Solutions</p>
+<h1>Programming Basics: Answer Key</h1>
+<div class="warn">📌 <b>For the student:</b> Try all three tasks yourself in the live editor (or IntelliJ) <i>before</i> reading this. Compare your working code and output to the solutions below. If yours differs, look for <i>why</i> — that's the real lesson.</div>
+
+<h2><span class="num">1</span> Warm-up — use a variable</h2>
+<p class="task">Create an <span class="mono">int</span> called <span class="mono">score</span> set to 90, and print <span class="mono">"My score is 90"</span> using the variable.</p>
+<div class="code"><span class="k">int</span> score = <span class="n">90</span>;
+<span class="t">System</span>.<span class="fn">out</span>.<span class="fn">println</span>(<span class="s">"My score is "</span> + score);</div>
+<div class="out"><span class="lbl">Expected output</span>My score is 90</div>
+<div class="explain"><b>Key idea:</b> the <span class="mono">+</span> here <b>joins</b> the text <span class="mono">"My score is "</span> with the value inside <span class="mono">score</span>. Because one side is a String, Java converts the number to text and glues them together (concatenation).</div>
+<p class="pitfall"><b>Common mistake:</b> typing <span class="mono">"My score is 90"</span> as one string. That works visually but ignores the goal — the task is to <i>use the variable</i>, so if <span class="mono">score</span> changes, the message updates automatically.</p>
+
+<h2><span class="num">2</span> Math — mixing double and int</h2>
+<p class="task">A ticket is $12.50; you buy 3. Use a <span class="mono">double</span> for price, an <span class="mono">int</span> for quantity, then print the total.</p>
+<div class="code"><span class="k">double</span> price = <span class="n">12.50</span>;
+<span class="k">int</span> quantity = <span class="n">3</span>;
+<span class="k">double</span> total = price * quantity;
+<span class="t">System</span>.<span class="fn">out</span>.<span class="fn">println</span>(<span class="s">"Total cost: $"</span> + total);</div>
+<div class="out"><span class="lbl">Expected output</span>Total cost: $37.5</div>
+<div class="explain"><b>Key idea:</b> when you multiply a <span class="mono">double</span> (12.5) by an <span class="mono">int</span> (3), Java <i>promotes</i> the result to a <span class="mono">double</span> — so <span class="mono">total</span> must be a <span class="mono">double</span>, not an <span class="mono">int</span>. Java prints <span class="mono">37.5</span>, not <span class="mono">37.50</span> (trailing zeros are dropped).</div>
+<p class="pitfall"><b>Common mistake:</b> declaring <span class="mono">int total</span>. That causes a compile error (<span class="mono">possible lossy conversion from double to int</span>) because a decimal can't fit in an int box.</p>
+
+<h2><span class="num">3</span> Loop — print 1 through 5</h2>
+<p class="task">Use a <span class="mono">for</span> loop to print the numbers 1 through 5, each on its own line.</p>
+<div class="code"><span class="k">for</span> (<span class="k">int</span> i = <span class="n">1</span>; i <= <span class="n">5</span>; i++) {
+  <span class="t">System</span>.<span class="fn">out</span>.<span class="fn">println</span>(i);
+}</div>
+<div class="out"><span class="lbl">Expected output</span>1
+2
+3
+4
+5</div>
+<div class="explain"><b>Reading the loop:</b> start <span class="mono">i</span> at 1 → check <span class="mono">i &lt;= 5</span> → if true, run the body → then <span class="mono">i++</span> adds 1 → check again. It stops when <span class="mono">i</span> becomes 6 because <span class="mono">6 &lt;= 5</span> is false.</div>
+<p class="pitfall"><b>Common mistakes:</b> using <span class="mono">i &lt; 5</span> (stops at 4) or starting <span class="mono">i = 0</span> (prints 0–4). Off-by-one errors are the #1 loop bug — always trace the first and last pass by hand.</p>
+
+<h2><span class="num">✓</span> Quiz answer key</h2>
+<p class="qa"><span class="qn">Quiz 1, Q1:</span> Order of execution → <span class="ans">B — top to bottom, one at a time.</span></p>
+<p class="qa"><span class="qn">Quiz 1, Q2:</span> Value of <span class="mono">cookies</span> → <span class="ans">C — 24</span> (2 × 12).</p>
+<p class="qa"><span class="qn">Quiz 2, Q1:</span> Type of <span class="mono">"7"</span> → <span class="ans">B — String</span> (quotes make it text).</p>
+<p class="qa"><span class="qn">Quiz 2, Q2:</span> <span class="mono">println(5 + 3)</span> → <span class="ans">C — 8</span> (numbers add).</p>
+<p class="qa"><span class="qn">Quiz 2, Q3:</span> What an IDE does → <span class="ans">A — write, run &amp; debug code.</span></p>
+
+<h2><span class="num">★</span> Grading rubric (30 pts)</h2>
+<table class="rubric">
+<tr><th>Criterion</th><th>Points</th><th>What to look for</th></tr>
+<tr><td>Task 1 correct</td><td>8</td><td>Uses the variable in the print, not a hard-coded string.</td></tr>
+<tr><td>Task 2 correct</td><td>8</td><td>double for price/total; correct total 37.5.</td></tr>
+<tr><td>Task 3 correct</td><td>8</td><td>Prints exactly 1–5, one per line; correct loop bounds.</td></tr>
+<tr><td>Code style</td><td>3</td><td>Clear variable names, correct types, semicolons.</td></tr>
+<tr><td>Explanation / comments</td><td>3</td><td>Student can explain why each line runs.</td></tr>
+</table>
+</doc-page>
+</x-import></helmet>
+</x-dc>
+</body>
+</html>

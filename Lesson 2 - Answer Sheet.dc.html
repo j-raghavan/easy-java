@@ -1,0 +1,113 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<script src="./support.js"></script>
+</head>
+<body>
+<x-dc>
+<helmet>
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@500;600;700&family=Nunito:wght@400;600;700;800&family=JetBrains+Mono:wght@400;500;700&display=swap" rel="stylesheet">
+<style>
+doc-page:not(:defined){visibility:hidden}
+*{box-sizing:border-box}
+body{margin:0;background:#EDEAE3;font-family:'Nunito',system-ui,sans-serif;color:#20203A;line-height:1.55}
+h1,h2,h3{font-family:'Space Grotesk',sans-serif;letter-spacing:-.01em}
+h1{font-size:30px;margin:0 0 4px}
+h2{font-size:19px;margin:26px 0 10px;padding-bottom:7px;border-bottom:2px solid #ECE7DE;display:flex;align-items:center;gap:10px}
+h2 .num{background:#2AA7C4;color:#fff;width:26px;height:26px;border-radius:8px;display:inline-flex;align-items:center;justify-content:center;font-size:14px;font-family:'JetBrains Mono';flex:none}
+.mono{font-family:'JetBrains Mono',monospace}
+.hdr{display:flex;justify-content:space-between;align-items:flex-end;gap:16px;border-bottom:3px solid #20203A;padding-bottom:12px;margin-bottom:6px}
+.hdr .dot{width:30px;height:30px;border-radius:8px;background:#2AA7C4;color:#fff;font-family:'JetBrains Mono';font-weight:700;display:inline-flex;align-items:center;justify-content:center;font-size:16px}
+.brand{display:flex;align-items:center;gap:10px;font-family:'Space Grotesk';font-weight:700}
+.metabar{font-family:'JetBrains Mono';font-size:12px;color:#6B6B85;text-align:right}
+.subtitle{color:#6B6B85;font-size:14px;font-weight:600;margin:0 0 2px}
+.warn{background:#FFF4DE;border-left:4px solid #FFB020;border-radius:0 10px 10px 0;padding:12px 16px;font-size:14px;margin:14px 0 4px}
+.task{font-weight:700;font-size:15px;margin:2px 0 10px;color:#1a6b7d}
+.code{background:#1E1E2E;color:#E8E6F3;border-radius:11px;padding:14px 16px;font-family:'JetBrains Mono';font-size:13px;line-height:1.65;white-space:pre;overflow-x:auto;margin:8px 0}
+.code .k{color:#c58af9}.code .t{color:#66d9c7}.code .s{color:#ffcf7a}.code .n{color:#f78fb3}.code .cm{color:#8b89a8}.code .fn{color:#7ab6ff}
+.out{background:#E1F6F3;border:1px solid #bfe9e2;border-radius:11px;padding:11px 15px;font-family:'JetBrains Mono';font-size:13px;color:#0a7a6f;margin:8px 0;white-space:pre}
+.out .lbl{display:block;font-size:11px;font-weight:700;letter-spacing:.1em;text-transform:uppercase;color:#12756a;margin-bottom:5px}
+.explain{font-size:14px;color:#3a3a52;background:#F6F4EF;border-radius:10px;padding:12px 15px;margin:8px 0}
+.explain b{font-family:'Space Grotesk'}
+.pitfall{font-size:13.5px;color:#8a2f2f}
+.pitfall b{color:#c23}
+.qa{font-size:14px;margin:4px 0}
+.qa .qn{font-weight:700}
+.qa .ans{color:#0a7a6f;font-weight:700}
+.rubric{border-collapse:collapse;width:100%;margin-top:6px}
+.rubric td{padding:7px 10px;font-size:13px;border-bottom:1px solid #ECE7DE}
+.rubric th{text-align:left;font-size:11px;text-transform:uppercase;letter-spacing:.08em;color:#6B6B85;padding:6px 10px;font-family:'JetBrains Mono'}
+.foot{font-family:'JetBrains Mono';font-size:11px;color:#8b89a8;display:flex;justify-content:space-between;width:100%}
+</style>
+<x-import component-from-global-scope="doc-page" from="./doc-page.js" hint-size="100%,100%">
+<doc-page size="letter" margin="0.7in">
+<div slot="footer" class="foot"><span>Java, Clearly — Lesson 2</span><span>Answer Sheet · Instructor copy</span></div>
+<div class="hdr">
+<div class="brand"><span class="dot">J</span><span>Java, Clearly</span></div>
+<div class="metabar">LESSON 2 · COMPUTER &amp; OS INTERNALS<br>ANSWER SHEET — AP CS A PREP</div>
+</div>
+<p class="subtitle">Assignment 2 — Worked Solutions</p>
+<h1>Under the Hood: Answer Key</h1>
+<div class="warn">📌 <b>For the student:</b> Attempt all three tasks in the live editor before reading. Pay special attention to <b>integer division</b> and <b>modulo</b> — they appear on almost every AP CS A exam.</div>
+
+<h2><span class="num">1</span> Memory math</h2>
+<p class="task">Store 3 <span class="mono">int</span> variables (4 bytes each) and print the total bytes used.</p>
+<div class="code"><span class="k">int</span> bytesPerInt = <span class="n">4</span>;
+<span class="k">int</span> count = <span class="n">3</span>;
+<span class="k">int</span> totalBytes = bytesPerInt * count;
+<span class="t">System</span>.<span class="fn">out</span>.<span class="fn">println</span>(<span class="s">"Total memory: "</span> + totalBytes + <span class="s">" bytes"</span>);</div>
+<div class="out"><span class="lbl">Expected output</span>Total memory: 12 bytes</div>
+<div class="explain"><b>Key idea:</b> each variable reserves a fixed-size box in RAM. An <span class="mono">int</span> is 4 bytes in Java, so 3 of them use 4 × 3 = 12 bytes. This is literally how the JVM reserves memory when your program starts.</div>
+
+<h2><span class="num">2</span> Integer division &amp; remainder</h2>
+<p class="task">30 students, teams of 4. Print full teams (<span class="mono">/</span>) and leftover students (<span class="mono">%</span>).</p>
+<div class="code"><span class="k">int</span> students = <span class="n">30</span>;
+<span class="k">int</span> teamSize = <span class="n">4</span>;
+<span class="k">int</span> fullTeams = students / teamSize;   <span class="cm">// integer division</span>
+<span class="k">int</span> leftOver = students % teamSize;    <span class="cm">// modulo = remainder</span>
+<span class="t">System</span>.<span class="fn">out</span>.<span class="fn">println</span>(<span class="s">"Full teams: "</span> + fullTeams);
+<span class="t">System</span>.<span class="fn">out</span>.<span class="fn">println</span>(<span class="s">"Left over: "</span> + leftOver);</div>
+<div class="out"><span class="lbl">Expected output</span>Full teams: 7
+Left over: 2</div>
+<div class="explain"><b>Key idea:</b> <span class="mono">30 / 4</span> is <b>7</b>, not 7.5 — integer division throws away the decimal. <span class="mono">30 % 4</span> gives the leftover, <b>2</b> (because 7 × 4 = 28, and 30 − 28 = 2). Together, division and modulo split a number into "how many groups" and "what's left."</div>
+<p class="pitfall"><b>Common mistake:</b> expecting <span class="mono">30 / 4</span> to be 7.5. It's only 7.5 if at least one value is a <span class="mono">double</span> (e.g. <span class="mono">30.0 / 4</span>).</p>
+
+<h2><span class="num">3</span> Cause a crash, then fix it</h2>
+<p class="task">Trigger a runtime error (divide by zero), then fix it. Label the error types.</p>
+<div class="code"><span class="cm">// BEFORE — this compiles fine, but crashes at runtime:</span>
+<span class="k">int</span> total = <span class="n">100</span>;
+<span class="k">int</span> groups = <span class="n">0</span>;
+<span class="t">System</span>.<span class="fn">out</span>.<span class="fn">println</span>(total / groups);   <span class="cm">// 💥 ArithmeticException: / by zero</span></div>
+<div class="code"><span class="cm">// AFTER — change groups to a non-zero number:</span>
+<span class="k">int</span> total = <span class="n">100</span>;
+<span class="k">int</span> groups = <span class="n">5</span>;
+<span class="t">System</span>.<span class="fn">out</span>.<span class="fn">println</span>(total / groups);   <span class="cm">// runs fine</span></div>
+<div class="out"><span class="lbl">Expected output (after fix)</span>20</div>
+<div class="explain"><b>Labelling the errors:</b> dividing by zero is a <b>runtime error</b> — the code is grammatically correct, so it compiles and starts, then crashes mid-run with an <span class="mono">ArithmeticException</span>. By contrast, forgetting a semicolon or misspelling <span class="mono">System</span> would be a <b>compile-time error</b> — <span class="mono">javac</span> refuses to build it and the program never starts.</div>
+
+<h2><span class="num">✓</span> Quiz answer key</h2>
+<p class="qa"><span class="qn">Quiz 1, Q1:</span> What makes <span class="mono">.class</span> bytecode? → <span class="ans">B — the compiler (javac).</span></p>
+<p class="qa"><span class="qn">Quiz 1, Q2:</span> Why run on many computers? → <span class="ans">C — each device has a JVM.</span></p>
+<p class="qa"><span class="qn">Quiz 2, Q1:</span> Missing semicolon caught when? → <span class="ans">B — compile-time.</span></p>
+<p class="qa"><span class="qn">Quiz 2, Q2:</span> Who picks whose turn on the CPU? → <span class="ans">A — the OS scheduler.</span></p>
+<p class="qa"><span class="qn">Quiz 2, Q3:</span> <span class="mono">40 / 8</span> prints? → <span class="ans">C — 5</span> (integer division).</p>
+
+<h2><span class="num">★</span> Grading rubric (30 pts)</h2>
+<table class="rubric">
+<tr><th>Criterion</th><th>Points</th><th>What to look for</th></tr>
+<tr><td>Task 1</td><td>7</td><td>Uses multiplication of variables; prints 12.</td></tr>
+<tr><td>Task 2 — division</td><td>7</td><td>fullTeams = 7 using <span class="mono">/</span>.</td></tr>
+<tr><td>Task 2 — modulo</td><td>7</td><td>leftOver = 2 using <span class="mono">%</span>.</td></tr>
+<tr><td>Task 3 — crash + fix</td><td>6</td><td>Shows a divide-by-zero, then a working fix.</td></tr>
+<tr><td>Task 3 — error labels</td><td>3</td><td>Correctly names runtime vs compile-time.</td></tr>
+</table>
+</doc-page>
+</x-import></helmet>
+</x-dc>
+</body>
+</html>

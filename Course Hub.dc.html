@@ -1,0 +1,153 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<script src="./support.js"></script>
+</head>
+<body>
+<x-dc>
+<helmet>
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@400;500;600;700&family=Nunito:wght@400;600;700;800&family=JetBrains+Mono:wght@400;500;700&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="lesson.css">
+<style>
+.hub{max-width:1040px;margin:0 auto;padding:0 22px 70px}
+.hero{padding:56px 0 30px;text-align:center;position:relative}
+.eyebrow{font-family:'JetBrains Mono';font-size:13px;font-weight:700;letter-spacing:.16em;text-transform:uppercase;color:var(--purple);margin-bottom:14px}
+.hero h1{font-size:clamp(40px,7vw,72px);line-height:1;margin-bottom:16px}
+.hero h1 .g{background:linear-gradient(100deg,var(--purple),var(--teal));-webkit-background-clip:text;background-clip:text;color:transparent}
+.hero p{font-size:20px;color:var(--muted);max-width:60ch;margin:0 auto;line-height:1.5}
+.herotags{display:flex;gap:10px;justify-content:center;flex-wrap:wrap;margin-top:22px}
+.overallwrap{max-width:520px;margin:26px auto 0}
+.overallbar{height:12px;background:var(--line);border-radius:999px;overflow:hidden}
+.overallfill{height:100%;width:0;background:linear-gradient(90deg,var(--purple),var(--teal));border-radius:999px;transition:width .6s ease}
+.overalltxt{font-family:'JetBrains Mono';font-size:12.5px;color:var(--muted);margin-top:8px;font-weight:600}
+.hublogo{display:inline-flex;align-items:center;gap:12px;margin-bottom:26px}
+.hublogo .dot{width:44px;height:44px;border-radius:12px;font-size:22px}
+.grid{display:grid;grid-template-columns:repeat(2,1fr);gap:18px;margin-top:14px}
+@media(max-width:720px){.grid{grid-template-columns:1fr}}
+.lcard{background:var(--panel);border:1px solid var(--line);border-radius:20px;padding:24px;display:flex;flex-direction:column;gap:12px;text-decoration:none;color:inherit;position:relative;overflow:hidden;transition:transform .18s,box-shadow .25s,border-color .2s}
+.lcard.ready:hover{transform:translateY(-4px);box-shadow:0 18px 40px -20px rgba(32,32,58,.4);border-color:var(--purple)}
+.lcard .lnum{font-family:'Space Grotesk';font-weight:700;font-size:15px;width:44px;height:44px;border-radius:12px;display:flex;align-items:center;justify-content:center;color:#fff;flex:none}
+.lcard .ltop{display:flex;align-items:center;justify-content:space-between;gap:12px}
+.lcard h3{font-size:22px;line-height:1.1}
+.lcard .lblurb{font-size:14.5px;color:var(--muted);line-height:1.5;flex:1}
+.lchips{display:flex;gap:7px;flex-wrap:wrap}
+.lchip{font-family:'JetBrains Mono';font-size:11px;font-weight:600;padding:4px 9px;border-radius:999px;background:var(--bg);border:1px solid var(--line);color:var(--muted)}
+.status{font-family:'JetBrains Mono';font-size:12px;font-weight:700;padding:5px 11px;border-radius:999px}
+.status.soon{background:var(--line);color:var(--muted)}
+.status.ready{background:var(--tealSoft);color:#0a7a6f}
+.status.prog{background:var(--amberSoft);color:#9a6a00}
+.lcard.soon{opacity:.62;cursor:not-allowed}
+.n1{background:#6C4CE0}.n2{background:#2AA7C4}.n3{background:#12B5A5}.n4{background:#E0972A}.n5{background:#E0562A}.n6{background:#B23AD6}
+.diff{display:flex;gap:4px;align-items:center}
+.pip{width:7px;height:7px;border-radius:50%;background:var(--line)}
+.pip.on{background:var(--purple)}
+.section-h{font-family:'Space Grotesk';font-weight:700;font-size:15px;letter-spacing:.02em;color:var(--muted);text-transform:uppercase;margin:44px 0 4px;font-size:13px;letter-spacing:.12em}
+.howrow{display:grid;grid-template-columns:repeat(3,1fr);gap:16px;margin-top:14px}
+@media(max-width:720px){.howrow{grid-template-columns:1fr}}
+.howcard{background:var(--panel);border:1px solid var(--line);border-radius:16px;padding:20px}
+.howcard .hi{font-size:26px}
+.howcard h4{font-family:'Space Grotesk';font-size:16px;margin:8px 0 5px}
+.howcard p{font-size:13.5px;color:var(--muted);line-height:1.5;margin:0}
+.footnote{text-align:center;color:var(--muted);font-size:13px;margin-top:48px;font-family:'JetBrains Mono'}
+.resetbtn{background:none;border:none;color:var(--purple);font-family:'JetBrains Mono';font-size:12px;cursor:pointer;text-decoration:underline;margin-top:10px}
+</style>
+</helmet>
+<div class="hub">
+<div class="hero">
+<div class="hublogo"><span class="dot">J</span><span style="font-family:'Space Grotesk';font-weight:800;font-size:22px">Java, Clearly</span></div>
+<div class="eyebrow">MVHS · AP Computer Science A Prep</div>
+<h1>Learn Java, <span class="g">the clear way</span></h1>
+<p>Six interactive, narrated lessons that take you from "what is a program?" all the way to real Java running in space — with live coding, quizzes, and hands-on assignments at every step.</p>
+<div class="herotags"><span class="tag p">🎧 narrated</span><span class="tag">💻 live code editor</span><span class="tag a">✎ quizzes + assignments</span><span class="tag" style="background:var(--coralSoft);color:#c23">🏆 progress &amp; scoring</span></div>
+<div class="overallwrap"><div class="overallbar"><div class="overallfill" data-overall></div></div><div class="overalltxt" data-overalltxt>Start Lesson 1 to begin your journey →</div><button class="resetbtn" data-reset>reset all progress</button></div>
+</div>
+
+<div class="section-h">The 6 lessons · difficulty builds gradually</div>
+<div class="grid" data-grid>
+<a class="lcard ready" href="Lesson 1 - Programming Basics.dc.html" data-lkey="l1">
+<div class="ltop"><span class="lnum n1">01</span><span class="status ready" data-status="l1">Ready</span></div>
+<h3>How Computers Think</h3>
+<p class="lblurb">Programs as recipes, variables, data types, and your first lines of real Java. The foundation everything rests on.</p>
+<div class="diff"><span class="hint" style="font-size:12px;margin-right:4px">Difficulty</span><span class="pip on"></span><span class="pip"></span><span class="pip"></span><span class="pip"></span><span class="pip"></span></div>
+<div class="lchips"><span class="lchip">variables</span><span class="lchip">types</span><span class="lchip">println</span><span class="lchip">step-through</span></div>
+</a>
+<a class="lcard ready" href="Lesson 2 - Computer and OS Internals.dc.html" data-lkey="l2">
+<div class="ltop"><span class="lnum n2">02</span><span class="status ready" data-status="l2">Ready</span></div>
+<h3>Under the Hood</h3>
+<p class="lblurb">What actually happens when you press Run: the compiler, bytecode, the JVM, the CPU, memory, and the operating system.</p>
+<div class="diff"><span class="hint" style="font-size:12px;margin-right:4px">Difficulty</span><span class="pip on"></span><span class="pip on"></span><span class="pip"></span><span class="pip"></span><span class="pip"></span></div>
+<div class="lchips"><span class="lchip">compiler + JVM</span><span class="lchip">memory</span><span class="lchip">errors</span></div>
+</a>
+<a class="lcard ready" href="Lesson 3 - Java Basics.dc.html" data-lkey="l3">
+<div class="ltop"><span class="lnum n3">03</span><span class="status ready" data-status="l3">Ready</span></div>
+<h3>Java Basics</h3>
+<p class="lblurb">Syntax, operators, casting, <span class="mono">Scanner</span> input, booleans, and making decisions with <span class="mono">if</span> / <span class="mono">else</span>.</p>
+<div class="diff"><span class="hint" style="font-size:12px;margin-right:4px">Difficulty</span><span class="pip on"></span><span class="pip on"></span><span class="pip on"></span><span class="pip"></span><span class="pip"></span></div>
+<div class="lchips"><span class="lchip">if / else</span><span class="lchip">operators</span><span class="lchip">Scanner</span></div>
+</a>
+<a class="lcard ready" href="Lesson 4 - Java Intermediate.dc.html" data-lkey="l4">
+<div class="ltop"><span class="lnum n4">04</span><span class="status ready" data-status="l4">Ready</span></div>
+<h3>Java Intermediate</h3>
+<p class="lblurb">Loops in depth, arrays and <span class="mono">ArrayList</span>, String methods, and writing your own methods with parameters.</p>
+<div class="diff"><span class="hint" style="font-size:12px;margin-right:4px">Difficulty</span><span class="pip on"></span><span class="pip on"></span><span class="pip on"></span><span class="pip on"></span><span class="pip"></span></div>
+<div class="lchips"><span class="lchip">loops</span><span class="lchip">arrays</span><span class="lchip">methods</span></div>
+</a>
+<a class="lcard ready" href="Lesson 5 - Java Advanced.dc.html" data-lkey="l5">
+<div class="ltop"><span class="lnum n5">05</span><span class="status ready" data-status="l5">Ready</span></div>
+<h3>Java Advanced</h3>
+<p class="lblurb">Object-oriented programming: classes, objects, constructors, inheritance, polymorphism, and recursion.</p>
+<div class="diff"><span class="hint" style="font-size:12px;margin-right:4px">Difficulty</span><span class="pip on"></span><span class="pip on"></span><span class="pip on"></span><span class="pip on"></span><span class="pip on"></span></div>
+<div class="lchips"><span class="lchip">classes</span><span class="lchip">inheritance</span><span class="lchip">recursion</span></div>
+</a>
+<a class="lcard ready" href="Lesson 6 - Java in Space.dc.html" data-lkey="l6">
+<div class="ltop"><span class="lnum n6">06</span><span class="status ready" data-status="l6">Ready</span></div>
+<h3>Java in Space 🚀</h3>
+<p class="lblurb">How NASA and space missions use Java — plus a capstone project where you code a mission simulation yourself.</p>
+<div class="diff"><span class="hint" style="font-size:12px;margin-right:4px">Difficulty</span><span class="pip on"></span><span class="pip on"></span><span class="pip on"></span><span class="pip on"></span><span class="pip on"></span></div>
+<div class="lchips"><span class="lchip">real-world</span><span class="lchip">capstone</span></div>
+</a>
+</div>
+
+<div class="section-h">How to use this course</div>
+<div class="howrow">
+<div class="howcard"><div class="hi">🎧</div><h4>Watch &amp; listen</h4><p>Each lesson narrates itself. Use the speaker button to mute, and ↺ to replay any scene. Move with the Next button or arrow keys.</p></div>
+<div class="howcard"><div class="hi">💻</div><h4>Code along</h4><p>Every lesson has a live editor that really runs Java. Don't just read — change the code, break it, fix it. That's how it sticks.</p></div>
+<div class="howcard"><div class="hi">📄</div><h4>Do the assignment</h4><p>Try each assignment <b>before</b> opening its answer sheet. Then compare. The struggle is where the learning happens.</p></div>
+</div>
+
+<div class="footnote">Built for MVHS students preparing for AP Computer Science A · Progress saves automatically in this browser</div>
+</div>
+</x-dc>
+<script type="text/x-dc" data-dc-script>
+class Component extends DCLogic {
+  componentDidMount(){ this.refresh(); }
+  refresh(){
+    var keys=['l1','l2','l3','l4','l5','l6'];
+    var ready={l1:1,l2:1,l3:1,l4:1,l5:1,l6:1};
+    var total=0, maxPer=60, done=0;
+    keys.forEach(function(k){
+      var st=document.querySelector('[data-status="'+k+'"]');
+      var score=0, started=false;
+      try{ var s=JSON.parse(localStorage.getItem(k+'prog')||'{}'); if(typeof s.score==='number'){score=s.score; started=(s.score>0||s.i>0);} }catch(e){}
+      if(ready[k]){
+        total+=Math.min(score,maxPer);
+        if(started&&st){ st.className='status prog'; st.textContent=score+' pts'; }
+        else if(st){ st.className='status ready'; st.textContent='Ready'; }
+      }
+    });
+    var pct=Math.round(total/(Object.keys(ready).length*maxPer)*100);
+    var fill=document.querySelector('[data-overall]'); if(fill) fill.style.width=Math.min(100,pct)+'%';
+    var txt=document.querySelector('[data-overalltxt]');
+    if(txt){ txt.textContent = total>0 ? (total+' points earned · '+pct+'% of available lessons complete') : 'Start Lesson 1 to begin your journey →'; }
+    var reset=document.querySelector('[data-reset]');
+    if(reset) reset.onclick=()=>{ ['l1','l2','l3','l4','l5','l6'].forEach(function(k){ try{localStorage.removeItem(k+'prog');}catch(e){} }); this.refresh(); };
+  }
+}
+</script>
+</body>
+</html>

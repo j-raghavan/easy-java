@@ -1,0 +1,126 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<script src="./support.js"></script>
+</head>
+<body>
+<x-dc>
+<helmet>
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@500;600;700&family=Nunito:wght@400;600;700;800&family=JetBrains+Mono:wght@400;500;700&display=swap" rel="stylesheet">
+<style>
+doc-page:not(:defined){visibility:hidden}
+*{box-sizing:border-box}
+body{margin:0;background:#EDEAE3;font-family:'Nunito',system-ui,sans-serif;color:#20203A;line-height:1.55}
+h1,h2,h3{font-family:'Space Grotesk',sans-serif;letter-spacing:-.01em}
+h1{font-size:30px;margin:0 0 4px}
+h2{font-size:19px;margin:26px 0 10px;padding-bottom:7px;border-bottom:2px solid #ECE7DE;display:flex;align-items:center;gap:10px}
+h2 .num{background:#B23AD6;color:#fff;width:26px;height:26px;border-radius:8px;display:inline-flex;align-items:center;justify-content:center;font-size:14px;font-family:'JetBrains Mono';flex:none}
+.mono{font-family:'JetBrains Mono',monospace}
+.hdr{display:flex;justify-content:space-between;align-items:flex-end;gap:16px;border-bottom:3px solid #20203A;padding-bottom:12px;margin-bottom:6px}
+.hdr .dot{width:30px;height:30px;border-radius:8px;background:#B23AD6;color:#fff;font-family:'JetBrains Mono';font-weight:700;display:inline-flex;align-items:center;justify-content:center;font-size:16px}
+.brand{display:flex;align-items:center;gap:10px;font-family:'Space Grotesk';font-weight:700}
+.metabar{font-family:'JetBrains Mono';font-size:12px;color:#6B6B85;text-align:right}
+.subtitle{color:#6B6B85;font-size:14px;font-weight:600;margin:0 0 2px}
+.warn{background:#FFF4DE;border-left:4px solid #FFB020;border-radius:0 10px 10px 0;padding:12px 16px;font-size:14px;margin:14px 0 4px}
+.task{font-weight:700;font-size:15px;margin:2px 0 10px;color:#8a2aa8}
+.code{background:#1E1E2E;color:#E8E6F3;border-radius:11px;padding:14px 16px;font-family:'JetBrains Mono';font-size:12.5px;line-height:1.6;white-space:pre;overflow-x:auto;margin:8px 0}
+.code .k{color:#c58af9}.code .t{color:#66d9c7}.code .s{color:#ffcf7a}.code .n{color:#f78fb3}.code .cm{color:#8b89a8}.code .fn{color:#7ab6ff}
+.out{background:#E1F6F3;border:1px solid #bfe9e2;border-radius:11px;padding:11px 15px;font-family:'JetBrains Mono';font-size:12.5px;color:#0a7a6f;margin:8px 0;white-space:pre}
+.out .lbl{display:block;font-size:11px;font-weight:700;letter-spacing:.1em;text-transform:uppercase;color:#12756a;margin-bottom:5px}
+.explain{font-size:14px;color:#3a3a52;background:#F6F4EF;border-radius:10px;padding:12px 15px;margin:8px 0}
+.explain b{font-family:'Space Grotesk'}
+.pitfall{font-size:13.5px;color:#8a2f2f}
+.pitfall b{color:#c23}
+.qa{font-size:14px;margin:4px 0}
+.qa .qn{font-weight:700}
+.qa .ans{color:#0a7a6f;font-weight:700}
+.rubric{border-collapse:collapse;width:100%;margin-top:6px}
+.rubric td{padding:7px 10px;font-size:13px;border-bottom:1px solid #ECE7DE}
+.rubric th{text-align:left;font-size:11px;text-transform:uppercase;letter-spacing:.08em;color:#6B6B85;padding:6px 10px;font-family:'JetBrains Mono'}
+.foot{font-family:'JetBrains Mono';font-size:11px;color:#8b89a8;display:flex;justify-content:space-between;width:100%}
+</style>
+<x-import component-from-global-scope="doc-page" from="./doc-page.js" hint-size="100%,100%">
+<doc-page size="letter" margin="0.7in">
+<div slot="footer" class="foot"><span>Java, Clearly — Lesson 6</span><span>Capstone Answer Sheet · Instructor copy</span></div>
+<div class="hdr">
+<div class="brand"><span class="dot">J</span><span>Java, Clearly</span></div>
+<div class="metabar">LESSON 6 · JAVA IN SPACE<br>CAPSTONE ANSWER SHEET</div>
+</div>
+<p class="subtitle">Capstone Assignment — Full Worked Solution</p>
+<h1>Mars Rover Mission: Answer Key</h1>
+<div class="warn">📌 <b>For the student:</b> This is one complete solution combining all three extensions. Your code may look different and still be correct — what matters is that the loop, conditionals, <span class="mono">.equals()</span>, the low-battery check, and the scan counter all work.</div>
+
+<h2><span class="num">✦</span> Complete rover with all 3 extensions</h2>
+<div class="code"><span class="k">int</span> battery = <span class="n">100</span>;
+<span class="k">int</span> position = <span class="n">0</span>;
+<span class="k">int</span> scanCount = <span class="n">0</span>;                 <span class="cm">// Task 3: counter</span>
+<span class="k">String</span>[] commands = {<span class="s">"FORWARD"</span>, <span class="s">"SCAN"</span>, <span class="s">"TURN"</span>, <span class="s">"SCAN"</span>, <span class="s">"FORWARD"</span>, <span class="s">"CHARGE"</span>};
+
+<span class="k">for</span> (<span class="k">int</span> i = <span class="n">0</span>; i < commands.length; i++) {
+  <span class="k">String</span> cmd = commands[i];
+  <span class="k">if</span> (cmd.<span class="fn">equals</span>(<span class="s">"FORWARD"</span>)) {
+    position = position + <span class="n">10</span>;
+    battery = battery - <span class="n">5</span>;
+    <span class="t">System</span>.<span class="fn">out</span>.<span class="fn">println</span>(<span class="s">"Move -> "</span> + position + <span class="s">"m  (battery "</span> + battery + <span class="s">"%)"</span>);
+  } <span class="k">else if</span> (cmd.<span class="fn">equals</span>(<span class="s">"SCAN"</span>)) {
+    battery = battery - <span class="n">10</span>;
+    scanCount = scanCount + <span class="n">1</span>;       <span class="cm">// Task 3</span>
+    <span class="t">System</span>.<span class="fn">out</span>.<span class="fn">println</span>(<span class="s">"Scanning rocks... (battery "</span> + battery + <span class="s">"%)"</span>);
+  } <span class="k">else if</span> (cmd.<span class="fn">equals</span>(<span class="s">"CHARGE"</span>)) {
+    battery = battery + <span class="n">20</span>;
+    <span class="t">System</span>.<span class="fn">out</span>.<span class="fn">println</span>(<span class="s">"Solar charging... (battery "</span> + battery + <span class="s">"%)"</span>);
+  } <span class="k">else if</span> (cmd.<span class="fn">equals</span>(<span class="s">"TURN"</span>)) {   <span class="cm">// Task 1: new command</span>
+    battery = battery - <span class="n">2</span>;
+    <span class="t">System</span>.<span class="fn">out</span>.<span class="fn">println</span>(<span class="s">"Rotating... (battery "</span> + battery + <span class="s">"%)"</span>);
+  }
+  <span class="k">if</span> (battery < <span class="n">30</span>) {                <span class="cm">// Task 2: safety check</span>
+    <span class="t">System</span>.<span class="fn">out</span>.<span class="fn">println</span>(<span class="s">"  WARNING: LOW BATTERY"</span>);
+  }
+}
+<span class="t">System</span>.<span class="fn">out</span>.<span class="fn">println</span>(<span class="s">"=== Mission done. Distance: "</span> + position + <span class="s">"m, battery: "</span> + battery + <span class="s">"%, scans: "</span> + scanCount + <span class="s">" ==="</span>);</div>
+<div class="out"><span class="lbl">Expected output</span>Move -> 10m  (battery 95%)
+Scanning rocks... (battery 85%)
+Rotating... (battery 83%)
+Scanning rocks... (battery 73%)
+Move -> 20m  (battery 68%)
+Solar charging... (battery 88%)
+=== Mission done. Distance: 20m, battery: 88%, scans: 2 ===</div>
+
+<h2><span class="num">1</span> Task 1 — the TURN command</h2>
+<div class="explain"><b>What to check:</b> a new <span class="mono">else if (cmd.equals("TURN"))</span> branch that subtracts 2 from battery and prints a rotate message. It must be part of the same <span class="mono">if/else if</span> chain so exactly one branch runs per command.</div>
+
+<h2><span class="num">2</span> Task 2 — low-battery safety check</h2>
+<div class="explain"><b>What to check:</b> an <span class="mono">if (battery &lt; 30)</span> placed <i>inside</i> the loop (after the command handling) so it's checked every step. In this run the battery never drops below 30, so the warning doesn't fire — that's correct. Have students test it with a longer mission (e.g. many SCANs) to see the warning appear.</div>
+
+<h2><span class="num">3</span> Task 3 — counting scans</h2>
+<div class="explain"><b>What to check:</b> a <span class="mono">scanCount</span> variable declared before the loop, incremented only inside the <span class="mono">SCAN</span> branch, and printed in the final summary. Here 2 SCAN commands ran → <span class="mono">scans: 2</span>. This is the "counter" pattern from Lesson 4.</div>
+<p class="pitfall"><b>Common mistakes:</b> using <span class="mono">==</span> instead of <span class="mono">.equals()</span> for the commands (Lesson 4 rule); declaring <span class="mono">scanCount</span> inside the loop so it resets to 0 every time; or placing the low-battery check outside the loop so it only runs once at the end.</p>
+
+<h2><span class="num">✓</span> Quiz answer key</h2>
+<p class="qa"><span class="qn">Quiz 1, Q1:</span> Java Mars-planning tool → <span class="ans">B — Maestro Science Activity Planner.</span></p>
+<p class="qa"><span class="qn">Quiz 1, Q2:</span> Same tool on many computers → <span class="ans">A — write once, run anywhere (the JVM).</span></p>
+<p class="qa"><span class="qn">Quiz 2, Q1:</span> Compare command Strings → <span class="ans">C — cmd.equals("SCAN").</span></p>
+<p class="qa"><span class="qn">Quiz 2, Q2:</span> Process every command → <span class="ans">A — a for loop over the array.</span></p>
+<p class="qa"><span class="qn">Quiz 2, Q3:</span> Final battery of starter mission → <span class="ans">B — 95</span> (100 −5 −10 −5 +20 −5).</p>
+
+<h2><span class="num">★</span> Capstone rubric (45 pts)</h2>
+<table class="rubric">
+<tr><th>Criterion</th><th>Points</th><th>What to look for</th></tr>
+<tr><td>Loop over command array</td><td>8</td><td>Correct <span class="mono">for</span> with <span class="mono">&lt; commands.length</span>.</td></tr>
+<tr><td>String comparison</td><td>8</td><td>Uses <span class="mono">.equals()</span>, not <span class="mono">==</span>.</td></tr>
+<tr><td>Battery &amp; position tracking</td><td>8</td><td>Values update correctly per command.</td></tr>
+<tr><td>Task 1 — TURN command</td><td>7</td><td>New branch, −2 battery, prints message.</td></tr>
+<tr><td>Task 2 — low-battery check</td><td>7</td><td><span class="mono">if (battery &lt; 30)</span> inside the loop.</td></tr>
+<tr><td>Task 3 — scan counter</td><td>7</td><td>Counter declared outside loop; correct total.</td></tr>
+</table>
+<div class="explain" style="margin-top:14px"><b>🎓 Course complete.</b> A student who can build and explain this program has demonstrated the core skills of AP Computer Science A: variables, types, expressions, conditionals, loops, arrays, and clean program structure. Congratulations!</div>
+</doc-page>
+</x-import></helmet>
+</x-dc>
+</body>
+</html>

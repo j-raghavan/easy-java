@@ -1,0 +1,615 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<script src="./support.js"></script>
+</head>
+<body>
+<x-dc>
+<helmet>
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@400;500;600;700&family=Nunito:wght@400;600;700;800&family=JetBrains+Mono:wght@400;500;700&display=swap" rel="stylesheet">
+<style>
+*{box-sizing:border-box}
+:root{--bg:#FDFBF7;--panel:#FFFFFF;--ink:#20203A;--muted:#6B6B85;--line:#ECE7DE;--purple:#6C4CE0;--purpleSoft:#EFEAFB;--coral:#FF6B6B;--coralSoft:#FFECEC;--teal:#12B5A5;--tealSoft:#E1F6F3;--amber:#FFB020;--amberSoft:#FFF4DE;--code:#1E1E2E;--codeInk:#E8E6F3}
+html,body{margin:0}
+body{background:var(--bg);color:var(--ink);font-family:'Nunito',system-ui,sans-serif;-webkit-font-smoothing:antialiased}
+.app{max-width:980px;margin:0 auto;min-height:100vh;display:flex;flex-direction:column;padding:0 20px 40px}
+h1,h2,h3,.dh{font-family:'Space Grotesk',sans-serif;font-weight:700;letter-spacing:-.01em;margin:0}
+.mono{font-family:'JetBrains Mono',monospace}
+.topbar{position:sticky;top:0;z-index:20;background:rgba(253,251,247,.92);backdrop-filter:blur(8px);padding:14px 0 10px;border-bottom:1px solid var(--line)}
+.brandrow{display:flex;align-items:center;justify-content:space-between;gap:12px}
+.brand{display:flex;align-items:center;gap:10px;font-weight:800;font-family:'Space Grotesk';font-size:15px}
+.dot{width:26px;height:26px;border-radius:8px;background:var(--purple);display:flex;align-items:center;justify-content:center;color:#fff;font-family:'JetBrains Mono';font-weight:700;font-size:14px}
+.badges{display:flex;align-items:center;gap:8px}
+.pill{font-size:12px;font-weight:700;padding:5px 10px;border-radius:999px;background:var(--purpleSoft);color:var(--purple)}
+.pill.score{background:var(--amberSoft);color:#9a6a00}
+.iconbtn{border:1px solid var(--line);background:var(--panel);border-radius:10px;width:34px;height:34px;display:flex;align-items:center;justify-content:center;cursor:pointer;font-size:15px;color:var(--ink)}
+.iconbtn:hover{border-color:var(--purple)}
+.progwrap{height:6px;background:var(--line);border-radius:999px;margin-top:10px;overflow:hidden}
+.progbar{height:100%;width:0;background:linear-gradient(90deg,var(--purple),var(--teal));border-radius:999px;transition:width .4s ease}
+.stage{flex:1;display:flex;flex-direction:column;justify-content:center;padding:28px 0}
+.scene{display:none}
+.scene.active{display:flex;flex-direction:column;gap:18px;animation:fade .5s ease}
+@keyframes fade{from{transform:translateY(14px)}to{transform:none}}
+.kicker{font-family:'JetBrains Mono';font-size:12px;font-weight:700;letter-spacing:.14em;text-transform:uppercase;color:var(--purple)}
+.title-xl{font-size:clamp(34px,6vw,58px);line-height:1.02}
+.lead{font-size:19px;line-height:1.5;color:var(--muted);max-width:60ch}
+h2.sh{font-size:clamp(26px,4vw,38px);line-height:1.08}
+.card{background:var(--panel);border:1px solid var(--line);border-radius:18px;padding:22px;box-shadow:0 1px 0 rgba(32,32,58,.02)}
+.softgrid{display:grid;gap:14px}
+.recipe{display:grid;grid-template-columns:1fr 1fr;gap:16px}
+.stepcard{border-radius:14px;padding:16px 18px;display:flex;gap:12px;align-items:flex-start;font-size:16px;font-weight:600}
+.stepnum{flex:none;width:30px;height:30px;border-radius:9px;background:#fff;display:flex;align-items:center;justify-content:center;font-family:'JetBrains Mono';font-weight:700}
+.c-purple{background:var(--purpleSoft)}.c-purple .stepnum{color:var(--purple)}
+.c-coral{background:var(--coralSoft)}.c-coral .stepnum{color:var(--coral)}
+.c-teal{background:var(--tealSoft)}.c-teal .stepnum{color:var(--teal)}
+.c-amber{background:var(--amberSoft)}.c-amber .stepnum{color:#9a6a00}
+.split{display:grid;grid-template-columns:1.1fr 1fr;gap:20px;align-items:start}
+@media(max-width:760px){.split,.recipe{grid-template-columns:1fr}}
+.codepanel{background:var(--code);border-radius:14px;overflow:hidden;font-family:'JetBrains Mono';font-size:14px;line-height:1.7}
+.codehead{display:flex;align-items:center;gap:7px;padding:10px 14px;border-bottom:1px solid rgba(255,255,255,.08)}
+.tl{width:11px;height:11px;border-radius:50%}
+.tl.r{background:#ff5f57}.tl.y{background:#febc2e}.tl.g{background:#28c840}
+.codefile{margin-left:8px;color:#8b89a8;font-size:12px}
+.codebody{padding:14px 16px;color:var(--codeInk);white-space:pre;overflow-x:auto}
+.cline{display:block;padding:2px 8px;border-radius:6px;transition:background .25s,opacity .25s}
+.cline.hot{background:rgba(108,76,224,.35)}
+.cline.dim{opacity:.35}
+.k{color:#c58af9}.t{color:#66d9c7}.s{color:#ffcf7a}.n{color:#f78fb3}.cm{color:#6b6b85}.fn{color:#7ab6ff}
+.vars{display:flex;flex-direction:column;gap:10px}
+.varbox{display:flex;align-items:center;gap:12px}
+.varlabel{font-family:'JetBrains Mono';font-size:13px;color:var(--muted);width:74px;flex:none}
+.varchip{flex:1;background:#fff;border:2px solid var(--line);border-radius:12px;padding:12px 14px;font-family:'JetBrains Mono';font-weight:700;font-size:16px;display:flex;justify-content:space-between;align-items:center;transition:border-color .3s,transform .3s,background .3s}
+.varchip.upd{border-color:var(--purple);background:var(--purpleSoft);transform:scale(1.03)}
+.varchip .vt{font-size:11px;font-weight:600;color:var(--muted)}
+.varchip.empty{color:#c3bfd6;font-weight:600}
+.btnrow{display:flex;gap:10px;flex-wrap:wrap;align-items:center}
+.btn{font-family:'Space Grotesk';font-weight:600;font-size:15px;border-radius:12px;padding:11px 20px;border:none;cursor:pointer;transition:transform .12s,box-shadow .2s}
+.btn:active{transform:translateY(1px)}
+.btn.primary{background:var(--purple);color:#fff;box-shadow:0 6px 18px -6px rgba(108,76,224,.7)}
+.btn.ghost{background:var(--panel);border:1px solid var(--line);color:var(--ink)}
+.btn.ghost:hover{border-color:var(--purple);color:var(--purple)}
+.btn.run{background:var(--teal);color:#fff}
+.btn:disabled{opacity:.4;cursor:not-allowed}
+.hint{font-size:14px;color:var(--muted)}
+.quiz{display:flex;flex-direction:column;gap:12px}
+.q{margin-bottom:6px}
+.qtext{font-weight:700;font-size:18px;margin-bottom:12px;font-family:'Space Grotesk'}
+.qtext .mono{background:var(--purpleSoft);color:var(--purple);padding:1px 7px;border-radius:6px;font-size:15px}
+.opts{display:grid;gap:9px}
+.opt{text-align:left;background:var(--panel);border:2px solid var(--line);border-radius:12px;padding:13px 16px;font-family:'Nunito';font-weight:600;font-size:15px;cursor:pointer;display:flex;align-items:center;gap:11px;transition:border-color .2s,background .2s}
+.opt:hover:not(.locked){border-color:var(--purple)}
+.opt .mk{width:24px;height:24px;border-radius:50%;border:2px solid var(--line);flex:none;display:flex;align-items:center;justify-content:center;font-weight:800;font-size:13px;font-family:'JetBrains Mono'}
+.opt.correct{border-color:var(--teal);background:var(--tealSoft)}
+.opt.correct .mk{background:var(--teal);border-color:var(--teal);color:#fff}
+.opt.wrong{border-color:var(--coral);background:var(--coralSoft)}
+.opt.wrong .mk{background:var(--coral);border-color:var(--coral);color:#fff}
+.opt.locked{cursor:default}
+.fb{font-size:14px;font-weight:700;padding:10px 14px;border-radius:10px;display:none}
+.fb.show{display:block}
+.fb.ok{background:var(--tealSoft);color:#0a7a6f}
+.fb.no{background:var(--coralSoft);color:#c23}
+.editor{width:100%;min-height:150px;background:var(--code);color:var(--codeInk);border:none;border-radius:0 0 14px 14px;font-family:'JetBrains Mono';font-size:14px;line-height:1.6;padding:14px 16px;resize:vertical;outline:none;tab-size:2}
+.console{background:#15151f;color:#c7f2e6;font-family:'JetBrains Mono';font-size:13.5px;line-height:1.6;border-radius:12px;padding:14px 16px;min-height:70px;white-space:pre-wrap;border:1px solid rgba(255,255,255,.06)}
+.console .err{color:#ff9b9b}
+.console .muted{color:#6b6b85}
+.match{display:grid;grid-template-columns:1fr 1fr;gap:26px}
+@media(max-width:640px){.match{grid-template-columns:1fr}}
+.mcol h3{font-size:14px;text-transform:uppercase;letter-spacing:.1em;color:var(--muted);margin-bottom:12px;font-family:'JetBrains Mono';font-weight:700}
+.chip{background:var(--panel);border:2px solid var(--line);border-radius:12px;padding:13px 15px;margin-bottom:11px;font-weight:700;font-family:'JetBrains Mono';font-size:15px;cursor:grab;user-select:none;transition:border-color .2s,transform .15s,opacity .2s}
+.chip:active{cursor:grabbing}
+.chip.dragging{opacity:.4}
+.chip.placed{cursor:default;opacity:.5}
+.drop{border:2px dashed var(--line);border-radius:12px;padding:13px 15px;margin-bottom:11px;min-height:52px;display:flex;align-items:center;justify-content:space-between;gap:10px;transition:border-color .2s,background .2s;font-weight:700}
+.drop .lbl{font-family:'JetBrains Mono';font-size:14px;color:var(--ink)}
+.drop.over{border-color:var(--purple);background:var(--purpleSoft)}
+.drop.right{border-style:solid;border-color:var(--teal);background:var(--tealSoft)}
+.drop.wrongdrop{border-style:solid;border-color:var(--coral);background:var(--coralSoft)}
+.drop .slot{font-family:'JetBrains Mono';font-size:14px;font-weight:700}
+.navbar{position:sticky;bottom:0;background:rgba(253,251,247,.92);backdrop-filter:blur(8px);border-top:1px solid var(--line);padding:14px 0;display:flex;align-items:center;justify-content:space-between;gap:12px;margin-top:20px}
+.dots{display:flex;gap:7px;flex-wrap:wrap;justify-content:center;flex:1}
+.ndot{width:9px;height:9px;border-radius:50%;background:var(--line);cursor:pointer;transition:background .2s,transform .2s}
+.ndot.on{background:var(--purple);transform:scale(1.35)}
+.ndot.done{background:var(--teal)}
+.caption{background:var(--ink);color:#fff;border-radius:12px;padding:12px 16px;font-size:15px;line-height:1.45;display:flex;gap:11px;align-items:flex-start;max-width:70ch}
+.caption .wave{flex:none;color:var(--amber);font-size:18px;margin-top:1px}
+.tag{display:inline-flex;align-items:center;gap:7px;background:var(--tealSoft);color:#0a7a6f;font-weight:700;font-size:13px;padding:6px 12px;border-radius:999px;font-family:'JetBrains Mono'}
+.why{border-left:4px solid var(--amber);background:var(--amberSoft);border-radius:0 12px 12px 0;padding:14px 18px;font-size:15px;line-height:1.5}
+.why b{font-family:'Space Grotesk'}
+.assign{display:grid;gap:14px}
+.taskitem{display:flex;gap:13px;align-items:flex-start;background:var(--panel);border:1px solid var(--line);border-radius:14px;padding:15px 17px}
+.tasknum{flex:none;width:28px;height:28px;border-radius:8px;background:var(--purple);color:#fff;display:flex;align-items:center;justify-content:center;font-family:'JetBrains Mono';font-weight:700;font-size:14px}
+.ide{display:flex;gap:0;border-radius:14px;overflow:hidden;border:1px solid var(--line)}
+.idebar{background:#2b2b3a;width:44px;flex:none;display:flex;flex-direction:column;align-items:center;gap:16px;padding:14px 0;color:#8b89a8;font-size:16px}
+.idemain{flex:1;background:var(--code);min-width:0}
+.idetabs{display:flex;background:#252533;border-bottom:1px solid rgba(255,255,255,.06)}
+.idetab{padding:9px 16px;font-family:'JetBrains Mono';font-size:12.5px;color:#8b89a8;border-right:1px solid rgba(255,255,255,.06)}
+.idetab.on{background:var(--code);color:var(--codeInk);border-bottom:2px solid var(--purple)}
+.callout{display:flex;gap:10px;align-items:flex-start;background:var(--purpleSoft);border-radius:12px;padding:13px 16px;font-size:14.5px;font-weight:600;color:#40308a}
+.callout .n{flex:none;width:22px;height:22px;border-radius:50%;background:var(--purple);color:#fff;display:flex;align-items:center;justify-content:center;font-size:12px;font-family:'JetBrains Mono'}
+.finalgrid{display:grid;grid-template-columns:repeat(3,1fr);gap:12px}
+@media(max-width:640px){.finalgrid{grid-template-columns:1fr}}
+.rc{background:var(--panel);border:1px solid var(--line);border-radius:14px;padding:16px}
+.rc .rt{font-family:'Space Grotesk';font-weight:700;font-size:16px;margin-bottom:5px}
+.rc .rd{font-size:13.5px;color:var(--muted);line-height:1.4}
+.scorebig{font-family:'Space Grotesk';font-weight:700;font-size:48px;color:var(--purple);line-height:1}
+</style>
+</helmet>
+<div class="app" id="l1">
+<div class="topbar">
+<div class="brandrow">
+<div class="brand"><span class="dot">J</span> Java, Clearly · Lesson 1</div>
+<div class="badges">
+<span class="pill">AP CS A Prep</span>
+<span class="pill score" id="scorePill">0 pts</span>
+<button class="iconbtn" id="muteBtn" title="Toggle narration">🔊</button>
+<button class="iconbtn" id="replayBtn" title="Replay narration">↺</button>
+</div>
+</div>
+<div class="progwrap"><div class="progbar" id="prog"></div></div>
+</div>
+<div class="stage" id="stage">
+
+<section class="scene active" data-narr="Welcome! In this lesson you'll learn how computers really think — the core ideas behind every program you'll ever write. No experience needed. Press Start when you're ready.">
+<span class="kicker">Lesson 1 of 6 · Foundations</span>
+<h1 class="title-xl">How Computers<br>Actually Think</h1>
+<p class="lead">Every app, game, and website is built from a few simple ideas. Master these and the rest of AP Computer Science becomes easy. Let's build your mental model — step by step.</p>
+<div class="btnrow">
+<span class="tag">⏱ ~10 min</span><span class="tag" style="background:var(--purpleSoft);color:var(--purple)">✎ 2 quizzes</span><span class="tag" style="background:var(--amberSoft);color:#9a6a00">💻 live code</span>
+</div>
+<div class="caption"><span class="wave">🔊</span><span id="cap-hint">Tip: narration reads each scene aloud. Mute it with the speaker button anytime.</span></div>
+</section>
+
+<section class="scene" data-narr="So what is a program? A program is just a list of instructions that a computer follows in order — exactly like a recipe. The computer never guesses. It does precisely what you say, one step at a time, from top to bottom.">
+<span class="kicker">Concept 01</span>
+<h2 class="sh">A program is a recipe 🍪</h2>
+<p class="lead">A computer follows instructions <b>in order</b>, top to bottom — never guessing, never skipping. If baking cookies were code, it'd look like this:</p>
+<div class="recipe">
+<div class="stepcard c-purple"><span class="stepnum">1</span><span>Preheat oven to 350°</span></div>
+<div class="stepcard c-coral"><span class="stepnum">2</span><span>Mix flour, sugar, butter</span></div>
+<div class="stepcard c-teal"><span class="stepnum">3</span><span>Scoop dough onto tray</span></div>
+<div class="stepcard c-amber"><span class="stepnum">4</span><span>Bake for 12 minutes</span></div>
+</div>
+<div class="why"><b>Why this matters →</b> On the AP exam, "trace the code" questions ask you to be the computer: run each line in order and track what happens. That's literally the whole skill.</div>
+</section>
+
+<section class="scene" data-narr="Let's watch a real program run. On the left is Java code. On the right are variables — think of them as labeled boxes that store values. Press Step to run one line at a time, and watch the boxes fill up.">
+<span class="kicker">Concept 02 · Interactive</span>
+<h2 class="sh">Variables are labeled boxes 📦</h2>
+<p class="lead">Press <b>Step</b> to run one line at a time. Watch how each variable gets a value stored in it.</p>
+<div class="split">
+<div class="codepanel">
+<div class="codehead"><span class="tl r"></span><span class="tl y"></span><span class="tl g"></span><span class="codefile mono">Cookies.java</span></div>
+<div class="codebody" id="stepCode"><span class="cline" data-line="0"><span class="k">int</span> trays = <span class="n">2</span>;</span><span class="cline" data-line="1"><span class="k">int</span> perTray = <span class="n">12</span>;</span><span class="cline" data-line="2"><span class="k">int</span> cookies = trays * perTray;</span><span class="cline" data-line="3"><span class="t">System</span>.<span class="fn">out</span>.<span class="fn">println</span>(cookies);</span></div>
+</div>
+<div>
+<div class="vars" id="stepVars">
+<div class="varbox"><span class="varlabel">trays</span><div class="varchip empty" data-v="trays">—</div></div>
+<div class="varbox"><span class="varlabel">perTray</span><div class="varchip empty" data-v="perTray">—</div></div>
+<div class="varbox"><span class="varlabel">cookies</span><div class="varchip empty" data-v="cookies">—</div></div>
+</div>
+<div class="console mono" id="stepOut" style="margin-top:14px"><span class="muted">// output appears here</span></div>
+<div class="btnrow" style="margin-top:14px">
+<button class="btn primary" id="stepBtn">▶ Step</button>
+<button class="btn ghost" id="stepReset">Reset</button>
+</div>
+</div>
+</div>
+</section>
+
+<section class="scene" data-narr="Quick check! Answer these two questions. You get points for correct answers on the first try. Read carefully — think like the computer.">
+<span class="kicker">Checkpoint · Quiz 1</span>
+<h2 class="sh">Do you have it? ✏️</h2>
+<div class="quiz" data-quiz="1">
+<div class="q" data-answer="1" data-fb-ok="Exactly. Lines run top to bottom, so cookies is computed only after trays and perTray exist." data-fb-no="Think about order: the computer runs line by line, top to bottom.">
+<div class="qtext">In what order does a computer run these lines?</div>
+<div class="opts">
+<button class="opt" data-i="0"><span class="mk">A</span>Whichever line is easiest first</button>
+<button class="opt" data-i="1"><span class="mk">B</span>Top to bottom, one at a time</button>
+<button class="opt" data-i="2"><span class="mk">C</span>All at the same time</button>
+</div>
+</div>
+<div class="q" data-answer="2" data-fb-ok="Right! 2 × 12 = 24. You traced it perfectly." data-fb-no="Re-trace it: cookies = trays * perTray = 2 * 12.">
+<div class="qtext">After the program runs, what is stored in <span class="mono">cookies</span>?</div>
+<div class="opts">
+<button class="opt" data-i="0"><span class="mk">A</span>2</button>
+<button class="opt" data-i="1"><span class="mk">B</span>12</button>
+<button class="opt" data-i="2"><span class="mk">C</span>24</button>
+</div>
+</div>
+</div>
+</section>
+
+<section class="scene" data-narr="Values come in types. A whole number is an int. A decimal is a double. Text wrapped in quotes is a String. True or false is a boolean. Drag each value to its matching type.">
+<span class="kicker">Concept 03 · Drag & drop</span>
+<h2 class="sh">Every value has a type 🏷️</h2>
+<p class="lead">Java needs to know <b>what kind</b> of value you're storing. Drag each value onto its correct type.</p>
+<div class="match" id="match1">
+<div class="mcol">
+<h3>Values (drag these)</h3>
+<div class="chip" draggable="true" data-type="int">42</div>
+<div class="chip" draggable="true" data-type="String">"Hello"</div>
+<div class="chip" draggable="true" data-type="double">3.14</div>
+<div class="chip" draggable="true" data-type="boolean">true</div>
+</div>
+<div class="mcol">
+<h3>Types (drop here)</h3>
+<div class="drop" data-type="int"><span class="lbl">int <span class="hint" style="font-weight:600">whole number</span></span><span class="slot"></span></div>
+<div class="drop" data-type="double"><span class="lbl">double <span class="hint" style="font-weight:600">decimal</span></span><span class="slot"></span></div>
+<div class="drop" data-type="String"><span class="lbl">String <span class="hint" style="font-weight:600">text</span></span><span class="slot"></span></div>
+<div class="drop" data-type="boolean"><span class="lbl">boolean <span class="hint" style="font-weight:600">true / false</span></span><span class="slot"></span></div>
+</div>
+</div>
+<div class="fb" id="matchFb"></div>
+</section>
+
+<section class="scene" data-narr="Now you write code! This is a real Java editor — it runs right here in your browser. Try changing the message, or the numbers, then press Run. Experiment! You can't break anything.">
+<span class="kicker">Concept 04 · Live editor 💻</span>
+<h2 class="sh">Your turn — write Java</h2>
+<p class="lead">This editor actually <b>runs</b>. Change the text, change the numbers, add a line, then press <b>Run</b>.</p>
+<div class="codepanel">
+<div class="codehead"><span class="tl r"></span><span class="tl y"></span><span class="tl g"></span><span class="codefile mono">Playground.java</span></div>
+<textarea class="editor" id="editor" spellcheck="false">String name = "Maya";
+int age = 15;
+System.out.println("Hi, " + name + "!");
+System.out.println("Next year you'll be " + (age + 1));</textarea>
+</div>
+<div class="btnrow">
+<button class="btn run" id="runBtn">▶ Run</button>
+<button class="btn ghost" id="tryLoop">Try a loop example</button>
+<span class="hint">Supports: variables (int, double, String, boolean), math, <span class="mono">println</span>, and simple <span class="mono">for</span> loops.</span>
+</div>
+<div class="console mono" id="console"><span class="muted">// press Run to see output</span></div>
+</section>
+
+<section class="scene" data-narr="When you write Java for real, you'll use an IDE — a professional editor. The most popular for Java is IntelliJ IDEA from JetBrains. Here's what its screen looks like and what each part does.">
+<span class="kicker">The Tools · IntelliJ IDEA</span>
+<h2 class="sh">Where pros write Java 🛠️</h2>
+<p class="lead">An <b>IDE</b> (Integrated Development Environment) is a smart editor. For AP CS you'll likely use <b>IntelliJ IDEA</b> by JetBrains. Here's the lay of the land:</p>
+<div class="ide">
+<div class="idebar"><span>📁</span><span>🔍</span><span>⎇</span><span>▶</span><span>🐞</span></div>
+<div class="idemain">
+<div class="idetabs"><span class="idetab on">Main.java</span><span class="idetab">Cookies.java</span></div>
+<div class="codebody"><span class="cm">// IntelliJ underlines mistakes in red as you type</span>
+<span class="k">public class</span> <span class="t">Main</span> {
+  <span class="k">public static void</span> <span class="fn">main</span>(<span class="t">String</span>[] args) {
+    <span class="t">System</span>.<span class="fn">out</span>.<span class="fn">println</span>(<span class="s">"Hello, AP CS!"</span>);
+  }
+}</div>
+</div>
+</div>
+<div class="softgrid" style="grid-template-columns:1fr 1fr;margin-top:4px">
+<div class="callout"><span class="n">▶</span><span>The green <b>Run</b> arrow compiles and runs your program instantly.</span></div>
+<div class="callout"><span class="n">🐞</span><span>The <b>Debugger</b> lets you step line-by-line — just like Concept 02!</span></div>
+</div>
+</section>
+
+<section class="scene" data-narr="Second checkpoint. These questions mix everything you've learned: types, running code, and tools. Take your time.">
+<span class="kicker">Checkpoint · Quiz 2</span>
+<h2 class="sh">Level up 🎯</h2>
+<div class="quiz" data-quiz="2">
+<div class="q" data-answer="1" data-fb-ok="Correct! Quotes make it text — a String — even though it looks like a number." data-fb-no="Quotes are the giveaway. Anything in double quotes is a String.">
+<div class="qtext">What type is the value <span class="mono">"7"</span> (with quotes)?</div>
+<div class="opts">
+<button class="opt" data-i="0"><span class="mk">A</span>int</button>
+<button class="opt" data-i="1"><span class="mk">B</span>String</button>
+<button class="opt" data-i="2"><span class="mk">C</span>double</button>
+</div>
+</div>
+<div class="q" data-answer="2" data-fb-ok="Yes! + between two numbers adds them: 5 + 3 = 8." data-fb-no="Between two ints, + means addition. 5 + 3.">
+<div class="qtext">What does <span class="mono">System.out.println(5 + 3);</span> print?</div>
+<div class="opts">
+<button class="opt" data-i="0"><span class="mk">A</span>53</button>
+<button class="opt" data-i="1"><span class="mk">B</span>5 + 3</button>
+<button class="opt" data-i="2"><span class="mk">C</span>8</button>
+</div>
+</div>
+<div class="q" data-answer="0" data-fb-ok="Right — an IDE like IntelliJ helps you write, run, and debug code." data-fb-no="IDE = Integrated Development Environment: a smart editor for writing code.">
+<div class="qtext">What is an IDE like IntelliJ used for?</div>
+<div class="opts">
+<button class="opt" data-i="0"><span class="mk">A</span>Writing, running & debugging code</button>
+<button class="opt" data-i="1"><span class="mk">B</span>Editing photos</button>
+<button class="opt" data-i="2"><span class="mk">C</span>Browsing the web</button>
+</div>
+</div>
+</div>
+</section>
+
+<section class="scene" data-narr="Time to practice on your own. Here is your assignment — three short coding tasks. Open the answer sheet only after you try them yourself. That struggle is where real learning happens.">
+<span class="kicker">Practice · Assignment 1</span>
+<h2 class="sh">Your assignment 📝</h2>
+<p class="lead">Do these in the live editor above (or in IntelliJ). Try each yourself first — then check the <b>answer sheet</b> to compare.</p>
+<div class="assign">
+<div class="taskitem"><span class="tasknum">1</span><div><b>Warm-up.</b> Create an <span class="mono">int</span> called <span class="mono">score</span> set to 90, and print <span class="mono">"My score is 90"</span> using the variable (not by typing 90 in the text).</div></div>
+<div class="taskitem"><span class="tasknum">2</span><div><b>Math.</b> A movie ticket is $12.50 and you buy 3. Use a <span class="mono">double</span> for price and an <span class="mono">int</span> for quantity, then print the total cost.</div></div>
+<div class="taskitem"><span class="tasknum">3</span><div><b>Loop.</b> Use a <span class="mono">for</span> loop to print the numbers 1 through 5, each on its own line.</div></div>
+</div>
+<div class="why"><b>Why do it yourself? →</b> Reading code feels easy; writing it reveals what you actually understand. Every professional got good by making — and fixing — thousands of small mistakes.</div>
+<div class="btnrow"><a class="btn primary" href="Lesson 1 - Answer Sheet.dc.html" target="_blank">📄 Open Answer Sheet</a></div>
+</section>
+
+<section class="scene" data-narr="Fantastic work! You now understand programs, sequencing, variables, types, and the tools pros use. Here's your score. Next lesson: how the operating system runs your code. See you there!">
+<span class="kicker">Lesson complete 🎉</span>
+<h2 class="sh">You did it!</h2>
+<div class="card" style="display:flex;align-items:center;gap:24px;flex-wrap:wrap">
+<div><div class="scorebig" id="finalScore">0</div><div class="hint" style="margin-top:4px">points earned</div></div>
+<div style="flex:1;min-width:200px"><p class="lead" style="font-size:16px;margin:0">You built the mental model that everything else stands on. Ready for the next piece?</p></div>
+</div>
+<h3 style="font-family:'Space Grotesk';margin-top:8px">You learned</h3>
+<div class="finalgrid">
+<div class="rc"><div class="rt">📜 Programs = recipes</div><div class="rd">Instructions run in order, top to bottom.</div></div>
+<div class="rc"><div class="rt">📦 Variables</div><div class="rd">Labeled boxes that store values.</div></div>
+<div class="rc"><div class="rt">🏷️ Types</div><div class="rd">int, double, String, boolean.</div></div>
+<div class="rc"><div class="rt">💻 Live code</div><div class="rd">You wrote & ran real Java.</div></div>
+<div class="rc"><div class="rt">🛠️ IntelliJ</div><div class="rd">Where pros write & debug.</div></div>
+<div class="rc"><div class="rt">📝 Assignment</div><div class="rd">Practice + answer sheet.</div></div>
+</div>
+<div class="callout" style="margin-top:6px"><span class="n">→</span><span><b>Up next — Lesson 2:</b> Computer &amp; OS internals — what actually happens when you press Run.</span></div>
+</section>
+
+</div>
+<div class="navbar">
+<button class="btn ghost" id="prevBtn">← Back</button>
+<div class="dots" id="dots"></div>
+<button class="btn primary" id="nextBtn">Start →</button>
+</div>
+</div>
+</x-dc>
+<script type="text/x-dc" data-dc-script>
+class Component extends DCLogic {
+  componentDidMount(){
+    const root=document.getElementById('l1'); if(!root) return;
+    this.root=root;
+    this.scenes=[...root.querySelectorAll('.scene')];
+    this.i=0; this.score=0; this.answered={}; this.matchDone=false;
+    this.muted=false; this.visited=new Set([0]);
+    // restore progress
+    try{const s=JSON.parse(localStorage.getItem('l1prog')||'{}');
+      if(typeof s.score==='number'){this.score=s.score;}
+    }catch(e){}
+    this.buildDots();
+    this.wireNav(); this.wireStepper(); this.wireQuizzes(); this.wireMatch(); this.wireEditor(); this.wireAudio();
+    this.show(0,true);
+    this.updateScore();
+  }
+  save(){try{localStorage.setItem('l1prog',JSON.stringify({score:this.score,i:this.i}));}catch(e){}}
+  buildDots(){
+    const d=document.getElementById('dots'); d.innerHTML='';
+    this.dots=this.scenes.map((_,k)=>{
+      const b=document.createElement('div'); b.className='ndot'; b.title='Scene '+(k+1);
+      b.onclick=()=>this.show(k); d.appendChild(b); return b;
+    });
+  }
+  show(n,skipSpeak){
+    n=Math.max(0,Math.min(this.scenes.length-1,n));
+    this.i=n; this.visited.add(n);
+    this.scenes.forEach((s,k)=>s.classList.toggle('active',k===n));
+    this.dots.forEach((d,k)=>{d.classList.toggle('on',k===n);d.classList.toggle('done',this.visited.has(k)&&k!==n);});
+    document.getElementById('prog').style.width=((n)/(this.scenes.length-1)*100)+'%';
+    const prev=document.getElementById('prevBtn'), next=document.getElementById('nextBtn');
+    prev.style.visibility=n===0?'hidden':'visible';
+    next.textContent = n===0?'Start →' : (n===this.scenes.length-1?'↺ Restart':'Next →');
+    if(n===this.scenes.length-1){document.getElementById('finalScore').textContent=this.score;}
+    window.scrollTo({top:0,behavior:'smooth'});
+    if(!skipSpeak) this.speakCurrent();
+    this.save();
+  }
+  wireNav(){
+    document.getElementById('nextBtn').onclick=()=>{
+      if(this.i===this.scenes.length-1){this.show(0);} else this.show(this.i+1);
+    };
+    document.getElementById('prevBtn').onclick=()=>this.show(this.i-1);
+    document.addEventListener('keydown',e=>{
+      if(e.target.tagName==='TEXTAREA')return;
+      if(e.key==='ArrowRight')this.show(this.i+1);
+      if(e.key==='ArrowLeft')this.show(this.i-1);
+    });
+  }
+  addScore(n){this.score+=n;this.updateScore();this.save();}
+  updateScore(){document.getElementById('scorePill').textContent=this.score+' pts';}
+  // ---- narration ----
+  wireAudio(){
+    this.synth=window.speechSynthesis;
+    document.getElementById('muteBtn').onclick=(e)=>{
+      this.muted=!this.muted; e.currentTarget.textContent=this.muted?'🔇':'🔊';
+      if(this.muted&&this.synth)this.synth.cancel();
+      if(!this.muted)this.speakCurrent();
+    };
+    document.getElementById('replayBtn').onclick=()=>this.speakCurrent(true);
+  }
+  speakCurrent(force){
+    if(!this.synth||this.muted&&!force)return; if(this.muted&&!force)return;
+    const txt=this.scenes[this.i].getAttribute('data-narr'); if(!txt)return;
+    try{this.synth.cancel();
+      const u=new SpeechSynthesisUtterance(txt); u.rate=1.02; u.pitch=1.05;
+      const vs=this.synth.getVoices(); const pref=vs.find(v=>/Google US English|Samantha|Jenny|Aria/i.test(v.name))||vs.find(v=>/en-US/i.test(v.lang));
+      if(pref)u.voice=pref;
+      this.synth.speak(u);
+    }catch(e){}
+  }
+  // ---- stepper ----
+  wireStepper(){
+    const code=document.getElementById('stepCode'); if(!code)return;
+    const lines=[...code.querySelectorAll('.cline')];
+    const vals={trays:'2',perTray:'12',cookies:'24'};
+    const order=['trays','perTray','cookies'];
+    let step=-1;
+    const chip=n=>document.querySelector('.varchip[data-v="'+n+'"]');
+    const out=document.getElementById('stepOut');
+    const render=()=>{
+      lines.forEach((l,k)=>{l.classList.toggle('hot',k===step);l.classList.toggle('dim',k<step);});
+    };
+    const reset=()=>{step=-1;order.forEach(n=>{const c=chip(n);c.textContent='—';c.className='varchip empty';c.setAttribute('data-v',n);});
+      out.innerHTML='<span class="muted">// output appears here</span>';lines.forEach(l=>{l.classList.remove('hot','dim');});
+      document.getElementById('stepBtn').textContent='▶ Step';document.getElementById('stepBtn').disabled=false;};
+    document.getElementById('stepBtn').onclick=(e)=>{
+      step++;
+      if(step<3){const n=order[step];const c=chip(n);c.textContent=vals[n];c.className='varchip upd';
+        c.innerHTML=vals[n]+' <span class="vt">int</span>';
+        setTimeout(()=>c.classList.remove('upd'),450);}
+      if(step===3){out.innerHTML='<span style="color:#c7f2e6">24</span>';}
+      render();
+      if(step>=3){e.currentTarget.textContent='✓ Done';e.currentTarget.disabled=true;}
+      else e.currentTarget.textContent='▶ Step ('+(step+1)+'/4)';
+    };
+    document.getElementById('stepReset').onclick=reset;
+  }
+  // ---- quizzes ----
+  wireQuizzes(){
+    this.root.querySelectorAll('.q').forEach((q,gi)=>{
+      const ans=+q.getAttribute('data-answer');
+      const opts=[...q.querySelectorAll('.opt')];
+      let fb=q.querySelector('.fb');
+      if(!fb){fb=document.createElement('div');fb.className='fb';q.appendChild(fb);}
+      const key=q.closest('.quiz').getAttribute('data-quiz')+'-'+gi;
+      opts.forEach(o=>{
+        o.onclick=()=>{
+          if(this.answered[key])return;
+          const pick=+o.getAttribute('data-i');
+          const correct=pick===ans;
+          opts.forEach(x=>x.classList.add('locked'));
+          o.classList.add(correct?'correct':'wrong');
+          if(!correct)opts[ans].classList.add('correct');
+          fb.textContent=correct?('✓ '+q.getAttribute('data-fb-ok')):('✗ '+q.getAttribute('data-fb-no'));
+          fb.className='fb show '+(correct?'ok':'no');
+          this.answered[key]=true;
+          if(correct)this.addScore(10);
+        };
+      });
+    });
+  }
+  // ---- drag match ----
+  wireMatch(){
+    const wrap=document.getElementById('match1'); if(!wrap)return;
+    const fb=document.getElementById('matchFb');
+    let dragged=null, placed=0;
+    const chips=[...wrap.querySelectorAll('.chip')];
+    const drops=[...wrap.querySelectorAll('.drop')];
+    chips.forEach(c=>{
+      c.addEventListener('dragstart',()=>{if(c.classList.contains('placed'))return;dragged=c;c.classList.add('dragging');});
+      c.addEventListener('dragend',()=>c.classList.remove('dragging'));
+    });
+    drops.forEach(d=>{
+      d.addEventListener('dragover',e=>{e.preventDefault();d.classList.add('over');});
+      d.addEventListener('dragleave',()=>d.classList.remove('over'));
+      d.addEventListener('drop',e=>{
+        e.preventDefault();d.classList.remove('over');
+        if(!dragged||dragged.classList.contains('placed'))return;
+        const ok=dragged.getAttribute('data-type')===d.getAttribute('data-type');
+        if(ok){
+          d.querySelector('.slot').textContent=dragged.textContent;
+          d.classList.add('right');dragged.classList.add('placed');placed++;
+          this.addScore(5);
+          if(placed===chips.length){fb.textContent='🎉 Perfect! You matched all four types. +'+ (chips.length*5) +' pts total for this activity.';fb.className='fb show ok';}
+        }else{
+          d.classList.add('wrongdrop');setTimeout(()=>d.classList.remove('wrongdrop'),600);
+          fb.textContent='✗ Not quite — '+dragged.textContent+' is not a '+d.getAttribute('data-type')+'. Try another slot.';fb.className='fb show no';
+        }
+      });
+    });
+  }
+  // ---- live Java-subset interpreter ----
+  wireEditor(){
+    const ed=document.getElementById('editor'); if(!ed)return;
+    const con=document.getElementById('console');
+    ed.addEventListener('keydown',e=>{if(e.key==='Tab'){e.preventDefault();const s=ed.selectionStart;ed.value=ed.value.slice(0,s)+'  '+ed.value.slice(ed.selectionEnd);ed.selectionStart=ed.selectionEnd=s+2;}});
+    document.getElementById('runBtn').onclick=()=>{
+      const {out,err}=this.runJava(ed.value);
+      if(err){con.innerHTML='<span class="err">✗ '+this.esc(err)+'</span>';}
+      else if(out.length===0){con.innerHTML='<span class="muted">// (no output — add a println!)</span>';}
+      else con.innerHTML=out.map(l=>this.esc(l)).join('\n');
+    };
+    document.getElementById('tryLoop').onclick=()=>{
+      ed.value='int total = 0;\nfor (int i = 1; i <= 5; i++) {\n  total = total + i;\n  System.out.println("Adding " + i);\n}\nSystem.out.println("Total = " + total);';
+      document.getElementById('runBtn').click();
+    };
+  }
+  esc(s){return String(s).replace(/&/g,'&amp;').replace(/</g,'&lt;').replace(/>/g,'&gt;');}
+  runJava(src){
+    const out=[]; const vars={};
+    const stripType=/^(int|double|String|boolean|long|float|char|var)\s+/;
+    const evalExpr=(raw)=>{
+      let expr=raw.trim();
+      // tokenize into string-literal vs code; stash literals as placeholders so the
+      // identifier-substitution pass never touches text inside quotes
+      const lits=[]; let js=''; let i=0;
+      while(i<expr.length){
+        const ch=expr[i];
+        if(ch==='"'){let j=i+1,str='';while(j<expr.length&&expr[j]!=='"'){if(expr[j]==='\\')j++;str+=expr[j];j++;}
+          lits.push(JSON.stringify(str)); js+='\u0000'+(lits.length-1)+'\u0000'; i=j+1;}
+        else{js+=ch;i++;}
+      }
+      // replace variable names with their stored JS values (placeholders have no letters, so they're safe)
+      js=js.replace(/[A-Za-z_$][A-Za-z0-9_$]*/g,(m)=>{
+        if(m==='true'||m==='false')return m;
+        if(m in vars){const v=vars[m];return typeof v==='string'?JSON.stringify(v):v;}
+        throw new Error("Cannot find variable '"+m+"'");
+      });
+      // restore string literals
+      js=js.replace(/\u0000(\d+)\u0000/g,(_,k)=>lits[+k]);
+      // Java string+number concat: JS does the same with + when one side is a string
+      let val;
+      try{val=Function('"use strict";return ('+js+')')();}
+      catch(e){throw new Error('Could not evaluate: '+raw.trim());}
+      return val;
+    };
+    const fmt=(v)=>{
+      if(typeof v==='boolean')return v?'true':'false';
+      if(typeof v==='number'){if(Number.isInteger(v))return String(v);return String(v);}
+      return String(v);
+    };
+    // Break into statements & blocks; handle for-loops
+    const lines=src.split('\n');
+    let guard=0;
+    const runStmt=(stmt)=>{
+      stmt=stmt.trim(); if(!stmt||stmt.startsWith('//'))return;
+      stmt=stmt.replace(/;$/,'');
+      // println / print
+      let m=stmt.match(/^System\.out\.(println|print)\s*\((.*)\)$/);
+      if(m){const v=m[2].trim()===''?'':evalExpr(m[2]);out.push(fmt(v));return;}
+      // assignment or declaration
+      let decl=stmt.replace(stripType,'');
+      m=decl.match(/^([A-Za-z_$][A-Za-z0-9_$]*)\s*=\s*(.+)$/);
+      if(m){vars[m[1]]=evalExpr(m[2]);return;}
+      // compound like x++
+      m=stmt.match(/^([A-Za-z_$][A-Za-z0-9_$]*)\+\+$/);
+      if(m){vars[m[1]]=(vars[m[1]]||0)+1;return;}
+      if(stmt.startsWith('public ')||stmt.startsWith('class ')||stmt.startsWith('import ')||stmt==='}'||stmt==='{')return;
+      throw new Error("Don't understand: "+stmt);
+    };
+    // recursive block parser
+    const parse=(arr)=>{
+      for(let k=0;k<arr.length;k++){
+        let line=arr[k].trim();
+        if(!line||line.startsWith('//'))continue;
+        let fm=line.match(/^for\s*\(\s*(?:int\s+)?([A-Za-z_$][\w$]*)\s*=\s*(.+?)\s*;\s*(.+?)\s*;\s*(.+?)\s*\)\s*\{?$/);
+        if(fm){
+          // collect body until matching }
+          let body=[];let depth=1;let started=line.includes('{');
+          if(!started){k++;started=arr[k]&&arr[k].trim()==='{';}
+          k++;
+          for(;k<arr.length;k++){const t=arr[k];const opens=(t.match(/\{/g)||[]).length;const closes=(t.match(/\}/g)||[]).length;
+            if(depth-closes<=0&&closes>0){depth=0;break;} depth+=opens-closes; body.push(t);}
+          const vn=fm[1]; vars[vn]=evalExpr(fm[2]);
+          const cond=fm[3]; const upd=fm[4];
+          while(true){ if(++guard>10000)throw new Error('Loop ran too long (infinite loop?)');
+            if(!evalExpr(cond))break; parse(body);
+            let um=upd.match(/^([A-Za-z_$][\w$]*)\+\+$/);
+            if(um){vars[um[1]]++;} else {let am=upd.match(/^([A-Za-z_$][\w$]*)\s*=\s*(.+)$/);if(am)vars[am[1]]=evalExpr(am[2]);else if(upd.includes('+='))
+              {let pm=upd.match(/^([A-Za-z_$][\w$]*)\s*\+=\s*(.+)$/);vars[pm[1]]=evalExpr(pm[1]+' + ('+pm[2]+')');}}
+          }
+          continue;
+        }
+        runStmt(line);
+      }
+    };
+    try{parse(lines);return {out};}catch(e){return {out,err:e.message};}
+  }
+}
+</script>
+</body>
+</html>

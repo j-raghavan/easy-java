@@ -1,0 +1,243 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<script src="./support.js"></script>
+</head>
+<body>
+<x-dc>
+<helmet>
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@400;500;600;700&family=Nunito:wght@400;600;700;800&family=JetBrains+Mono:wght@400;500;700&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="lesson.css">
+<script src="lesson-engine.js"></script>
+</helmet>
+<div class="app" id="l5">
+<div class="topbar">
+<div class="brandrow">
+<div class="brand"><a href="Course Hub.dc.html"><span class="dot">J</span></a> Java, Clearly · Lesson 5</div>
+<div class="badges"><span class="pill">AP CS A Prep</span><span class="pill score" data-score>0 pts</span><button class="iconbtn" data-mute title="Toggle narration">🔊</button><button class="iconbtn" data-replay title="Replay narration">↺</button></div>
+</div>
+<div class="progwrap"><div class="progbar" data-prog></div></div>
+</div>
+<div class="stage" data-stage>
+
+<section class="scene active" data-narr="This is the big one. So far your programs were lists of instructions. Real Java is built from objects — little bundles that each know their own data and their own behavior. This is object-oriented programming, and it's the heart of the second half of AP Computer Science A. We'll finish with recursion: methods that call themselves.">
+<span class="kicker">Lesson 5 of 6 · The Deep End</span>
+<h1 class="title-xl">Objects,<br>Classes &amp; Recursion</h1>
+<p class="lead">Big programs aren't one giant list — they're teams of <b>objects</b> that each hold their own data and know how to do their own jobs. Master this and you think like a real software engineer.</p>
+<div class="btnrow"><span class="tag">⏱ ~15 min</span><span class="tag p">✎ 2 quizzes</span><span class="tag a">🧩 matching</span><span class="tag" style="background:var(--coralSoft);color:#c23">💻 recursion lab</span></div>
+</section>
+
+<section class="scene" data-narr="Think of a class as a blueprint, and an object as a thing built from that blueprint. A Dog class describes what every dog has — a name and an age, called fields — and what every dog can do — like bark, called methods. From one blueprint you can build many dogs, each with its own data.">
+<span class="kicker">Concept 01</span>
+<h2 class="sh">A class is a blueprint 📐</h2>
+<p class="lead">The <b>class</b> describes what every object of that type <i>has</i> (fields) and <i>can do</i> (methods). One blueprint → many objects.</p>
+<div class="split">
+<div class="codepanel">
+<div class="codehead"><span class="tl r"></span><span class="tl y"></span><span class="tl g"></span><span class="codefile mono">Dog.java</span></div>
+<div class="codebody"><span class="k">public class</span> <span class="t">Dog</span> {
+  <span class="k">String</span> name;      <span class="cm">// field (state)</span>
+  <span class="k">int</span> age;          <span class="cm">// field (state)</span>
+
+  <span class="k">public</span> <span class="fn">Dog</span>(<span class="k">String</span> n, <span class="k">int</span> a) {  <span class="cm">// constructor</span>
+    name = n;
+    age = a;
+  }
+  <span class="k">public void</span> <span class="fn">bark</span>() {   <span class="cm">// method (behavior)</span>
+    <span class="t">System</span>.<span class="fn">out</span>.<span class="fn">println</span>(name + <span class="s">" says woof!"</span>);
+  }
+}</div>
+</div>
+<div class="deflist">
+<div><span class="dt">class Dog</span> — the blueprint / type.</div>
+<div><span class="dt">name, age</span> — <b>fields</b>: the data each dog stores.</div>
+<div><span class="dt">Dog(...)</span> — the <b>constructor</b>: runs when you build a new dog, sets up its fields.</div>
+<div><span class="dt">bark()</span> — a <b>method</b>: something a dog can do.</div>
+</div>
+</div>
+<div class="why"><b>Why objects? →</b> Bundling data with the code that uses it keeps big programs organized. A <span class="mono">Dog</span> object carries its own name everywhere it goes — no giant pile of loose variables.</div>
+</section>
+
+<section class="scene" data-narr="To build an object you use the keyword new, which calls the constructor. Each object gets its own copy of the fields. Press Step to build a Dog named Rex and watch its fields fill in, then call its bark method.">
+<span class="kicker">Concept 02 · Interactive</span>
+<h2 class="sh">Building an object with <span class="mono" style="font-size:.7em">new</span> 🏗️</h2>
+<p class="lead">The <span class="mono">new</span> keyword calls the constructor and hands back a fresh object. Press <b>Step</b>:</p>
+<div class="split stepper" data-steps='[{"line":0,"set":{"name":"..."},"type":"calling new Dog"},{"line":1,"set":{"name":"Rex"},"type":"field set"},{"line":2,"set":{"age":"3"},"type":"field set"},{"line":4,"out":"Rex says woof!"}]'>
+<div class="codepanel">
+<div class="codehead"><span class="tl r"></span><span class="tl y"></span><span class="tl g"></span><span class="codefile mono">Main.java</span></div>
+<div class="codebody"><span class="cline" data-line="0"><span class="t">Dog</span> d = <span class="k">new</span> <span class="fn">Dog</span>(<span class="s">"Rex"</span>, <span class="n">3</span>);</span><span class="cline" data-line="1"><span class="cm">// constructor: name = "Rex"</span></span><span class="cline" data-line="2"><span class="cm">// constructor: age = 3</span></span><span class="cline" data-line="3"></span><span class="cline" data-line="4">d.<span class="fn">bark</span>();</span></div>
+</div>
+<div>
+<div class="vars">
+<div class="varbox"><span class="varlabel">d.name</span><div class="varchip empty" data-v="name">—</div></div>
+<div class="varbox"><span class="varlabel">d.age</span><div class="varchip empty" data-v="age">—</div></div>
+</div>
+<div class="console mono" data-step-out style="margin-top:14px"><span class="muted">// output</span></div>
+<div class="btnrow" style="margin-top:14px"><button class="btn primary" data-step>▶ Step</button><button class="btn ghost" data-step-reset>Reset</button></div>
+</div>
+</div>
+<div class="why"><b>Key insight →</b> <span class="mono">d</span> holds a <b>reference</b> to the object. Build another with <span class="mono">new Dog("Fido", 5)</span> and it's a completely separate dog with its own name and age.</div>
+</section>
+
+<section class="scene" data-narr="Checkpoint one, on object vocabulary. These words appear all over the AP exam, so get them solid.">
+<span class="kicker">Checkpoint · Quiz 1</span>
+<h2 class="sh">Object vocabulary ✏️</h2>
+<div class="quiz" data-quiz="1">
+<div class="q" data-answer="1" data-fb-ok="Correct! A class is the blueprint; an object is a specific thing built from it." data-fb-no="Think blueprint vs. house. Which one is the plan, and which is the built thing?">
+<div class="qtext">What's the difference between a <b>class</b> and an <b>object</b>?</div>
+<div class="opts"><button class="opt" data-i="0"><span class="mk">A</span>They're the same thing</button><button class="opt" data-i="1"><span class="mk">B</span>A class is the blueprint; an object is one built from it</button><button class="opt" data-i="2"><span class="mk">C</span>An object is the blueprint; a class is built from it</button></div>
+</div>
+<div class="q" data-answer="2" data-fb-ok="Yes — the constructor runs when you use new, setting up the object's fields." data-fb-no="Which special method runs automatically when you write 'new Dog(...)'?">
+<div class="qtext">Which part runs when you write <span class="mono">new Dog("Rex", 3)</span>?</div>
+<div class="opts"><button class="opt" data-i="0"><span class="mk">A</span>The bark() method</button><button class="opt" data-i="1"><span class="mk">B</span>The main method</button><button class="opt" data-i="2"><span class="mk">C</span>The constructor</button></div>
+</div>
+<div class="q" data-answer="0" data-fb-ok="Right — name and age are fields: the data each object stores." data-fb-no="What do we call the variables that belong to an object and hold its data?">
+<div class="qtext">In the <span class="mono">Dog</span> class, <span class="mono">name</span> and <span class="mono">age</span> are called?</div>
+<div class="opts"><button class="opt" data-i="0"><span class="mk">A</span>Fields</button><button class="opt" data-i="1"><span class="mk">B</span>Loops</button><button class="opt" data-i="2"><span class="mk">C</span>Constructors</button></div>
+</div>
+</div>
+</section>
+
+<section class="scene" data-narr="Inheritance lets one class build on another. A Puppy is a Dog, so it automatically gets everything a Dog has — the name field, the bark method — and can add its own. We say Puppy extends Dog. The one being extended is the superclass; the new one is the subclass.">
+<span class="kicker">Concept 03</span>
+<h2 class="sh">Inheritance: build on what exists 🧬</h2>
+<p class="lead">A subclass <span class="mono">extends</span> a superclass — it inherits all its fields and methods, then adds more. "A Puppy <b>is a</b> Dog."</p>
+<div class="split">
+<div class="codepanel">
+<div class="codehead"><span class="tl r"></span><span class="tl y"></span><span class="tl g"></span><span class="codefile mono">Puppy.java</span></div>
+<div class="codebody"><span class="k">public class</span> <span class="t">Puppy</span> <span class="k">extends</span> <span class="t">Dog</span> {
+  <span class="cm">// inherits name, age, bark()</span>
+
+  <span class="k">public</span> <span class="fn">Puppy</span>(<span class="k">String</span> n) {
+    <span class="k">super</span>(n, <span class="n">0</span>);   <span class="cm">// call Dog's constructor</span>
+  }
+  <span class="k">public void</span> <span class="fn">play</span>() {   <span class="cm">// a new behavior</span>
+    <span class="t">System</span>.<span class="fn">out</span>.<span class="fn">println</span>(name + <span class="s">" chases its tail!"</span>);
+  }
+}</div>
+</div>
+<div class="deflist">
+<div><span class="dt">extends Dog</span> — Puppy is a kind of Dog.</div>
+<div><span class="dt">inherited</span> — Puppy already has <span class="mono">name</span>, <span class="mono">age</span>, and <span class="mono">bark()</span> for free.</div>
+<div><span class="dt">super(...)</span> — calls the parent (Dog) constructor.</div>
+<div><span class="dt">play()</span> — a brand-new ability only Puppy has.</div>
+<div class="callout" style="margin-top:4px"><span class="n">✓</span><span>A <span class="mono">Puppy</span> can both <span class="mono">bark()</span> (inherited) and <span class="mono">play()</span> (its own).</span></div>
+</div>
+</div>
+</section>
+
+<section class="scene" data-narr="Let's lock in the OOP vocabulary. Match each term to what it means. These four words are the backbone of object-oriented Java.">
+<span class="kicker">Concept 04 · Drag &amp; drop</span>
+<h2 class="sh">OOP vocabulary 🧩</h2>
+<p class="lead">Match each term to its meaning:</p>
+<div class="match" id="oopmatch">
+<div class="mcol"><h3>Term</h3>
+<div class="chip" draggable="true" data-type="class">class</div>
+<div class="chip" draggable="true" data-type="object">object</div>
+<div class="chip" draggable="true" data-type="ctor">constructor</div>
+<div class="chip" draggable="true" data-type="inherit">extends</div>
+</div>
+<div class="mcol"><h3>Meaning</h3>
+<div class="drop" data-type="class"><span class="lbl">The blueprint that defines fields &amp; methods</span><span class="slot"></span></div>
+<div class="drop" data-type="object"><span class="lbl">One specific thing built from a class</span><span class="slot"></span></div>
+<div class="drop" data-type="ctor"><span class="lbl">Special method that sets up a new object</span><span class="slot"></span></div>
+<div class="drop" data-type="inherit"><span class="lbl">Makes a subclass inherit from a superclass</span><span class="slot"></span></div>
+</div>
+</div>
+</section>
+
+<section class="scene" data-narr="Now recursion: a method that calls itself, each time on a smaller problem, until it hits a base case that stops it. This live editor really runs. Watch factorial call itself all the way down to 1, then multiply back up. Try changing the number.">
+<span class="kicker">Concept 05 · Live editor 💻</span>
+<h2 class="sh">Recursion: a method that calls itself 🪆</h2>
+<p class="lead">Recursion solves a big problem by solving a smaller version of itself — until a <b>base case</b> stops it. This <b>runs</b>:</p>
+<div class="codepanel">
+<div class="codehead"><span class="tl r"></span><span class="tl y"></span><span class="tl g"></span><span class="codefile mono">Recursion.java</span></div>
+<textarea class="editor" spellcheck="false">int factorial(int n) {
+  if (n <= 1) {
+    return 1;
+  }
+  return n * factorial(n - 1);
+}
+System.out.println("5! = " + factorial(5));
+System.out.println("7! = " + factorial(7));</textarea>
+</div>
+<div class="btnrow"><button class="btn run" data-run>▶ Run</button><button class="btn ghost" data-try="int fib(int n) {&#10;  if (n <= 1) {&#10;    return n;&#10;  }&#10;  return fib(n - 1) + fib(n - 2);&#10;}&#10;for (int i = 0; i < 8; i++) {&#10;  System.out.print(fib(i) + &quot; &quot;);&#10;}">Try Fibonacci</button><span class="hint">Every recursion needs a <b>base case</b> (here <span class="mono">n &lt;= 1</span>) or it never stops!</span></div>
+<div class="console mono" data-console><span class="muted">// press Run</span></div>
+<div class="why" style="margin-top:2px"><b>How it works →</b> <span class="mono">factorial(5)</span> = 5 × <span class="mono">factorial(4)</span> = 5 × 4 × <span class="mono">factorial(3)</span> … down to <span class="mono">factorial(1)</span> = 1, then it all multiplies back up to 120.</div>
+</section>
+
+<section class="scene" data-narr="Second checkpoint, the hardest in the course. It mixes inheritance and recursion. Take your time and trace carefully.">
+<span class="kicker">Checkpoint · Quiz 2</span>
+<h2 class="sh">Advanced master 🎯</h2>
+<div class="quiz" data-quiz="2">
+<div class="q" data-answer="1" data-pts="14" data-fb-ok="Correct! A Puppy inherits bark() from Dog AND has its own play() — so both." data-fb-no="Puppy extends Dog, so it gets Dog's methods too. What can it do in total?">
+<div class="qtext">A <span class="mono">Puppy extends Dog</span>. Which methods can a Puppy object use?</div>
+<div class="opts"><button class="opt" data-i="0"><span class="mk">A</span>Only play()</button><button class="opt" data-i="1"><span class="mk">B</span>Both bark() (inherited) and play()</button><button class="opt" data-i="2"><span class="mk">C</span>Only bark()</button></div>
+</div>
+<div class="q" data-answer="0" data-pts="14" data-fb-ok="Yes! Without a base case, the method calls itself forever and crashes (StackOverflowError)." data-fb-no="What stops a recursive method from calling itself endlessly?">
+<div class="qtext">What happens to a recursive method with <b>no base case</b>?</div>
+<div class="opts"><button class="opt" data-i="0"><span class="mk">A</span>It recurses forever and crashes</button><button class="opt" data-i="1"><span class="mk">B</span>It returns 0</button><button class="opt" data-i="2"><span class="mk">C</span>It runs exactly once</button></div>
+</div>
+<div class="q" data-answer="2" data-pts="14" data-fb-ok="Right — factorial(3) = 3 × 2 × 1 = 6." data-fb-no="Trace it: 3 × factorial(2) = 3 × 2 × factorial(1) = 3 × 2 × 1.">
+<div class="qtext">Using the factorial method, what is <span class="mono">factorial(3)</span>?</div>
+<div class="opts"><button class="opt" data-i="0"><span class="mk">A</span>3</button><button class="opt" data-i="1"><span class="mk">B</span>9</button><button class="opt" data-i="2"><span class="mk">C</span>6</button></div>
+</div>
+</div>
+</section>
+
+<section class="scene" data-narr="Your most advanced assignment yet. You'll design a class on paper, then write and run a recursive method. Try everything before opening the answer sheet.">
+<span class="kicker">Practice · Assignment 5</span>
+<h2 class="sh">Your assignment 📝</h2>
+<p class="lead">Tasks 2 &amp; 3 run in the live editor above. Try each yourself, then compare with the answer sheet.</p>
+<div class="assign">
+<div class="taskitem"><span class="tasknum">1</span><div><b>Design a class.</b> On paper (or in IntelliJ), write a <span class="mono">Student</span> class with two fields (<span class="mono">name</span>, <span class="mono">int grade</span>), a constructor that sets them, and a method <span class="mono">promote()</span> that adds 1 to the grade.</div></div>
+<div class="taskitem"><span class="tasknum">2</span><div><b>Recursive countdown.</b> Write a recursive method <span class="mono">countdown(int n)</span> that prints <span class="mono">n</span> down to 1, then prints <span class="mono">"Blastoff!"</span>. Test with <span class="mono">countdown(5)</span>.</div></div>
+<div class="taskitem"><span class="tasknum">3</span><div><b>Recursive sum.</b> Write a recursive method <span class="mono">int sumTo(int n)</span> that returns 1 + 2 + … + n. Test with <span class="mono">sumTo(10)</span> (answer: 55).</div></div>
+</div>
+<div class="why"><b>Why it matters →</b> AP CS A always includes class-design and recursion problems. Designing a clean class and identifying a base case are exactly the skills being tested.</div>
+<div class="btnrow"><a class="btn primary" href="Lesson 5 - Answer Sheet.dc.html" target="_blank">📄 Open Answer Sheet</a></div>
+</section>
+
+<section class="scene" data-narr="Incredible work. You now understand objects, classes, constructors, inheritance, and recursion — the toughest ideas in AP Computer Science A. In the final lesson we'll see how all of this powers real missions in space, and you'll build a capstone project. See you at the finish line!">
+<span class="kicker">Lesson complete 🎉</span>
+<h2 class="sh">You reached the deep end!</h2>
+<div class="card" style="display:flex;align-items:center;gap:24px;flex-wrap:wrap">
+<div><div class="scorebig" data-final-score>0</div><div class="hint" style="margin-top:4px">points earned</div></div>
+<div style="flex:1;min-width:200px"><p class="lead" style="font-size:16px;margin:0">Objects and recursion are the ideas that separate beginners from real programmers. You've got them.</p></div>
+</div>
+<h3 style="font-family:'Space Grotesk';margin-top:8px">You learned</h3>
+<div class="finalgrid">
+<div class="rc"><div class="rt">📐 Classes</div><div class="rd">Blueprints with fields + methods.</div></div>
+<div class="rc"><div class="rt">🏗️ Objects</div><div class="rd">Built with new + a constructor.</div></div>
+<div class="rc"><div class="rt">🧬 Inheritance</div><div class="rd">Subclass extends superclass.</div></div>
+<div class="rc"><div class="rt">🪆 Recursion</div><div class="rd">A method that calls itself.</div></div>
+<div class="rc"><div class="rt">🛑 Base case</div><div class="rd">The stop condition for recursion.</div></div>
+<div class="rc"><div class="rt">📝 Assignment</div><div class="rd">Design a class + recursion.</div></div>
+</div>
+<div class="callout" style="margin-top:6px"><span class="n">→</span><span><b>Up next — Lesson 6:</b> Java in Space 🚀 — real missions, plus your capstone project.</span></div>
+<div class="btnrow"><a class="btn primary" href="Course Hub.dc.html">← Back to Course Hub</a></div>
+</section>
+
+</div>
+<div class="navbar"><button class="btn ghost" data-prev>← Back</button><div class="dots" data-dots></div><button class="btn primary" data-next>Start →</button></div>
+</div>
+</x-dc>
+<script type="text/x-dc" data-dc-script>
+class Component extends DCLogic {
+  componentDidMount(){
+    var tries=0;
+    var boot=()=>{
+      var root=document.getElementById('l5');
+      if(window.LessonEngine && root){ this.api=window.LessonEngine.mount(root,{key:'l5'}); }
+      else if(tries++<80){ setTimeout(boot,50); }
+    };
+    boot();
+  }
+}
+</script>
+</body>
+</html>

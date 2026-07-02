@@ -1,0 +1,116 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<script src="./support.js"></script>
+</head>
+<body>
+<x-dc>
+<helmet>
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@500;600;700&family=Nunito:wght@400;600;700;800&family=JetBrains+Mono:wght@400;500;700&display=swap" rel="stylesheet">
+<style>
+doc-page:not(:defined){visibility:hidden}
+*{box-sizing:border-box}
+body{margin:0;background:#EDEAE3;font-family:'Nunito',system-ui,sans-serif;color:#20203A;line-height:1.55}
+h1,h2,h3{font-family:'Space Grotesk',sans-serif;letter-spacing:-.01em}
+h1{font-size:30px;margin:0 0 4px}
+h2{font-size:19px;margin:26px 0 10px;padding-bottom:7px;border-bottom:2px solid #ECE7DE;display:flex;align-items:center;gap:10px}
+h2 .num{background:#12B5A5;color:#fff;width:26px;height:26px;border-radius:8px;display:inline-flex;align-items:center;justify-content:center;font-size:14px;font-family:'JetBrains Mono';flex:none}
+.mono{font-family:'JetBrains Mono',monospace}
+.hdr{display:flex;justify-content:space-between;align-items:flex-end;gap:16px;border-bottom:3px solid #20203A;padding-bottom:12px;margin-bottom:6px}
+.hdr .dot{width:30px;height:30px;border-radius:8px;background:#12B5A5;color:#fff;font-family:'JetBrains Mono';font-weight:700;display:inline-flex;align-items:center;justify-content:center;font-size:16px}
+.brand{display:flex;align-items:center;gap:10px;font-family:'Space Grotesk';font-weight:700}
+.metabar{font-family:'JetBrains Mono';font-size:12px;color:#6B6B85;text-align:right}
+.subtitle{color:#6B6B85;font-size:14px;font-weight:600;margin:0 0 2px}
+.warn{background:#FFF4DE;border-left:4px solid #FFB020;border-radius:0 10px 10px 0;padding:12px 16px;font-size:14px;margin:14px 0 4px}
+.task{font-weight:700;font-size:15px;margin:2px 0 10px;color:#0a7a6f}
+.code{background:#1E1E2E;color:#E8E6F3;border-radius:11px;padding:14px 16px;font-family:'JetBrains Mono';font-size:13px;line-height:1.65;white-space:pre;overflow-x:auto;margin:8px 0}
+.code .k{color:#c58af9}.code .t{color:#66d9c7}.code .s{color:#ffcf7a}.code .n{color:#f78fb3}.code .cm{color:#8b89a8}.code .fn{color:#7ab6ff}
+.out{background:#E1F6F3;border:1px solid #bfe9e2;border-radius:11px;padding:11px 15px;font-family:'JetBrains Mono';font-size:13px;color:#0a7a6f;margin:8px 0;white-space:pre}
+.out .lbl{display:block;font-size:11px;font-weight:700;letter-spacing:.1em;text-transform:uppercase;color:#12756a;margin-bottom:5px}
+.explain{font-size:14px;color:#3a3a52;background:#F6F4EF;border-radius:10px;padding:12px 15px;margin:8px 0}
+.explain b{font-family:'Space Grotesk'}
+.pitfall{font-size:13.5px;color:#8a2f2f}
+.pitfall b{color:#c23}
+.qa{font-size:14px;margin:4px 0}
+.qa .qn{font-weight:700}
+.qa .ans{color:#0a7a6f;font-weight:700}
+.rubric{border-collapse:collapse;width:100%;margin-top:6px}
+.rubric td{padding:7px 10px;font-size:13px;border-bottom:1px solid #ECE7DE}
+.rubric th{text-align:left;font-size:11px;text-transform:uppercase;letter-spacing:.08em;color:#6B6B85;padding:6px 10px;font-family:'JetBrains Mono'}
+.foot{font-family:'JetBrains Mono';font-size:11px;color:#8b89a8;display:flex;justify-content:space-between;width:100%}
+</style>
+<x-import component-from-global-scope="doc-page" from="./doc-page.js" hint-size="100%,100%">
+<doc-page size="letter" margin="0.7in">
+<div slot="footer" class="foot"><span>Java, Clearly — Lesson 3</span><span>Answer Sheet · Instructor copy</span></div>
+<div class="hdr">
+<div class="brand"><span class="dot">J</span><span>Java, Clearly</span></div>
+<div class="metabar">LESSON 3 · JAVA BASICS<br>ANSWER SHEET — AP CS A PREP</div>
+</div>
+<p class="subtitle">Assignment 3 — Worked Solutions</p>
+<h1>Java Basics: Answer Key</h1>
+<div class="warn">📌 <b>For the student:</b> Try all three yourself first. Task 3 is the classic integer-division trap — if your average printed as a whole number, that's the lesson.</div>
+
+<h2><span class="num">1</span> Even or odd</h2>
+<p class="task">Print whether an int is even or odd using <span class="mono">%</span> and <span class="mono">if/else</span>.</p>
+<div class="code"><span class="k">int</span> n = <span class="n">7</span>;
+<span class="k">if</span> (n % <span class="n">2</span> == <span class="n">0</span>) {
+  <span class="t">System</span>.<span class="fn">out</span>.<span class="fn">println</span>(n + <span class="s">" is even"</span>);
+} <span class="k">else</span> {
+  <span class="t">System</span>.<span class="fn">out</span>.<span class="fn">println</span>(n + <span class="s">" is odd"</span>);
+}</div>
+<div class="out"><span class="lbl">Expected output</span>7 is odd</div>
+<div class="explain"><b>Key idea:</b> <span class="mono">n % 2</span> is the remainder after dividing by 2. Even numbers divide evenly, so the remainder is <span class="mono">0</span>; odd numbers leave <span class="mono">1</span>. The test <span class="mono">n % 2 == 0</span> is the standard even check.</div>
+<p class="pitfall"><b>Common mistake:</b> writing <span class="mono">n % 2 = 0</span> (single <span class="mono">=</span>). One <span class="mono">=</span> assigns; you need <span class="mono">==</span> to compare — a compile-time error here.</p>
+
+<h2><span class="num">2</span> Letter grade</h2>
+<p class="task">Print A/B/C/F from an int score using <span class="mono">if / else if / else</span>.</p>
+<div class="code"><span class="k">int</span> score = <span class="n">85</span>;
+<span class="k">if</span> (score >= <span class="n">90</span>) {
+  <span class="t">System</span>.<span class="fn">out</span>.<span class="fn">println</span>(<span class="s">"A"</span>);
+} <span class="k">else if</span> (score >= <span class="n">80</span>) {
+  <span class="t">System</span>.<span class="fn">out</span>.<span class="fn">println</span>(<span class="s">"B"</span>);
+} <span class="k">else if</span> (score >= <span class="n">70</span>) {
+  <span class="t">System</span>.<span class="fn">out</span>.<span class="fn">println</span>(<span class="s">"C"</span>);
+} <span class="k">else</span> {
+  <span class="t">System</span>.<span class="fn">out</span>.<span class="fn">println</span>(<span class="s">"F"</span>);
+}</div>
+<div class="out"><span class="lbl">Expected output (score = 85)</span>B</div>
+<div class="explain"><b>Key idea:</b> order matters. Java checks top to bottom and runs the <b>first</b> true branch, then skips the rest. Because 85 fails <span class="mono">&gt;= 90</span> but passes <span class="mono">&gt;= 80</span>, it prints B and never checks the others.</div>
+<p class="pitfall"><b>Common mistake:</b> writing separate <span class="mono">if</span>s instead of <span class="mono">else if</span>. With separate ifs, a score of 95 would match ≥90, ≥80, and ≥70 and print three letters.</p>
+
+<h2><span class="num">3</span> Average with a decimal</h2>
+<p class="task">Average 88, 92, 79 and print it <b>as a decimal</b>.</p>
+<div class="code"><span class="k">int</span> a = <span class="n">88</span>, b = <span class="n">92</span>, c = <span class="n">79</span>;
+<span class="k">int</span> sum = a + b + c;              <span class="cm">// 259</span>
+<span class="k">double</span> average = sum / <span class="n">3.0</span>;      <span class="cm">// divide by 3.0 (a double!)</span>
+<span class="t">System</span>.<span class="fn">out</span>.<span class="fn">println</span>(<span class="s">"Average: "</span> + average);</div>
+<div class="out"><span class="lbl">Expected output</span>Average: 86.33333333333333</div>
+<div class="explain"><b>Key idea:</b> the sum is 259. Writing <span class="mono">sum / 3</span> (both ints) gives 86 — the decimal is lost. Dividing by <span class="mono">3.0</span> (a double) forces double division and keeps <span class="mono">86.333…</span>. You could also write <span class="mono">(double) sum / 3</span>.</div>
+<p class="pitfall"><b>Common mistake:</b> <span class="mono">double average = sum / 3;</span> — this still computes <span class="mono">259 / 3 = 86</span> as ints <i>first</i>, then stores 86.0. The cast/decimal must be in the division itself.</p>
+
+<h2><span class="num">✓</span> Quiz answer key</h2>
+<p class="qa"><span class="qn">Quiz 1, Q1:</span> <span class="mono">17 % 5</span> → <span class="ans">C — 2.</span></p>
+<p class="qa"><span class="qn">Quiz 1, Q2:</span> <span class="mono">9 / 4</span> → <span class="ans">A — 2</span> (integer division).</p>
+<p class="qa"><span class="qn">Quiz 1, Q3:</span> <span class="mono">(5&gt;3) &amp;&amp; (2&gt;8)</span> → <span class="ans">B — false.</span></p>
+<p class="qa"><span class="qn">Quiz 2, Q1:</span> x = 20 chain → <span class="ans">B — exactly twenty.</span></p>
+<p class="qa"><span class="qn">Quiz 2, Q2:</span> Which prints 3.5? → <span class="ans">C — (double) 7 / 2.</span></p>
+<p class="qa"><span class="qn">Quiz 2, Q3:</span> <span class="mono">(5&gt;3) || (10&lt;2)</span> → <span class="ans">A — true.</span></p>
+
+<h2><span class="num">★</span> Grading rubric (30 pts)</h2>
+<table class="rubric">
+<tr><th>Criterion</th><th>Points</th><th>What to look for</th></tr>
+<tr><td>Task 1</td><td>8</td><td>Uses <span class="mono">% 2 == 0</span>; correct even/odd.</td></tr>
+<tr><td>Task 2</td><td>10</td><td>Uses <span class="mono">else if</span> chain; correct grade for the test value.</td></tr>
+<tr><td>Task 3</td><td>9</td><td>Average prints as a decimal (86.33…), not 86.</td></tr>
+<tr><td>Style</td><td>3</td><td>Good names, correct <span class="mono">==</span> vs <span class="mono">=</span>, braces balanced.</td></tr>
+</table>
+</doc-page>
+</x-import></helmet>
+</x-dc>
+</body>
+</html>

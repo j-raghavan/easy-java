@@ -1,0 +1,119 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<script src="./support.js"></script>
+</head>
+<body>
+<x-dc>
+<helmet>
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@500;600;700&family=Nunito:wght@400;600;700;800&family=JetBrains+Mono:wght@400;500;700&display=swap" rel="stylesheet">
+<style>
+doc-page:not(:defined){visibility:hidden}
+*{box-sizing:border-box}
+body{margin:0;background:#EDEAE3;font-family:'Nunito',system-ui,sans-serif;color:#20203A;line-height:1.55}
+h1,h2,h3{font-family:'Space Grotesk',sans-serif;letter-spacing:-.01em}
+h1{font-size:30px;margin:0 0 4px}
+h2{font-size:19px;margin:26px 0 10px;padding-bottom:7px;border-bottom:2px solid #ECE7DE;display:flex;align-items:center;gap:10px}
+h2 .num{background:#E0972A;color:#fff;width:26px;height:26px;border-radius:8px;display:inline-flex;align-items:center;justify-content:center;font-size:14px;font-family:'JetBrains Mono';flex:none}
+.mono{font-family:'JetBrains Mono',monospace}
+.hdr{display:flex;justify-content:space-between;align-items:flex-end;gap:16px;border-bottom:3px solid #20203A;padding-bottom:12px;margin-bottom:6px}
+.hdr .dot{width:30px;height:30px;border-radius:8px;background:#E0972A;color:#fff;font-family:'JetBrains Mono';font-weight:700;display:inline-flex;align-items:center;justify-content:center;font-size:16px}
+.brand{display:flex;align-items:center;gap:10px;font-family:'Space Grotesk';font-weight:700}
+.metabar{font-family:'JetBrains Mono';font-size:12px;color:#6B6B85;text-align:right}
+.subtitle{color:#6B6B85;font-size:14px;font-weight:600;margin:0 0 2px}
+.warn{background:#FFF4DE;border-left:4px solid #FFB020;border-radius:0 10px 10px 0;padding:12px 16px;font-size:14px;margin:14px 0 4px}
+.task{font-weight:700;font-size:15px;margin:2px 0 10px;color:#a06a15}
+.code{background:#1E1E2E;color:#E8E6F3;border-radius:11px;padding:14px 16px;font-family:'JetBrains Mono';font-size:13px;line-height:1.65;white-space:pre;overflow-x:auto;margin:8px 0}
+.code .k{color:#c58af9}.code .t{color:#66d9c7}.code .s{color:#ffcf7a}.code .n{color:#f78fb3}.code .cm{color:#8b89a8}.code .fn{color:#7ab6ff}
+.out{background:#E1F6F3;border:1px solid #bfe9e2;border-radius:11px;padding:11px 15px;font-family:'JetBrains Mono';font-size:13px;color:#0a7a6f;margin:8px 0;white-space:pre}
+.out .lbl{display:block;font-size:11px;font-weight:700;letter-spacing:.1em;text-transform:uppercase;color:#12756a;margin-bottom:5px}
+.explain{font-size:14px;color:#3a3a52;background:#F6F4EF;border-radius:10px;padding:12px 15px;margin:8px 0}
+.explain b{font-family:'Space Grotesk'}
+.pitfall{font-size:13.5px;color:#8a2f2f}
+.pitfall b{color:#c23}
+.qa{font-size:14px;margin:4px 0}
+.qa .qn{font-weight:700}
+.qa .ans{color:#0a7a6f;font-weight:700}
+.rubric{border-collapse:collapse;width:100%;margin-top:6px}
+.rubric td{padding:7px 10px;font-size:13px;border-bottom:1px solid #ECE7DE}
+.rubric th{text-align:left;font-size:11px;text-transform:uppercase;letter-spacing:.08em;color:#6B6B85;padding:6px 10px;font-family:'JetBrains Mono'}
+.foot{font-family:'JetBrains Mono';font-size:11px;color:#8b89a8;display:flex;justify-content:space-between;width:100%}
+</style>
+<x-import component-from-global-scope="doc-page" from="./doc-page.js" hint-size="100%,100%">
+<doc-page size="letter" margin="0.7in">
+<div slot="footer" class="foot"><span>Java, Clearly — Lesson 4</span><span>Answer Sheet · Instructor copy</span></div>
+<div class="hdr">
+<div class="brand"><span class="dot">J</span><span>Java, Clearly</span></div>
+<div class="metabar">LESSON 4 · JAVA INTERMEDIATE<br>ANSWER SHEET — AP CS A PREP</div>
+</div>
+<p class="subtitle">Assignment 4 — Worked Solutions</p>
+<h1>Loops, Arrays &amp; Methods: Answer Key</h1>
+<div class="warn">📌 <b>For the student:</b> Every task here mirrors an AP free-response pattern — loop over an array, inside a method, and return a result. Attempt them before reading.</div>
+
+<h2><span class="num">1</span> Sum an array</h2>
+<p class="task">Loop through <span class="mono">{5, 10, 15, 20}</span> and print the total.</p>
+<div class="code"><span class="k">int</span>[] nums = {<span class="n">5</span>, <span class="n">10</span>, <span class="n">15</span>, <span class="n">20</span>};
+<span class="k">int</span> total = <span class="n">0</span>;
+<span class="k">for</span> (<span class="k">int</span> i = <span class="n">0</span>; i < nums.length; i++) {
+  total = total + nums[i];
+}
+<span class="t">System</span>.<span class="fn">out</span>.<span class="fn">println</span>(<span class="s">"Total: "</span> + total);</div>
+<div class="out"><span class="lbl">Expected output</span>Total: 50</div>
+<div class="explain"><b>Key idea:</b> the "accumulator" pattern — start <span class="mono">total</span> at 0, then add each element as you loop. The loop condition <span class="mono">i &lt; nums.length</span> (not <span class="mono">&lt;=</span>) keeps you inside the array's valid indexes 0–3.</div>
+<p class="pitfall"><b>Common mistake:</b> using <span class="mono">i &lt;= nums.length</span> — that tries to read <span class="mono">nums[4]</span>, which doesn't exist, and crashes with <span class="mono">ArrayIndexOutOfBoundsException</span>.</p>
+
+<h2><span class="num">2</span> Biggest of three</h2>
+<p class="task">Write <span class="mono">int biggest(int a, int b, int c)</span> returning the largest.</p>
+<div class="code"><span class="k">int</span> <span class="fn">biggest</span>(<span class="k">int</span> a, <span class="k">int</span> b, <span class="k">int</span> c) {
+  <span class="k">int</span> max = a;
+  <span class="k">if</span> (b > max) { max = b; }
+  <span class="k">if</span> (c > max) { max = c; }
+  <span class="k">return</span> max;
+}
+<span class="t">System</span>.<span class="fn">out</span>.<span class="fn">println</span>(<span class="fn">biggest</span>(<span class="n">4</span>, <span class="n">9</span>, <span class="n">7</span>));</div>
+<div class="out"><span class="lbl">Expected output</span>9</div>
+<div class="explain"><b>Key idea:</b> same "best so far" pattern from the lesson — start <span class="mono">max</span> at <span class="mono">a</span>, then compare each other value and update. The method <b>returns</b> the result so the caller can use it.</div>
+<p class="pitfall"><b>Common mistake:</b> forgetting the <span class="mono">return</span>, or declaring the method <span class="mono">void</span>. If it computes a value you want back, it must have a return type (<span class="mono">int</span>) and a <span class="mono">return</span> statement.</p>
+
+<h2><span class="num">3</span> Count the even numbers</h2>
+<p class="task">Method returns how many array values are even. Test on <span class="mono">{2, 7, 4, 9, 10}</span>.</p>
+<div class="code"><span class="k">int</span> <span class="fn">countEven</span>(<span class="k">int</span>[] nums) {
+  <span class="k">int</span> count = <span class="n">0</span>;
+  <span class="k">for</span> (<span class="k">int</span> i = <span class="n">0</span>; i < nums.length; i++) {
+    <span class="k">if</span> (nums[i] % <span class="n">2</span> == <span class="n">0</span>) {
+      count = count + <span class="n">1</span>;
+    }
+  }
+  <span class="k">return</span> count;
+}
+<span class="k">int</span>[] data = {<span class="n">2</span>, <span class="n">7</span>, <span class="n">4</span>, <span class="n">9</span>, <span class="n">10</span>};
+<span class="t">System</span>.<span class="fn">out</span>.<span class="fn">println</span>(<span class="s">"Even count: "</span> + <span class="fn">countEven</span>(data));</div>
+<div class="out"><span class="lbl">Expected output</span>Even count: 3</div>
+<div class="explain"><b>Key idea:</b> the "counter" pattern combines everything — a loop walks the array, an <span class="mono">if</span> tests each value with <span class="mono">% 2 == 0</span>, and a counter tallies the matches. 2, 4, and 10 are even → 3.</div>
+
+<h2><span class="num">✓</span> Quiz answer key</h2>
+<p class="qa"><span class="qn">Quiz 1, Q1:</span> Last index of length-5 array → <span class="ans">C — 4.</span></p>
+<p class="qa"><span class="qn">Quiz 1, Q2:</span> <span class="mono">for(i=0; i&lt;3; i++)</span> runs → <span class="ans">B — 3 times.</span></p>
+<p class="qa"><span class="qn">Quiz 1, Q3:</span> <span class="mono">arr[5]</span> on length-5 → <span class="ans">A — runtime error (out of bounds).</span></p>
+<p class="qa"><span class="qn">Quiz 2, Q1:</span> <span class="mono">square(6)</span> → <span class="ans">B — 36.</span></p>
+<p class="qa"><span class="qn">Quiz 2, Q2:</span> Compare Strings → <span class="ans">C — a.equals(b).</span></p>
+<p class="qa"><span class="qn">Quiz 2, Q3:</span> <span class="mono">"Java".substring(1,4)</span> → <span class="ans">A — "ava".</span></p>
+
+<h2><span class="num">★</span> Grading rubric (30 pts)</h2>
+<table class="rubric">
+<tr><th>Criterion</th><th>Points</th><th>What to look for</th></tr>
+<tr><td>Task 1</td><td>9</td><td>Correct loop bounds (<span class="mono">&lt;</span> length); total = 50.</td></tr>
+<tr><td>Task 2</td><td>10</td><td>Method has return type + return; biggest(4,9,7)=9.</td></tr>
+<tr><td>Task 3</td><td>8</td><td>Loop + if + counter; returns 3.</td></tr>
+<tr><td>Style</td><td>3</td><td>Clear names, correct <span class="mono">%</span>, balanced braces.</td></tr>
+</table>
+</doc-page>
+</x-import></helmet>
+</x-dc>
+</body>
+</html>

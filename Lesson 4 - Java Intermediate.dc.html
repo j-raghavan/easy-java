@@ -1,0 +1,238 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<script src="./support.js"></script>
+</head>
+<body>
+<x-dc>
+<helmet>
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@400;500;600;700&family=Nunito:wght@400;600;700;800&family=JetBrains+Mono:wght@400;500;700&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="lesson.css">
+<script src="lesson-engine.js"></script>
+</helmet>
+<div class="app" id="l4">
+<div class="topbar">
+<div class="brandrow">
+<div class="brand"><a href="Course Hub.dc.html"><span class="dot">J</span></a> Java, Clearly · Lesson 4</div>
+<div class="badges"><span class="pill">AP CS A Prep</span><span class="pill score" data-score>0 pts</span><button class="iconbtn" data-mute title="Toggle narration">🔊</button><button class="iconbtn" data-replay title="Replay narration">↺</button></div>
+</div>
+<div class="progwrap"><div class="progbar" data-prog></div></div>
+</div>
+<div class="stage" data-stage>
+
+<section class="scene active" data-narr="You can make decisions with if. Now let's teach the computer to repeat work and handle lots of data at once. This is Java Intermediate: loops, arrays, and writing your own methods. These three ideas are the workhorses of every real program and a huge part of the AP exam.">
+<span class="kicker">Lesson 4 of 6 · Building Power</span>
+<h1 class="title-xl">Loops, Arrays<br>&amp; Methods</h1>
+<p class="lead">Three tools that turn short programs into powerful ones: <b>loops</b> repeat work, <b>arrays</b> hold many values, and <b>methods</b> let you name and reuse your own code. This is where programming gets fun.</p>
+<div class="btnrow"><span class="tag">⏱ ~14 min</span><span class="tag p">✎ 2 quizzes</span><span class="tag a">📊 traced algorithm</span><span class="tag" style="background:var(--coralSoft);color:#c23">💻 3 code labs</span></div>
+</section>
+
+<section class="scene" data-narr="A for loop has three parts inside its parentheses: where to start, how long to keep going, and how to change each time. Press Step to watch a loop add up the numbers one to five. Notice how i counts up and total grows.">
+<span class="kicker">Concept 01 · Interactive</span>
+<h2 class="sh">The for loop, dissected 🔁</h2>
+<p class="lead">Three parts: <span class="mono">start ; keep-going test ; change</span>. Press <b>Step</b> to watch it sum 1 through 5:</p>
+<div class="split stepper" data-steps='[{"line":0,"set":{"total":"0"},"type":"int"},{"line":1,"set":{"i":"1"},"type":"start"},{"line":2,"set":{"total":"1"}},{"line":1,"set":{"i":"2"},"type":"i++"},{"line":2,"set":{"total":"3"}},{"line":1,"set":{"i":"3"}},{"line":2,"set":{"total":"6"}},{"line":1,"set":{"i":"4"}},{"line":2,"set":{"total":"10"}},{"line":1,"set":{"i":"5"}},{"line":2,"set":{"total":"15"}},{"line":4,"out":"Sum = 15"}]'>
+<div class="codepanel">
+<div class="codehead"><span class="tl r"></span><span class="tl y"></span><span class="tl g"></span><span class="codefile mono">Sum.java</span></div>
+<div class="codebody"><span class="cline" data-line="0"><span class="k">int</span> total = <span class="n">0</span>;</span><span class="cline" data-line="1"><span class="k">for</span> (<span class="k">int</span> i = <span class="n">1</span>; i <= <span class="n">5</span>; i++) {</span><span class="cline" data-line="2">  total = total + i;</span><span class="cline" data-line="3">}</span><span class="cline" data-line="4"><span class="t">System</span>.<span class="fn">out</span>.<span class="fn">println</span>(<span class="s">"Sum = "</span> + total);</span></div>
+</div>
+<div>
+<div class="vars">
+<div class="varbox"><span class="varlabel">i</span><div class="varchip empty" data-v="i">—</div></div>
+<div class="varbox"><span class="varlabel">total</span><div class="varchip empty" data-v="total">—</div></div>
+</div>
+<div class="console mono" data-step-out style="margin-top:14px"><span class="muted">// output</span></div>
+<div class="btnrow" style="margin-top:14px"><button class="btn primary" data-step>▶ Step</button><button class="btn ghost" data-step-reset>Reset</button></div>
+</div>
+</div>
+<div class="why"><b>Read it aloud →</b> "Start i at 1; while i ≤ 5, run the body; then add 1 to i." The loop ends when the test becomes false (i = 6).</div>
+</section>
+
+<section class="scene" data-narr="One variable holds one value. But what if you have 30 test scores? An array holds many values under one name, each at a numbered position called an index. Indexes start at zero, not one. Run this to build an array and add up every value with a loop.">
+<span class="kicker">Concept 02 · Code lab</span>
+<h2 class="sh">Arrays: many values, one name 📦📦📦</h2>
+<p class="lead">An array is a row of numbered boxes. The first index is <b>0</b>. Run this and change the numbers:</p>
+<div class="codepanel">
+<div class="codehead"><span class="tl r"></span><span class="tl y"></span><span class="tl g"></span><span class="codefile mono">Scores.java</span></div>
+<textarea class="editor" spellcheck="false">int[] scores = {88, 92, 79, 95};
+int total = 0;
+for (int i = 0; i < scores.length; i++) {
+  total = total + scores[i];
+}
+System.out.println("Count: " + scores.length);
+System.out.println("Sum: " + total);</textarea>
+</div>
+<div class="btnrow"><button class="btn run" data-run>▶ Run</button><button class="btn ghost" data-try="String[] planets = {&quot;Mars&quot;, &quot;Venus&quot;, &quot;Earth&quot;};&#10;for (int i = 0; i < planets.length; i++) {&#10;  System.out.println(i + &quot;: &quot; + planets[i]);&#10;}">Try a String array</button><span class="hint">A 4-item array uses indexes <span class="mono">0,1,2,3</span> — never 4.</span></div>
+<div class="console mono" data-console><span class="muted">// press Run</span></div>
+</section>
+
+<section class="scene" data-narr="Let's trace a real algorithm: finding the largest value in an array. The trick is to remember a best-so-far, then compare it to each item. Press Step and watch the max variable update only when we find something bigger. This pattern appears again and again on the exam.">
+<span class="kicker">Concept 03 · Interactive</span>
+<h2 class="sh">Algorithm: find the maximum 🔍</h2>
+<p class="lead">Remember the biggest value seen <b>so far</b>, and update it when you find something larger. Press <b>Step</b>:</p>
+<div class="split stepper" data-steps='[{"line":0,"set":{"max":"3"},"type":"start = data[0]"},{"line":1,"set":{"i":"1"}},{"line":2,"set":{"max":"9"},"type":"9 > 3 ✓"},{"line":1,"set":{"i":"2"}},{"line":2,"set":{"max":"9"},"type":"2 > 9? no"},{"line":1,"set":{"i":"3"}},{"line":2,"set":{"max":"15"},"type":"15 > 9 ✓"},{"line":4,"out":"Max = 15"}]'>
+<div class="codepanel">
+<div class="codehead"><span class="tl r"></span><span class="tl y"></span><span class="tl g"></span><span class="codefile mono">FindMax.java</span></div>
+<div class="codebody"><span class="cm">// data = {3, 9, 2, 15}</span>
+<span class="cline" data-line="0"><span class="k">int</span> max = data[<span class="n">0</span>];</span><span class="cline" data-line="1"><span class="k">for</span> (<span class="k">int</span> i = <span class="n">1</span>; i < data.length; i++) {</span><span class="cline" data-line="2">  <span class="k">if</span> (data[i] > max) max = data[i];</span><span class="cline" data-line="3">}</span><span class="cline" data-line="4"><span class="t">System</span>.<span class="fn">out</span>.<span class="fn">println</span>(<span class="s">"Max = "</span> + max);</span></div>
+</div>
+<div>
+<div class="vars">
+<div class="varbox"><span class="varlabel">i</span><div class="varchip empty" data-v="i">—</div></div>
+<div class="varbox"><span class="varlabel">max</span><div class="varchip empty" data-v="max">—</div></div>
+</div>
+<div class="console mono" data-step-out style="margin-top:14px"><span class="muted">// output</span></div>
+<div class="btnrow" style="margin-top:14px"><button class="btn primary" data-step>▶ Step</button><button class="btn ghost" data-step-reset>Reset</button></div>
+</div>
+</div>
+<div class="why"><b>The pattern →</b> Start <span class="mono">max</span> at the first element, then compare every other element to it. This "keep the best so far" idea also finds minimums, sums, and counts.</div>
+</section>
+
+<section class="scene" data-narr="Checkpoint one. Watch out for array indexes and loop bounds.">
+<span class="kicker">Checkpoint · Quiz 1</span>
+<h2 class="sh">Loop &amp; array check ✏️</h2>
+<div class="quiz" data-quiz="1">
+<div class="q" data-answer="2" data-fb-ok="Correct! Indexes start at 0, so a 5-element array uses 0,1,2,3,4. The last index is length − 1." data-fb-no="Arrays are zero-indexed. If length is 5, the valid indexes are 0 through 4.">
+<div class="qtext">An array has <span class="mono">length</span> 5. What is the <b>last valid index</b>?</div>
+<div class="opts"><button class="opt" data-i="0"><span class="mk">A</span>5</button><button class="opt" data-i="1"><span class="mk">B</span>6</button><button class="opt" data-i="2"><span class="mk">C</span>4</button></div>
+</div>
+<div class="q" data-answer="1" data-fb-ok="Yes! It runs for i = 0,1,2 — that's 3 times." data-fb-no="Count the values of i that pass the test i < 3: 0, 1, 2.">
+<div class="qtext">How many times does the body run? <span class="mono">for (int i = 0; i &lt; 3; i++)</span></div>
+<div class="opts"><button class="opt" data-i="0"><span class="mk">A</span>2</button><button class="opt" data-i="1"><span class="mk">B</span>3</button><button class="opt" data-i="2"><span class="mk">C</span>4</button></div>
+</div>
+<div class="q" data-answer="0" data-fb-ok="Right — accessing index 5 in a length-5 array (max index 4) throws ArrayIndexOutOfBoundsException at runtime." data-fb-no="Index 5 doesn't exist in a length-5 array (valid: 0–4). What happens when you reach past the end?">
+<div class="qtext">You access <span class="mono">arr[5]</span> on a length-5 array. What happens?</div>
+<div class="opts"><button class="opt" data-i="0"><span class="mk">A</span>A runtime error (out of bounds)</button><button class="opt" data-i="1"><span class="mk">B</span>It returns 0</button><button class="opt" data-i="2"><span class="mk">C</span>It wraps to arr[0]</button></div>
+</div>
+</div>
+</section>
+
+<section class="scene" data-narr="Methods let you name a chunk of code, give it inputs called parameters, and get back a result with return. Once written, you can call it as many times as you like. Run this and see how one method gets reused with different inputs.">
+<span class="kicker">Concept 04 · Code lab</span>
+<h2 class="sh">Write your own methods 🧩</h2>
+<p class="lead">A method takes <b>parameters</b> in, and hands a value back with <span class="mono">return</span>. Write once, use everywhere:</p>
+<div class="codepanel">
+<div class="codehead"><span class="tl r"></span><span class="tl y"></span><span class="tl g"></span><span class="codefile mono">Methods.java</span></div>
+<textarea class="editor" spellcheck="false">int triple(int x) {
+  return x * 3;
+}
+System.out.println("triple(4) = " + triple(4));
+System.out.println("triple(10) = " + triple(10));
+System.out.println("triple(4) + triple(10) = " + (triple(4) + triple(10)));</textarea>
+</div>
+<div class="btnrow"><button class="btn run" data-run>▶ Run</button><button class="btn ghost" data-try="int bigger(int a, int b) {&#10;  if (a > b) {&#10;    return a;&#10;  }&#10;  return b;&#10;}&#10;System.out.println(&quot;Bigger of 8, 5 is &quot; + bigger(8, 5));">Try a two-input method</button><span class="hint">The type before the name (<span class="mono">int</span>) is what the method <b>returns</b>.</span></div>
+<div class="console mono" data-console><span class="muted">// press Run</span></div>
+</section>
+
+<section class="scene" data-narr="Strings come with built-in methods too. length tells you how many characters, substring pulls out a piece, charAt grabs one letter, and equals compares two strings. Never use double-equals to compare strings — always use dot-equals. Run this to see them in action.">
+<span class="kicker">Concept 05 · Code lab</span>
+<h2 class="sh">String methods you must know 🔤</h2>
+<p class="lead">Strings carry handy tools. The big rule: compare strings with <span class="mono">.equals()</span>, never <span class="mono">==</span>.</p>
+<div class="codepanel">
+<div class="codehead"><span class="tl r"></span><span class="tl y"></span><span class="tl g"></span><span class="codefile mono">Strings.java</span></div>
+<textarea class="editor" spellcheck="false">String word = "Computer";
+System.out.println("Length: " + word.length());
+System.out.println("First 4: " + word.substring(0, 4));
+System.out.println("Upper: " + word.toUpperCase());
+System.out.println("Same? " + word.equals("Computer"));</textarea>
+</div>
+<div class="btnrow"><button class="btn run" data-run>▶ Run</button><span class="hint"><span class="mono">substring(0, 4)</span> takes characters at index 0,1,2,3 — up to but not including 4.</span></div>
+<div class="console mono" data-console><span class="muted">// press Run</span></div>
+</section>
+
+<section class="scene" data-narr="Now put it all together. Write a method that takes an array and returns something. The starter computes an average using a loop and a cast. Try it, then write your own in the try example.">
+<span class="kicker">Concept 06 · Code lab 💻</span>
+<h2 class="sh">Methods + loops + arrays, together</h2>
+<p class="lead">This method loops over an array and returns a decimal average. Run it, then try the counting example:</p>
+<div class="codepanel">
+<div class="codehead"><span class="tl r"></span><span class="tl y"></span><span class="tl g"></span><span class="codefile mono">Average.java</span></div>
+<textarea class="editor" spellcheck="false">double average(int[] nums) {
+  int sum = 0;
+  for (int i = 0; i < nums.length; i++) {
+    sum = sum + nums[i];
+  }
+  return (double) sum / nums.length;
+}
+int[] data = {80, 90, 100};
+System.out.println("Average = " + average(data));</textarea>
+</div>
+<div class="btnrow"><button class="btn run" data-run>▶ Run</button><button class="btn ghost" data-try="int countBig(int[] nums) {&#10;  int count = 0;&#10;  for (int i = 0; i < nums.length; i++) {&#10;    if (nums[i] > 50) {&#10;      count = count + 1;&#10;    }&#10;  }&#10;  return count;&#10;}&#10;int[] data = {12, 77, 40, 90, 63};&#10;System.out.println(&quot;Over 50: &quot; + countBig(data));">Try a counting method</button><span class="hint">Notice the <span class="mono">(double)</span> cast — without it the average would be a rounded-down int.</span></div>
+<div class="console mono" data-console><span class="muted">// press Run</span></div>
+</section>
+
+<section class="scene" data-narr="Second checkpoint, and it's the toughest yet. Trace carefully and remember what you learned about indexes, methods, and string comparison.">
+<span class="kicker">Checkpoint · Quiz 2</span>
+<h2 class="sh">Intermediate master 🎯</h2>
+<div class="quiz" data-quiz="2">
+<div class="q" data-answer="1" data-pts="12" data-fb-ok="Correct! The method returns x * x, so square(6) is 36." data-fb-no="Follow the return: it hands back x * x. With x = 6, that's 6 × 6.">
+<div class="qtext"><span class="mono">int square(int x) { return x * x; }</span> — what is <span class="mono">square(6)</span>?</div>
+<div class="opts"><button class="opt" data-i="0"><span class="mk">A</span>12</button><button class="opt" data-i="1"><span class="mk">B</span>36</button><button class="opt" data-i="2"><span class="mk">C</span>6</button></div>
+</div>
+<div class="q" data-answer="2" data-pts="12" data-fb-ok="Yes — always compare Strings with .equals(). Using == can give wrong results." data-fb-no="There's a special rule for comparing Strings in Java. It's not ==.">
+<div class="qtext">How should you check if two <span class="mono">String</span>s have the same text?</div>
+<div class="opts"><button class="opt" data-i="0"><span class="mk">A</span><span class="mono">a = b</span></button><button class="opt" data-i="1"><span class="mk">B</span><span class="mono">a == b</span></button><button class="opt" data-i="2"><span class="mk">C</span><span class="mono">a.equals(b)</span></button></div>
+</div>
+<div class="q" data-answer="0" data-pts="12" data-fb-ok="Right! substring(1, 4) takes indexes 1,2,3 of 'Java' → 'ava'." data-fb-no="substring(1, 4) takes characters from index 1 up to (not including) 4.">
+<div class="qtext"><span class="mono">"Java".substring(1, 4)</span> gives?</div>
+<div class="opts"><button class="opt" data-i="0"><span class="mk">A</span>"ava"</button><button class="opt" data-i="1"><span class="mk">B</span>"Jav"</button><button class="opt" data-i="2"><span class="mk">C</span>"java"</button></div>
+</div>
+</div>
+</section>
+
+<section class="scene" data-narr="Practice time. Three tasks combining loops, arrays, and methods. Try them in a code lab first, then check the answer sheet.">
+<span class="kicker">Practice · Assignment 4</span>
+<h2 class="sh">Your assignment 📝</h2>
+<p class="lead">Use a code lab above (or IntelliJ). Try each yourself, then compare with the answer sheet.</p>
+<div class="assign">
+<div class="taskitem"><span class="tasknum">1</span><div><b>Sum an array.</b> Given <span class="mono">int[] nums = {5, 10, 15, 20};</span>, use a loop to compute and print the total (should be 50).</div></div>
+<div class="taskitem"><span class="tasknum">2</span><div><b>Write a method.</b> Write a method <span class="mono">int biggest(int a, int b, int c)</span> that returns the largest of three numbers. Test it with <span class="mono">biggest(4, 9, 7)</span>.</div></div>
+<div class="taskitem"><span class="tasknum">3</span><div><b>Count matches.</b> Given an <span class="mono">int</span> array, write a method that returns how many values are even. Test it on <span class="mono">{2, 7, 4, 9, 10}</span> (answer: 3).</div></div>
+</div>
+<div class="why"><b>Why it matters →</b> Nearly every AP CS A free-response question asks you to loop through an array inside a method and return a result. These three drill that exact skill.</div>
+<div class="btnrow"><a class="btn primary" href="Lesson 4 - Answer Sheet.dc.html" target="_blank">📄 Open Answer Sheet</a></div>
+</section>
+
+<section class="scene" data-narr="Outstanding. You can now repeat work with loops, store collections in arrays, and write your own reusable methods. You're now doing real programming. Next lesson is the big one: object-oriented programming, the way large Java programs are actually built. See you there!">
+<span class="kicker">Lesson complete 🎉</span>
+<h2 class="sh">You're building real power!</h2>
+<div class="card" style="display:flex;align-items:center;gap:24px;flex-wrap:wrap">
+<div><div class="scorebig" data-final-score>0</div><div class="hint" style="margin-top:4px">points earned</div></div>
+<div style="flex:1;min-width:200px"><p class="lead" style="font-size:16px;margin:0">Loops, arrays, and methods are the workhorses behind every serious program you'll write.</p></div>
+</div>
+<h3 style="font-family:'Space Grotesk';margin-top:8px">You learned</h3>
+<div class="finalgrid">
+<div class="rc"><div class="rt">🔁 for loops</div><div class="rd">start ; test ; change.</div></div>
+<div class="rc"><div class="rt">📦 Arrays</div><div class="rd">Many values, indexed from 0.</div></div>
+<div class="rc"><div class="rt">🔍 Algorithms</div><div class="rd">Find max / sum / count patterns.</div></div>
+<div class="rc"><div class="rt">🧩 Methods</div><div class="rd">Parameters in, return out.</div></div>
+<div class="rc"><div class="rt">🔤 String methods</div><div class="rd">length, substring, .equals().</div></div>
+<div class="rc"><div class="rt">📝 Assignment</div><div class="rd">Sum, biggest, count-even.</div></div>
+</div>
+<div class="callout" style="margin-top:6px"><span class="n">→</span><span><b>Up next — Lesson 5:</b> Java Advanced — objects, classes, inheritance, and recursion.</span></div>
+<div class="btnrow"><a class="btn primary" href="Course Hub.dc.html">← Back to Course Hub</a></div>
+</section>
+
+</div>
+<div class="navbar"><button class="btn ghost" data-prev>← Back</button><div class="dots" data-dots></div><button class="btn primary" data-next>Start →</button></div>
+</div>
+</x-dc>
+<script type="text/x-dc" data-dc-script>
+class Component extends DCLogic {
+  componentDidMount(){
+    var tries=0;
+    var boot=()=>{
+      var root=document.getElementById('l4');
+      if(window.LessonEngine && root){ this.api=window.LessonEngine.mount(root,{key:'l4'}); }
+      else if(tries++<80){ setTimeout(boot,50); }
+    };
+    boot();
+  }
+}
+</script>
+</body>
+</html>
